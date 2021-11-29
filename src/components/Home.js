@@ -1,7 +1,41 @@
+import React from 'react';
 import styled from "styled-components";
-import Container from 'react-bootstrap/Container';
+import {Dropdown,Container} from "react-bootstrap";
 
 const Home = (props) => {
+
+    const CustomToggle = React.forwardRef(({ children,onClick }, ref) => (
+        <Language
+            ref={ref}
+            onClick={(e) => {
+                e.preventDefault();
+                onClick(e);
+            }}
+        >
+            {children}
+        </Language>
+    ));
+
+    const CustomMenu = React.forwardRef(
+        ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+            return (
+                <div
+                    ref={ref}
+                    style={style}
+                    className={className}
+                    aria-labelledby={labeledBy}
+                >
+                    <ul style={{background:"white"}}>
+                        {React.Children.toArray(children).filter(
+                            (child) =>
+                                 child.props.children.toLowerCase(),
+                        )}
+                    </ul>
+                </div>
+            );
+        },
+    );
+
     return(
         <Container>
             <Header>
@@ -9,10 +43,17 @@ const Home = (props) => {
                     ResumeXT
                 </Logo>
                 <Actions>
-                    <Language>
-                        <img src="/images/language.svg" alt=""/>
-                        <span>English</span>
-                    </Language>
+                    <Dropdown>
+                        <Dropdown.Toggle as={CustomToggle} id="dropdown">
+                                <img src="/images/language.svg" alt=""/>
+                                <span>AZ</span>
+                                <i className="fa fa-caret-down"></i>
+                            <Dropdown.Menu as={CustomMenu}>
+                                <li value="1">EN</li>
+                                <li value="2">RUS</li>
+                            </Dropdown.Menu>
+                        </Dropdown.Toggle>
+                    </Dropdown>
                         <a>Sign Up</a>
                         <a>Login</a>
                 </Actions>
@@ -36,23 +77,27 @@ const Actions = styled.div`
     align-items: center;
     justify-content: center;
     a{
-      font-size: 17px;
-      margin-left: 15px;
+      font-size: 16px;
+      margin-left: 30px;
       font-weight: 600;
     }
-    a:first-of-type{
+    a:nth-of-type(2){
       color:maroon;
     }
-    a:nth-of-type(2){
+    a:nth-of-type(3){
     color:#2274B0;
     }
 `;
 
-const Language = styled.div`
+const Language = styled.a`
   display: flex;
   align-items: center;
+  cursor: pointer;
   img{
     height: 22px;
+  }
+  span{
+    margin-left: 5%;
   }
 `;
 
