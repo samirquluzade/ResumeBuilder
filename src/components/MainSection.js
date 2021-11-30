@@ -18,7 +18,7 @@ const Section = styled.div`
 const Inspiration = styled.div`
     text-align: center;
     p{
-      font-size: 34px;
+      font-size: 33px;
     }
 `;
 
