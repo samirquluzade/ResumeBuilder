@@ -40,7 +40,6 @@ const Header = (props) => {
                 </Buttons>
             </Actions>
         </Headers>
-
     );
 }
 const Headers = styled.div`
