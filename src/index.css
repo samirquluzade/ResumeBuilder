@@ -9,6 +9,7 @@ body{
 :root,html{
   background-color: #F3F2EF;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 a{
   text-decoration: none!important;
