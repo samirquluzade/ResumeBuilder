@@ -20,7 +20,7 @@ const MainSection = (props) => {
                 </ResumeTitle>
                 <ResumeCards>
                     <div className="row" style={{width:'100%'}}>
-                        <div className="col-lg-4 col-md-6 col-sm-6 col-4">
+                        <div className="col-lg-4 col-md-6 col-sm-6">
                             <ResumeCard></ResumeCard>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-6">
