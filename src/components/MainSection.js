@@ -14,6 +14,16 @@ const MainSection = (props) => {
                     <i className="fas fa-arrow-right right-button"></i>
                 </CreateButton>
             </CreateButtonDiv>
+            <MostResumes>
+                <ResumeTitle>
+                    <h2>Most selected resumes</h2>
+                </ResumeTitle>
+                <ResumeCards>
+                    <ResumeCard>
+
+                    </ResumeCard>
+                </ResumeCards>
+            </MostResumes>
         </Section>
     );
 }
@@ -32,11 +42,11 @@ const Inspiration = styled.div`
       font-weight: 700;
       color:#fc766aff;
     }
-  @media(max-width: 768px){
-    p{
-      font-size: 30px;
+    @media(max-width: 768px){
+        p{
+          font-size: 32px;
+        }
     }
-  }
 `;
 
 const CreateButton = styled.a`
@@ -55,6 +65,9 @@ const CreateButton = styled.a`
       display: none;
       color:white;
     }
+    @media(max-width:768px){
+      padding: 20px;
+    }
 `;
 
 const CreateButtonDiv = styled.div`
@@ -70,7 +83,25 @@ const CreateButtonDiv = styled.div`
       }
       background-color: maroon;
     }
-   
+    @media(max-width: 768px){
+      margin: 10% 0;
+    }
+`;
+
+const MostResumes = styled.div`
+    
+`;
+
+const ResumeTitle = styled.div`
+
+`;
+
+const ResumeCards = styled.div`
+
+`;
+
+const ResumeCard = styled.div`
+
 `;
 
 export default MainSection;
