@@ -2,55 +2,18 @@ import React, {useEffect} from 'react';
 import styled from 'styled-components';
 
 const MainSection = (props) => {
-    const Typing = () => {
-        const typedTextSpan = document.querySelector(".typing");
-        const txt = [
-            "Create The Best Resume For Yourself Online",
-            "Don't worry! We'll help you how to create your best resume",
-            "Just click the button below &#8595;",
-        ];
-        const typeSpeed = 150;
-        const eraseSpeed = 100;
-        const newText = 500;
-        let textArrayIndex = 0;
-        let charIndex = 0;
-        function typeWriter() {
-            if (charIndex < txt[textArrayIndex].length) {
-                if (typedTextSpan) {
-                    typedTextSpan.innerHTML += txt[textArrayIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeWriter, typeSpeed);
-                }
-            } else {
-                setTimeout(erase, newText);
-            }
-        }
-        function erase() {
-            if (charIndex > 0) {
-                typedTextSpan.innerHTML = txt[textArrayIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(erase, eraseSpeed);
-            } else {
-                textArrayIndex++;
-                if (textArrayIndex >= txt.length) {
-                    textArrayIndex = 0;
-                }
-                setTimeout(typeWriter, typeSpeed + 500);
-            }
-        }
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(typeWriter, newText);
-        });
-    }
 
-    useEffect(() => {
-        Typing();
-    },[])
     return(
         <Section>
           <Inspiration>
               <p className="typing">Create The Best <span>Resume</span><br/> For Yourself Online</p>
           </Inspiration>
+            <CreateButtonDiv>
+                <CreateButton>
+                    <span>Create My Resume</span>
+                    <i className="fas fa-arrow-right right-button"></i>
+                </CreateButton>
+            </CreateButtonDiv>
         </Section>
     );
 }
@@ -69,6 +32,45 @@ const Inspiration = styled.div`
       font-weight: 700;
       color:#fc766aff;
     }
+  @media(max-width: 768px){
+    p{
+      font-size: 30px;
+    }
+  }
+`;
+
+const CreateButton = styled.a`
+    padding: 35px;
+    font-size: 18px;
+    background-color: #F37112;
+    border-radius: 15px;
+    transition: .7s;
+    cursor: pointer;
+    span{
+      color:white;
+    }
+    i{
+      margin-left: 30px;
+      float:right;
+      display: none;
+      color:white;
+    }
+`;
+
+const CreateButtonDiv = styled.div`
+    text-align: center;
+    margin:5% 0;
+    i{
+      font-size: 20px;
+    }
+    ${CreateButton}:hover{
+      i{
+        float:none;
+        display: inline-block;
+      }
+      background-color: maroon;
+    }
+   
 `;
 
 export default MainSection;
