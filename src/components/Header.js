@@ -51,6 +51,9 @@ const Headers = styled.div`
   img{
     height: 60px;
   }
+  @media(max-width: 768px){
+    margin:5% 8%;
+  }
 `;
 
 const Actions = styled.div`
