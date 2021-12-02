@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Modal,Button} from "react-bootstrap";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 const Header = (props) => {
+
+    const [signUp,setSignUpShow] = useState(false);
+
+
+    const handleClose= () => {
+        setSignUpShow(false);
+    }
+
     return(
+        <>
         <Headers>
             <Logo>
                 ResumeXT
@@ -35,11 +45,34 @@ const Header = (props) => {
                     </Languages>
                 </div>
                 <Buttons>
-                    <Link to='#signup'>Sign up</Link>
+                    <Link to='#signup' onClick={() => setSignUpShow(true)} data-toggle="modal" data-target="#exampleModal">Sign up</Link>
                     <Link to='#login'>Sign in</Link>
                 </Buttons>
             </Actions>
         </Headers>
+    {signUp && (
+        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h3 className="modal-title text-center" id="exampleModalLabel">Sign up</h3>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        ...
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )}
+    </>
     );
 }
 const Headers = styled.div`
