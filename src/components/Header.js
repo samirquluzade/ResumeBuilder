@@ -9,6 +9,12 @@ const Header = (props) => {
     const [loginShow,setLoginShow] = useState(false);
     const [showPassword,setShowPassword] = useState(false);
 
+
+    const handleClose = () => {
+        setSignUpShow(false);
+        setLoginShow(false);
+    }
+
     return(
         <>
         <Headers>
@@ -48,7 +54,7 @@ const Header = (props) => {
             </Actions>
         </Headers>
             <div className="modal fade" id="Modal" tabIndex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true" onClick={() => setSignUpShow(false)}>
+                 aria-labelledby="exampleModalLabel" aria-hidden="true" onClick={handleClose}>
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -68,11 +74,11 @@ const Header = (props) => {
                             </Authentifiation>
                     {signUpShow && (
                         <Form>
-                            <Label for="name">Name</Label>
+                            <Label htmlFor="name">Name</Label>
                             <Input type="text" name="name" className="form-control"/>
-                            <Label for="email">Email</Label>
+                            <Label htmlFor="email">Email</Label>
                             <Input type="text" name="email" className="form-control"/>
-                            <Label for="password">Password</Label>
+                            <Label htmlFor="password">Password</Label>
                             { !showPassword ? (
                                 <>
                                 <Input type="password" name="password" className="form-control"/>
@@ -89,9 +95,9 @@ const Header = (props) => {
                     )}
                             {loginShow && (
                                 <Form>
-                                    <Label for="email">Email</Label>
+                                    <Label htmlFor="email">Email</Label>
                                     <Input type="text" name="email" className="form-control"/>
-                                    <Label for="password">Password</Label>
+                                    <Label htmlFor="password">Password</Label>
                                     { !showPassword ? (
                                             <>
                                                 <Input type="password" name="password" className="form-control"/>
