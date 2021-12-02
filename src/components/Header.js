@@ -15,6 +15,10 @@ const Header = (props) => {
         setLoginShow(false);
     }
 
+    const preventClose = (e) => {
+        e.stopPropagation();
+    }
+
     return(
         <>
         <Headers>
@@ -56,9 +60,9 @@ const Header = (props) => {
             <div className="modal fade" id="Modal" tabIndex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true" onClick={handleClose}>
                 <div className="modal-dialog" role="document">
-                    <div className="modal-content">
+                    <div className="modal-content" onClick={preventClose}>
                         <div className="modal-header">
-                            <h3 className="modal-title text-center" id="exampleModalLabel">Sign up</h3>
+                            {loginShow ? <h3 className="modal-title text-center" id="exampleModalLabel">Log in</h3> : <h3 className="modal-title text-center" id="exampleModalLabel">Sign up</h3>}
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setSignUpShow(false)}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -101,7 +105,7 @@ const Header = (props) => {
                                     { !showPassword ? (
                                             <>
                                                 <Input type="password" name="password" className="form-control"/>
-                                                <i className="fas fa-eye" onClick={() => setShowPassword(true)}></i>
+                                                <i className="fas fa-eye" style={{top:'78%'}} onClick={() => setShowPassword(true)}></i>
                                             </>)
                                         :
                                         (
@@ -110,19 +114,21 @@ const Header = (props) => {
                                                 <i className="fas fa-eye-slash" onClick={() => setShowPassword(false)}></i>
                                             </>)
                                     }
+                                    <Label style={{cursor:'pointer'}}>
+                                        <Input type="checkbox" style={{marginTop:'4%',float:'left'}}/> &nbsp; Remember me
+                                    </Label>
+                                    <Label style={{float:'right',cursor:'pointer'}}>Forgot password?</Label>
                                 </Form>
                             )}
                     </div>
                         {signUpShow && (
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-success">Create an account</button>
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setSignUpShow(false)}>Close</button>
+                        <ActionButton type="button" className="btn btn-success">Create an account</ActionButton>
                     </div>
                         )}
                         {loginShow && (
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-success">Log in</button>
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setLoginShow(false)}>Close</button>
+                                <ActionButton type="button" className="btn btn-success">Log in</ActionButton>
                             </div>
                         )}
                 </div>
@@ -208,7 +214,7 @@ const Languages = styled.div`
 
 const Label = styled.label`
   font-size: 16px;
-  margin-top: 3%;
+  margin-top: 2%;
   font-weight: 500;
 `;
 
@@ -252,5 +258,10 @@ const Authentifiation = styled.button`
     box-shadow: inset 0px 0px 0px 1px #025cb9;
     background-color: #ecf4fe;
   }
+`;
+
+const ActionButton = styled.button`
+  font-size: 18px;
+  background-color: #06C755;
 `;
 export default Header;

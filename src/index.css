@@ -17,6 +17,9 @@ p{
 .close{
   margin-top: -8%!important;
 }
+.modal-footer{
+  text-align: center!important;
+}
 a{
   text-decoration: none!important;
 }
