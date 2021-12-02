@@ -62,7 +62,14 @@ const Header = (props) => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        ...
+                        <Authentifiation>
+                            <img src="/images/google.png" alt=""/>
+                            <p>Connect with Google</p>
+                        </Authentifiation>
+                        <Authentifiation>
+                            <img src="/images/facebook.png" alt=""/>
+                            <p>Connect with Facebook</p>
+                        </Authentifiation>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-primary">Save changes</button>
@@ -149,4 +156,32 @@ const Languages = styled.div`
   }
 `;
 
+// const Label = styled.label`
+//   font-size: 16px;
+// `;
+
+const Authentifiation = styled.button`
+  width: 80%;
+  text-align: center;
+  background: transparent;
+  border:2px solid #0a66c2;
+  color: #0a66c2;
+  height: 48px;
+  border-radius: 24px;
+  box-shadow: none;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: 2% auto;
+  img{
+    height: 25px;
+  }
+  p{
+    margin-left: 2%;
+  }
+  &:hover{
+    box-shadow: inset 0px 0px 0px 1px #025cb9;
+    background-color: #ecf4fe;
+  }
+`;
 export default Header;
