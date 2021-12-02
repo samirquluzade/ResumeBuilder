@@ -5,12 +5,9 @@ import {Link} from "react-router-dom";
 
 const Header = (props) => {
 
-    const [signUp,setSignUpShow] = useState(false);
-
-
-    const handleClose= () => {
-        setSignUpShow(false);
-    }
+    const [signUpShow,setSignUpShow] = useState(false);
+    const [loginShow,setLoginShow] = useState(false);
+    const [showPassword,setShowPassword] = useState(false);
 
     return(
         <>
@@ -45,40 +42,87 @@ const Header = (props) => {
                     </Languages>
                 </div>
                 <Buttons>
-                    <Link to='#signup' onClick={() => setSignUpShow(true)} data-toggle="modal" data-target="#exampleModal">Sign up</Link>
-                    <Link to='#login'>Sign in</Link>
+                    <Link to='#signup' onClick={() => setSignUpShow(true)} data-toggle="modal" data-target="#Modal">Sign up</Link>
+                    <Link to='#login' onClick={() => setLoginShow(true)} data-toggle="modal" data-target="#Modal">Log in</Link>
                 </Buttons>
             </Actions>
         </Headers>
-    {signUp && (
-        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h3 className="modal-title text-center" id="exampleModalLabel">Sign up</h3>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <div className="modal fade" id="Modal" tabIndex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true" onClick={() => setSignUpShow(false)}>
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h3 className="modal-title text-center" id="exampleModalLabel">Sign up</h3>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setSignUpShow(false)}>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <Authentifiation>
+                                <img src="/images/google.png" alt=""/>
+                                <p>Connect with Google</p>
+                            </Authentifiation>
+                            <Authentifiation>
+                                <img src="/images/facebook.png" alt=""/>
+                                <p>Connect with Facebook</p>
+                            </Authentifiation>
+                    {signUpShow && (
+                        <Form>
+                            <Label for="name">Name</Label>
+                            <Input type="text" name="name" className="form-control"/>
+                            <Label for="email">Email</Label>
+                            <Input type="text" name="email" className="form-control"/>
+                            <Label for="password">Password</Label>
+                            { !showPassword ? (
+                                <>
+                                <Input type="password" name="password" className="form-control"/>
+                                <i className="fas fa-eye" onClick={() => setShowPassword(true)}></i>
+                                </>)
+                                :
+                                (
+                                    <>
+                                        <Input type="text" name="password" className="form-control"/>
+                                        <i className="fas fa-eye-slash" onClick={() => setShowPassword(false)}></i>
+                                    </>)
+                            }
+                        </Form>
+                    )}
+                            {loginShow && (
+                                <Form>
+                                    <Label for="email">Email</Label>
+                                    <Input type="text" name="email" className="form-control"/>
+                                    <Label for="password">Password</Label>
+                                    { !showPassword ? (
+                                            <>
+                                                <Input type="password" name="password" className="form-control"/>
+                                                <i className="fas fa-eye" onClick={() => setShowPassword(true)}></i>
+                                            </>)
+                                        :
+                                        (
+                                            <>
+                                                <Input type="text" name="password" className="form-control"/>
+                                                <i className="fas fa-eye-slash" onClick={() => setShowPassword(false)}></i>
+                                            </>)
+                                    }
+                                </Form>
+                            )}
                     </div>
-                    <div className="modal-body">
-                        <Authentifiation>
-                            <img src="/images/google.png" alt=""/>
-                            <p>Connect with Google</p>
-                        </Authentifiation>
-                        <Authentifiation>
-                            <img src="/images/facebook.png" alt=""/>
-                            <p>Connect with Facebook</p>
-                        </Authentifiation>
-                    </div>
+                        {signUpShow && (
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary">Save changes</button>
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-success">Create an account</button>
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setSignUpShow(false)}>Close</button>
                     </div>
+                        )}
+                        {loginShow && (
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-success">Log in</button>
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setLoginShow(false)}>Close</button>
+                            </div>
+                        )}
                 </div>
             </div>
         </div>
-    )}
+
     </>
     );
 }
@@ -156,9 +200,28 @@ const Languages = styled.div`
   }
 `;
 
-// const Label = styled.label`
-//   font-size: 16px;
-// `;
+const Label = styled.label`
+  font-size: 16px;
+  margin-top: 3%;
+  font-weight: 500;
+`;
+
+const Input = styled.input`
+  position: relative;
+  &:focus{
+    outline: none!important;
+    box-shadow: none!important;
+    border:1px solid #000000;
+  }
+`;
+
+const Form = styled.form`
+  i{
+    position: absolute;
+    top:90%;
+    right: 5%;
+  }
+`;
 
 const Authentifiation = styled.button`
   width: 80%;
