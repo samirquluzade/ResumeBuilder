@@ -264,4 +264,5 @@ const ActionButton = styled.button`
   font-size: 18px;
   background-color: #06C755;
 `;
+
 export default Header;
