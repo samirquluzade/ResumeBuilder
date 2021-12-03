@@ -1,8 +1,9 @@
 import Home from "./components/Home";
+import UserHeader from "./components/UserHeader";
 
 function App() {
   return (
-    <Home />
+    <UserHeader />
   );
 }
 
