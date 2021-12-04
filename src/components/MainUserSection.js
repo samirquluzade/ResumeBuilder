@@ -26,6 +26,37 @@ const MainUserSection = () => {
                 <CategoryName>Other</CategoryName>
                 </CategoryMobile>
             </CategoryGroup>
+            <ResumeCards>
+                <div className="row" style={{width:'100%'}}>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-6">
+                        <ResumeCard></ResumeCard>
+                    </div>
+                </div>
+            </ResumeCards>
         </Section>
     );
 };
@@ -54,13 +85,13 @@ const CategoryGroup = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 3%;
 `;
 
 const CategoryName = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  //text-align: center;
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
@@ -82,5 +113,21 @@ const CategoryMobile = styled.div`
   }
 `;
 
+const ResumeCards = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ResumeCard = styled.div`
+    height: 450px;
+    min-width: 325px;
+    background-color: white;
+    margin-left: 2%;
+    margin-bottom: 5%;
+    //@media(max-width: 768px){
+    //  height: 300px;
+    //  min-width: 200px;
+    //}
+`;
 
 export default MainUserSection;
