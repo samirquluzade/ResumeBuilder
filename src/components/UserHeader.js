@@ -5,20 +5,6 @@ import {Link} from "react-router-dom";
 
 const UserHeader = (props) => {
 
-    const [signUpShow,setSignUpShow] = useState(false);
-    const [loginShow,setLoginShow] = useState(false);
-    const [showPassword,setShowPassword] = useState(false);
-
-
-    const handleClose = () => {
-        setSignUpShow(false);
-        setLoginShow(false);
-    }
-
-    const preventClose = (e) => {
-        e.stopPropagation();
-    }
-
     return(
         <>
             <Headers>
@@ -51,6 +37,7 @@ const UserHeader = (props) => {
                             </Link>
                         </Languages>
                     </div>
+                    <div className="dropdown" style={{marginRight:'20px'}}>
                     <User>
                         <Link to="#user" className="dropdown-toggle" id="dropdownmenu2" data-toggle="dropdown" ariahaspopup="true" aria-expanded="false">
                             <img src="/images/user.svg" alt=""/>
@@ -59,16 +46,17 @@ const UserHeader = (props) => {
                         </Link>
                         <Languages className="dropdown-menu" aria-labelledby="dropdownmenu2">
                             <Link className="dropdown-item" to="#en">
-                                EN
+                                Settings
                             </Link>
                             <Link className="dropdown-item" to="#rus">
-                                AZ
+                                Created resumes
                             </Link>
                             <Link className="dropdown-item" to="#tr">
-                                TR
+                                Sign out
                             </Link>
                         </Languages>
                     </User>
+                    </div>
                 </Actions>
             </Headers>
         </>
@@ -118,21 +106,6 @@ const Logo = styled.div`
   font-size: 22px;
 `;
 
-const Buttons = styled.div`
-  font-size: 16px;
-  font-weight: 600;
-  a{
-    text-decoration: none;
-    margin-left: 30px;
-  }
-  a:nth-of-type(1){
-    color:maroon;
-  }
-  a:nth-of-type(2){
-    color:#2274B0;
-  }
-`;
-
 const Languages = styled.div`
   a{
     display: flex;
@@ -148,59 +121,6 @@ const Languages = styled.div`
   }
 `;
 
-const Label = styled.label`
-  font-size: 16px;
-  margin-top: 2%;
-  font-weight: 500;
-`;
-
-const Input = styled.input`
-  position: relative;
-  &:focus{
-    outline: none!important;
-    box-shadow: none!important;
-    border:1px solid #000000;
-  }
-`;
-
-const Form = styled.form`
-  i{
-    position: absolute;
-    top:90%;
-    right: 5%;
-  }
-`;
-
-const Authentifiation = styled.button`
-  width: 80%;
-  text-align: center;
-  background: transparent;
-  border:2px solid #0a66c2;
-  color: #0a66c2;
-  height: 48px;
-  border-radius: 24px;
-  box-shadow: none;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  margin: 2% auto;
-  img{
-    height: 25px;
-  }
-  p{
-    margin-left: 2%;
-  }
-  &:hover{
-    box-shadow: inset 0px 0px 0px 1px #025cb9;
-    background-color: #ecf4fe;
-  }
-`;
-
-const ActionButton = styled.button`
-  font-size: 18px;
-  background-color: #06C755;
-`;
-
 const User = styled.a`
     img:first-of-type{
       height: 35px;
@@ -211,6 +131,11 @@ const User = styled.a`
     }
     img:nth-of-type(2){
       height: 12px;
+    }
+    a{
+      font-size: 14px;
+      white-space: nowrap;
+      padding: 2px;
     }
 `;
 
