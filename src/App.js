@@ -1,9 +1,9 @@
 import Home from "./components/Home";
-import UserHeader from "./components/UserHeader";
+import User from "./components/User";
 
 function App() {
   return (
-    <UserHeader />
+    <User />
   );
 }
 
