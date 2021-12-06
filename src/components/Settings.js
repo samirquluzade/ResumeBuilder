@@ -51,7 +51,7 @@ const Settings = () => {
 const Section = styled.div`
     margin: 6% 8%;
     @media(max-width: 768px){
-      margin: 18% 8%;
+      margin: 18% 3%;
     }
 `;
 
@@ -84,10 +84,13 @@ const Form = styled.form`
 `;
 
 const SaveButton = styled.div`
-  padding-top: 5%;
+  padding-top: 40px;
   text-align: center;
   button{
     font-size: 17px;
+  }
+  @media(max-width: 768px){
+    padding-top: 15px;
   }
 `;
 
