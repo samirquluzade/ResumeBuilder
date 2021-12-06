@@ -22,6 +22,9 @@ const Footers = styled.div`
   text-align: center;
   font-weight: 600;
   padding: 2rem 0;
+  @media(max-width: 992px){
+    margin-top: 140px;
+  }
 `;
 
 const FooterTitle = styled.p`
