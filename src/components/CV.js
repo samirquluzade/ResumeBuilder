@@ -6,9 +6,8 @@ const CV = () => {
     const [name,setName] = useState('');
     const [surname,setSurname] = useState('');
     const [address,setAddress] = useState('');
-    const [city,setCity] = useState('');
-    const [postal,setPostal] = useState('');
     const [phone,setPhone] = useState('');
+    const [phone2,setPhone2] = useState('');
     const [email,setEmail] = useState('');
 
     return(
@@ -22,12 +21,10 @@ const CV = () => {
                 <Input type="text" name="surname" className="form-control" placeholder="Guluzadeh" onChange={(e) => setSurname(e.target.value)}/>
                 <Label htmlFor="address">Address</Label>
                 <Input type="text" name="address" className="form-control" placeholder="Enter a location" onChange={(e) => setAddress(e.target.value)}/>
-                <Label htmlFor="city">City</Label>
-                <Input type="text" name="city" className="form-control" placeholder="Baku" onChange={(e) => setCity(e.target.value)}/>
-                <Label htmlFor="postal">Postal Code</Label>
-                <Input type="text" name="postal" className="form-control" placeholder="1005" onChange={(e) => setPostal(e.target.value)}/>
                 <Label htmlFor="phone">Phone</Label>
-                <Input type="text" name="phone" className="form-control" placeholder="0551234567" onChange={(e) => setPhone(e.target.value)}/>
+                <Input type="number" name="phone" className="form-control" placeholder="0551234567" onChange={(e) => setPhone(e.target.value)}/>
+                <Label htmlFor="phone2">Phone 2</Label>
+                <Input type="number" name="phone2" className="form-control" placeholder="0551234567" onChange={(e) => setPhone2(e.target.value)}/>
                 <Label htmlFor="email">Email</Label>
                 <Input type="text" name="email" className="form-control" placeholder="mail@example.com" onChange={(e) => setEmail(e.target.value)}/>
                 <button className="btn btn-primary">Next to Experience</button>
@@ -47,10 +44,41 @@ const CV = () => {
                         </About>
                     </ResumeLeft>
                     <ResumeRight>
-                        <FullName>
-                            {name} <br />
-                            {surname}
-                        </FullName>
+                        <Head>
+                            <FullName>
+                                {name} <br />
+                                {surname}
+                            </FullName>
+                            <Contact>
+                                {address!=='' &&
+                                <>
+                                    <i className="fas fa-map-marker-alt">&nbsp;</i>
+                                    <span>{address}</span>
+                                </>
+                                }
+                                <br/>
+                                {phone!=='' &&
+                                    <>
+                                        <i className="fas fa-phone-square">&nbsp;</i>
+                                        <span>{phone}</span>
+                                    </>
+                                }
+                                <br />
+                                {phone2!=='' &&
+                                <>
+                                    <i className="fas fa-phone-square">&nbsp;</i>
+                                    <span>{phone2}</span>
+                                </>
+                                }
+                                <br />
+                                {email!=='' &&
+                                <>
+                                    <i className="fas fa-envelope">&nbsp;</i>
+                                    <span>{email}</span>
+                                </>
+                                }
+                            </Contact>
+                        </Head>
                         <Right>
                             WORK EXPERIENCE
                         </Right>
@@ -124,7 +152,7 @@ const About = styled.div`
 
 const Right = styled.div`
     color:#434244;
-    margin: 15% 0 10% 5%;
+    margin: 15% 10% 10% 5%;
     font-weight: 600;
 `;
 
@@ -134,8 +162,24 @@ const ResumeRight = styled.div`
 `;
 
 const FullName = styled.div`
-  margin: 10% 0 5% 5%;
+  margin: 10% 25% 5% 5%;
   font-size: 26px;
   font-weight: 700;
+`;
+
+const Contact = styled.div`
+  margin: 10% 1% 5% 5%;
+  i{
+    font-size: 16px;
+  }
+  span{
+    font-size: 8px;
+  }
+`;
+
+const Head = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 export default CV;
