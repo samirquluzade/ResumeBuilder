@@ -27,7 +27,9 @@ const CV = () => {
                 <Input type="number" name="phone2" className="form-control" placeholder="0551234567" onChange={(e) => setPhone2(e.target.value)}/>
                 <Label htmlFor="email">Email</Label>
                 <Input type="text" name="email" className="form-control" placeholder="mail@example.com" onChange={(e) => setEmail(e.target.value)}/>
-                <button className="btn btn-primary">Next to Experience</button>
+                <Next>
+                    <button className="btn btn-primary">Next to Experience</button>
+                </Next>
             </Inputs>
         </LeftSide>
           <RightSide>
@@ -102,11 +104,14 @@ const Page = styled.div`
 `;
 
 const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 700px;
 `;
 
 const Title = styled.h3`
-
+  text-align: center;
 `;
 
 const Inputs = styled.div`
@@ -182,4 +187,10 @@ const Head = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+const Next = styled.div`
+  text-align: center;
+  margin-top: 5%;
+`;
+
 export default CV;
