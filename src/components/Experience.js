@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 const Experience = ({handleChange,backTo,data}) => {
+
+    const [error,setError] = useState({
+       job:null,
+       employer:null,
+       startDate:null,
+       endDate:null,
+       city:null,
+       desc:null
+    });
 
     const checkHandler = () => {
         let checkbox = document.getElementById('present');
@@ -14,6 +23,17 @@ const Experience = ({handleChange,backTo,data}) => {
         else
         {
             text.style.display = "block";
+        }
+    }
+
+    const checkDate = (e) => {
+        if(e.target.value > data.startDate){
+            handleChange(e);
+            setError({...error,endDate: null});
+        }
+        else
+        {
+            setError({...error,endDate: "Start date cannot be greater than end date"});
         }
     }
 
@@ -30,7 +50,8 @@ const Experience = ({handleChange,backTo,data}) => {
                 <Input type="month" name="startDate" className="form-control" onChange={handleChange} value={data.startDate}/>
                 <EndDate>
                     <Label htmlFor="endDate">End Date</Label>
-                    <Input type="month" name="endDate" className="form-control" onChange={handleChange} value={data.endDate} id="end"/>
+                    <Input type="month" name="endDate" className="form-control" onChange={checkDate} value={data.endDate} id="end"/>
+                    {error && <Error>{error.endDate}</Error>}
                 </EndDate>
                 <Label style={{cursor:'pointer'}} onClick={checkHandler}>
                     <Input type="checkbox" style={{marginTop:'4%',float:'left'}} id="present" /> &nbsp; I currently work here
@@ -88,5 +109,9 @@ const TextArea = styled.textarea`
 `;
 
 const EndDate = styled.div``;
+
+const Error = styled.p`
+  color:red;
+`;
 
 export default Experience;

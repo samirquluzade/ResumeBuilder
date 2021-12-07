@@ -22,6 +22,9 @@ const CV = () => {
     });
     const [contact,setContact] = useState(true);
     const [experience,setExperience] = useState(false);
+    const errors = {};
+
+    const [error,setError] = useState(errors);
 
     const handleChange = e => {
         const {name,value} = e.target;
@@ -29,8 +32,28 @@ const CV = () => {
     }
 
     const goToExperience = () => {
-        setExperience(true);
-        setContact(false);
+        if(data.name.trim()===''){
+            // setError({...error,name: 'This field cannot be blank!'})
+            errors.name = 'This field cannot be blank!';
+        }
+        if(data.surname.trim()===''){
+            errors.surname = 'This field cannot be blank!';
+        }
+        if(data.address.trim()===''){
+            errors.address = 'This field cannot be blank!';
+        }
+        if(data.phone.trim()===''){
+            errors.phone = 'This field cannot be blank!';
+        }
+        if(data.email.trim()===''){
+            errors.email = 'This field cannot be blank!';
+        }
+        setError(errors);
+        if(data.name.trim()!=='' && data.surname.trim()!=='' && data.address.trim()!=='' && data.phone.trim()!=='' && data.email.trim()!=='')
+        {
+            setExperience(true);
+            setContact(false);
+        }
     }
 
     const backTo = e => {
@@ -43,7 +66,7 @@ const CV = () => {
     return(
       <Page>
         <LeftSide>
-            {contact && <Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>}
+            {contact && <Contact handleChange={handleChange} goToExperience={goToExperience} data={data} error={error}/>}
             {experience && <Experience handleChange={handleChange} backTo={backTo} data={data}/>}
         </LeftSide>
           <RightSide>
