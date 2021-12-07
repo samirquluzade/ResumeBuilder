@@ -44,7 +44,7 @@ const CV = () => {
       <Page>
         <LeftSide>
             {contact && <Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>}
-            {experience && <Experience handleChange={handleChange} backTo={backTo} />}
+            {experience && <Experience handleChange={handleChange} backTo={backTo} data={data}/>}
         </LeftSide>
           <RightSide>
                 <ResumeExample>
