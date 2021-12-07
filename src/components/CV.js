@@ -37,8 +37,8 @@ const CV = () => {
     return(
       <Page>
         <LeftSide>
-            {contact && <Contact handleChange={handleChange} goToExperience={goToExperience}/>}
-            {experience && <Experience handleChange={handleChange} backTo={backTo}/>}
+            {contact && <Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>}
+            {experience && <Experience handleChange={handleChange} backTo={backTo} />}
         </LeftSide>
           <RightSide>
                 <ResumeExample>
@@ -61,31 +61,28 @@ const CV = () => {
                             </FullName>
                             <Contacts>
                                 {data.address!=='' &&
-                                <>
+                                <Info>
                                     <i className="fas fa-map-marker-alt">&nbsp;</i>
                                     <span>{data.address}</span>
-                                </>
+                                </Info>
                                 }
-                                <br/>
                                 {data.phone!=='' &&
-                                    <>
-                                        <i className="fas fa-phone-square">&nbsp;</i>
-                                        <span>{data.phone}</span>
-                                    </>
+                                <Info>
+                                    <i className="fas fa-phone-square">&nbsp;</i>
+                                    <span>{data.phone}</span>
+                                </Info>
                                 }
-                                <br />
                                 {data.phone2!=='' &&
-                                <>
+                                <Info>
                                     <i className="fas fa-phone-square">&nbsp;</i>
                                     <span>{data.phone2}</span>
-                                </>
+                                </Info>
                                 }
-                                <br />
                                 {data.email!=='' &&
-                                <>
+                                <Info>
                                     <i className="fas fa-envelope">&nbsp;</i>
                                     <span>{data.email}</span>
-                                </>
+                                </Info>
                                 }
                             </Contacts>
                         </Head>
@@ -165,12 +162,23 @@ const Contacts = styled.div`
   span{
     font-size: 8px;
   }
+  span:after{
+    content: "";
+    display: block;
+    width: 135px;
+    height: 1px;
+    background-color: gray;
+  }
 `;
 
 const Head = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const Info = styled.div`
+  margin-top: 3%;
 `;
 
 export default CV;
