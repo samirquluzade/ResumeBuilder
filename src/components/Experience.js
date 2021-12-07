@@ -6,6 +6,7 @@ const Experience = ({handleChange,backTo}) => {
     return(
         <>
             <Title>Tell us about your Experience</Title>
+            <Message>Start with your recent job</Message>
             <Inputs>
                 <Label htmlFor="job">Job Title</Label>
                 <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={handleChange}/>
@@ -40,6 +41,11 @@ const Next = styled.div`
 
 const Title = styled.h3`
   text-align: center;
+`;
+
+const Message = styled.h5`
+  text-align: center;
+  color:maroon;
 `;
 
 const Inputs = styled.div`
