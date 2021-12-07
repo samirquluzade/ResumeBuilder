@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
-const Experience = ({handleChange,backTo,data}) => {
+const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
 
     const [error,setError] = useState({
        job:null,
@@ -43,11 +43,14 @@ const Experience = ({handleChange,backTo,data}) => {
             <Message>Start with your recent job</Message>
             <Inputs>
                 <Label htmlFor="job">Job Title</Label>
-                <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={handleChange} value={data.job}/>
+                <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={handleChange} value={data.job} minLength={2} maxLength={20} required="required"/>
+                {errors.job && <Error>{errors.job}</Error>}
                 <Label htmlFor="employer">Employer</Label>
-                <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={handleChange} value={data.employer}/>
+                <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={handleChange} value={data.employer} minLength={2} maxLength={20} required="required"/>
+                {errors.employer && <Error>{errors.employer}</Error>}
                 <Label htmlFor="startDate">Start Date</Label>
                 <Input type="month" name="startDate" className="form-control" onChange={handleChange} value={data.startDate}/>
+                {errors.startDate && <Error>{errors.startDate}</Error>}
                 <EndDate>
                     <Label htmlFor="endDate">End Date</Label>
                     <Input type="month" name="endDate" className="form-control" onChange={checkDate} value={data.endDate} id="end"/>
@@ -58,12 +61,13 @@ const Experience = ({handleChange,backTo,data}) => {
                 </Label>
                 <br/>
                 <Label htmlFor="city">City</Label>
-                <Input type="text" name="city" className="form-control" onChange={handleChange} value={data.city}/>
+                <Input type="text" name="city" className="form-control" onChange={handleChange} value={data.city} minLength={2} maxLength={20} required="required"/>
+                {errors.city && <Error>{errors.city}</Error>}
                 <Label htmlFor="desc">Description</Label>
                 <TextArea name="desc" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your work experience" onChange={handleChange} value={data.desc}/>
                 <Next>
                     <Link to="#contact" className="btn btn-danger" onClick={backTo}>Back</Link>
-                    <Link to="#experience" className="btn btn-primary">Next to Education</Link>
+                    <Link to="#education" className="btn btn-primary" onClick={goToEducation}>Next to Education</Link>
                 </Next>
             </Inputs>
         </>

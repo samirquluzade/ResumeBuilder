@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import Contact from "./Contact";
 import Experience from "./Experience";
+import Education from "./Education";
 
 const CV = () => {
 
@@ -22,6 +23,7 @@ const CV = () => {
     });
     const [contact,setContact] = useState(true);
     const [experience,setExperience] = useState(false);
+    const [education,setEducation] = useState(false);
     const errors = {};
 
     const [error,setError] = useState(errors);
@@ -33,7 +35,6 @@ const CV = () => {
 
     const goToExperience = () => {
         if(data.name.trim()===''){
-            // setError({...error,name: 'This field cannot be blank!'})
             errors.name = 'This field cannot be blank!';
         }
         if(data.surname.trim()===''){
@@ -56,6 +57,27 @@ const CV = () => {
         }
     }
 
+    const goToEducation = () => {
+        if(data.job.trim()===''){
+            errors.job = 'This field cannot be blank!';
+        }
+        if(data.employer.trim()===''){
+            errors.employer = 'This field cannot be blank!';
+        }
+        if(data.startDate.trim()===''){
+            errors.startDate = 'This field cannot be blank!';
+        }
+        if(data.city.trim()===''){
+            errors.city = 'This field cannot be blank!';
+        }
+        setError(errors);
+        if(data.job.trim()!=='' && data.employer.trim()!=='' && data.startDate.trim()!=='' && data.city.trim()!=='')
+        {
+            setEducation(true)
+            setExperience(false);
+        }
+    }
+
     const backTo = e => {
         if(experience){
             setExperience(false);
@@ -67,7 +89,8 @@ const CV = () => {
       <Page>
         <LeftSide>
             {contact && <Contact handleChange={handleChange} goToExperience={goToExperience} data={data} error={error}/>}
-            {experience && <Experience handleChange={handleChange} backTo={backTo} data={data}/>}
+            {experience && <Experience handleChange={handleChange} goToEducation={goToEducation} backTo={backTo} data={data} errors={error}/>}
+            {education && <Education />}
         </LeftSide>
           <RightSide>
                 <ResumeExample>
