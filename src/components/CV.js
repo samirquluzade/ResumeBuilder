@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import Contact from "./Contact";
+import Experience from "./Experience";
 
 const CV = () => {
 
@@ -13,16 +14,31 @@ const CV = () => {
        phone2:'',
        email:''
     });
+    const [contact,setContact] = useState(true);
+    const [experience,setExperience] = useState(false);
 
     const handleChange = e => {
         const {name,value} = e.target;
         setData({...data,[name]:value});
     }
 
+    const goToExperience = () => {
+        setExperience(true);
+        setContact(false);
+    }
+
+    const backTo = e => {
+        if(experience){
+            setExperience(false);
+            setContact(true);
+        }
+    }
+
     return(
       <Page>
         <LeftSide>
-            <Contact handleChange={handleChange}/>
+            {contact && <Contact handleChange={handleChange} goToExperience={goToExperience}/>}
+            {experience && <Experience handleChange={handleChange} backTo={backTo}/>}
         </LeftSide>
           <RightSide>
                 <ResumeExample>

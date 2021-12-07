@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
 
-const Contact = ({handleChange}) => {
+const Contact = ({handleChange,goToExperience}) => {
 
     return(
       <>
@@ -20,7 +20,7 @@ const Contact = ({handleChange}) => {
               <Input type="number" name="phone2" className="form-control" placeholder="0551234567" onChange={handleChange}/>
               <Label htmlFor="email">Email</Label>
               <Input type="text" name="email" className="form-control" placeholder="mail@example.com" onChange={handleChange}/>
-              <Next>
+              <Next onClick={goToExperience}>
                   <Link to="#experience" className="btn btn-primary">Next to Experience</Link>
               </Next>
           </Inputs>
