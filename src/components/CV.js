@@ -12,7 +12,13 @@ const CV = () => {
        address:'',
        phone:'',
        phone2:'',
-       email:''
+       email:'',
+       job:'',
+       employer:'',
+       startDate:'',
+       endDate:'',
+       city:'',
+       desc:''
     });
     const [contact,setContact] = useState(true);
     const [experience,setExperience] = useState(false);
@@ -89,6 +95,39 @@ const CV = () => {
                         <Right>
                             WORK EXPERIENCE
                         </Right>
+                        <Experiences>
+                            <ExperienceLeft>
+                                <Job>
+                                {data.job!=='' &&
+                                    data.job
+                                }
+                                </Job>
+                                <Employer>
+                                {data.employer!=='' &&
+                                    data.employer
+                                }
+                                </Employer>
+                                <Date>
+                                    {data.startDate!=='' &&
+                                        data.startDate + ` / `
+                                    }{  data.endDate!=='' &&
+                                        data.endDate
+                                    }
+                                </Date>
+                                <Description>
+                                    {data.desc!=='' &&
+                                        data.desc
+                                    }
+                                </Description>
+                            </ExperienceLeft>
+                            <ExperienceRight>
+                                <City>
+                                    {data.city!=='' &&
+                                        data.city
+                                    }
+                                </City>
+                            </ExperienceRight>
+                        </Experiences>
                         <Right>
                             EDUCATION
                         </Right>
@@ -122,7 +161,7 @@ const ResumeExample = styled.div`
     margin: 2% 5%;
     display: flex;
     flex-direction: row;
-    height: 700px;
+    height: 722px;
 `;
 
 const ResumeLeft = styled.div`
@@ -139,8 +178,15 @@ const About = styled.div`
 
 const Right = styled.div`
     color:#434244;
-    margin: 15% 10% 10% 5%;
-    font-weight: 600;
+    margin: 15% 10% 2% 5%;
+    font-weight: 700;
+    &:after{
+      content: "";
+      display: block;
+      width: 400px;
+      height: 1px;
+      background-color: gray;
+    }
 `;
 
 const ResumeRight = styled.div`
@@ -181,4 +227,36 @@ const Info = styled.div`
   margin-top: 3%;
 `;
 
+const Experiences = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10% 4% 5%;
+  font-weight: 500;
+`;
+
+const Job = styled.div`
+  
+`;
+
+const Employer = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+`;
+
+const Date = styled.div`
+  
+`;
+
+const ExperienceLeft = styled.div``;
+
+const ExperienceRight = styled.div``;
+
+const City = styled.div`
+  
+`;
+
+const Description = styled.div`
+    font-size: 10px;
+    color:#847C7C;
+`;
 export default CV;

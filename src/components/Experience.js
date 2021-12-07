@@ -13,9 +13,9 @@ const Experience = ({handleChange,backTo}) => {
                 <Label htmlFor="employer">Employer</Label>
                 <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={handleChange}/>
                 <Label htmlFor="startDate">Start Date</Label>
-                <Input type="date" name="startDate" className="form-control" onChange={handleChange}/>
+                <Input type="month" name="startDate" className="form-control" onChange={handleChange}/>
                 <Label htmlFor="endDate">End Date</Label>
-                <Input type="date" name="endDate" className="form-control" onChange={handleChange}/>
+                <Input type="month" name="endDate" className="form-control" onChange={handleChange}/>
                 <Label style={{cursor:'pointer'}}>
                     <Input type="checkbox" style={{marginTop:'4%',float:'left'}}/> &nbsp; I currently work here
                 </Label>
@@ -23,7 +23,7 @@ const Experience = ({handleChange,backTo}) => {
                 <Label htmlFor="city">City</Label>
                 <Input type="text" name="city" className="form-control" onChange={handleChange}/>
                 <Label htmlFor="desc">Description</Label>
-                <TextArea name="desc" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your work experience"/>
+                <TextArea name="desc" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your work experience" onChange={handleChange}/>
                 <Next>
                     <Link to="#contact" className="btn btn-danger" onClick={backTo}>Back</Link>
                     <Link to="#experience" className="btn btn-primary">Next to Education</Link>
