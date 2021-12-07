@@ -1,36 +1,28 @@
 import React,{useState} from 'react';
 import styled from "styled-components";
+import {Link} from "react-router-dom";
+import Contact from "./Contact";
 
 const CV = () => {
 
-    const [name,setName] = useState('');
-    const [surname,setSurname] = useState('');
-    const [address,setAddress] = useState('');
-    const [phone,setPhone] = useState('');
-    const [phone2,setPhone2] = useState('');
-    const [email,setEmail] = useState('');
+    const [data,setData] = useState({
+       name:'',
+       surname:'',
+       address:'',
+       phone:'',
+       phone2:'',
+       email:''
+    });
+
+    const handleChange = e => {
+        const {name,value} = e.target;
+        setData({...data,[name]:value});
+    }
 
     return(
       <Page>
         <LeftSide>
-            <Title>Please enter your contact infos</Title>
-            <Inputs>
-                <Label htmlFor="name">Name</Label>
-                <Input type="text" name="name" className="form-control" placeholder="Samir" onChange={(e) => setName(e.target.value)}/>
-                <Label htmlFor="surname">Surname</Label>
-                <Input type="text" name="surname" className="form-control" placeholder="Guluzadeh" onChange={(e) => setSurname(e.target.value)}/>
-                <Label htmlFor="address">Address</Label>
-                <Input type="text" name="address" className="form-control" placeholder="Enter a location" onChange={(e) => setAddress(e.target.value)}/>
-                <Label htmlFor="phone">Phone</Label>
-                <Input type="number" name="phone" className="form-control" placeholder="0551234567" onChange={(e) => setPhone(e.target.value)}/>
-                <Label htmlFor="phone2">Phone 2</Label>
-                <Input type="number" name="phone2" className="form-control" placeholder="0551234567" onChange={(e) => setPhone2(e.target.value)}/>
-                <Label htmlFor="email">Email</Label>
-                <Input type="text" name="email" className="form-control" placeholder="mail@example.com" onChange={(e) => setEmail(e.target.value)}/>
-                <Next>
-                    <button className="btn btn-primary">Next to Experience</button>
-                </Next>
-            </Inputs>
+            <Contact handleChange={handleChange}/>
         </LeftSide>
           <RightSide>
                 <ResumeExample>
@@ -48,38 +40,38 @@ const CV = () => {
                     <ResumeRight>
                         <Head>
                             <FullName>
-                                {name} <br />
-                                {surname}
+                                {data.name} <br />
+                                {data.surname}
                             </FullName>
-                            <Contact>
-                                {address!=='' &&
+                            <Contacts>
+                                {data.address!=='' &&
                                 <>
                                     <i className="fas fa-map-marker-alt">&nbsp;</i>
-                                    <span>{address}</span>
+                                    <span>{data.address}</span>
                                 </>
                                 }
                                 <br/>
-                                {phone!=='' &&
+                                {data.phone!=='' &&
                                     <>
                                         <i className="fas fa-phone-square">&nbsp;</i>
-                                        <span>{phone}</span>
+                                        <span>{data.phone}</span>
                                     </>
                                 }
                                 <br />
-                                {phone2!=='' &&
+                                {data.phone2!=='' &&
                                 <>
                                     <i className="fas fa-phone-square">&nbsp;</i>
-                                    <span>{phone2}</span>
+                                    <span>{data.phone2}</span>
                                 </>
                                 }
                                 <br />
-                                {email!=='' &&
+                                {data.email!=='' &&
                                 <>
                                     <i className="fas fa-envelope">&nbsp;</i>
-                                    <span>{email}</span>
+                                    <span>{data.email}</span>
                                 </>
                                 }
-                            </Contact>
+                            </Contacts>
                         </Head>
                         <Right>
                             WORK EXPERIENCE
@@ -108,29 +100,6 @@ const LeftSide = styled.div`
   flex-direction: column;
   justify-content: center;
   min-width: 700px;
-`;
-
-const Title = styled.h3`
-  text-align: center;
-`;
-
-const Inputs = styled.div`
-
-`;
-
-const Label = styled.label`
-  font-size: 16px;
-  margin-top: 2%;
-  font-weight: 500;
-`;
-
-const Input = styled.input`
-  position: relative;
-  &:focus{
-    outline: none!important;
-    box-shadow: none!important;
-    border:1px solid #000000;
-  }
 `;
 
 const RightSide = styled.div`
@@ -172,7 +141,7 @@ const FullName = styled.div`
   font-weight: 700;
 `;
 
-const Contact = styled.div`
+const Contacts = styled.div`
   margin: 10% 1% 5% 5%;
   i{
     font-size: 16px;
@@ -186,11 +155,6 @@ const Head = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`;
-
-const Next = styled.div`
-  text-align: center;
-  margin-top: 5%;
 `;
 
 export default CV;
