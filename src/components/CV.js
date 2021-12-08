@@ -28,33 +28,57 @@ const CV = () => {
 
     const [error,setError] = useState(errors);
 
-    const handleChange = e => {
-        const {name,value} = e.target;
-        setData({...data,[name]:value});
+    const validationCheck = () => {
+        if(data.name.trim()!==''){
+            errors.name = '';
+        }
+        else
+        {
+            errors.name = 'This field cannot be blank!';
+        }
+        if(data.surname.trim()!==''){
+            errors.surname = '';
+        }
+        else
+        {
+            errors.surname = 'This field cannot be blank!';
+        }
+        if(data.address.trim()!==''){
+            errors.address = '';
+        }
+        else{
+            errors.address = 'This field cannot be blank!';
+        }
+        if(data.phone.trim()!==''){
+            errors.phone = '';
+        }
+        else
+        {
+            errors.phone = 'This field cannot be blank!';
+        }
+        if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(data.email)){
+            errors.email = 'Please enter a valid email address!'
+        }
+        else
+        {
+            errors.email = '';
+        }
+        setError(errors);
     }
 
     const goToExperience = () => {
-        if(data.name.trim()===''){
-            errors.name = 'This field cannot be blank!';
-        }
-        if(data.surname.trim()===''){
-            errors.surname = 'This field cannot be blank!';
-        }
-        if(data.address.trim()===''){
-            errors.address = 'This field cannot be blank!';
-        }
-        if(data.phone.trim()===''){
-            errors.phone = 'This field cannot be blank!';
-        }
-        if(data.email.trim()===''){
-            errors.email = 'This field cannot be blank!';
-        }
-        setError(errors);
-        if(data.name.trim()!=='' && data.surname.trim()!=='' && data.address.trim()!=='' && data.phone.trim()!=='' && data.email.trim()!=='')
+        validationCheck();
+        if(errors.name==='' && errors.surname==='' && errors.address==='' && errors.phone==='' && errors.email==='')
         {
             setExperience(true);
             setContact(false);
         }
+    }
+
+    const handleChange = e => {
+        const {name,value} = e.target;
+        setData({...data,[name]:value});
+        validationCheck();
     }
 
     const goToEducation = () => {
