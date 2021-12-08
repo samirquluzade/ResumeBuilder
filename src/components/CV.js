@@ -28,7 +28,7 @@ const CV = () => {
 
     const [error,setError] = useState(errors);
 
-    const validationCheck = () => {
+    const validationContactCheck = () => {
         if(data.name.trim()!==''){
             errors.name = '';
         }
@@ -66,8 +66,45 @@ const CV = () => {
         setError(errors);
     }
 
+    const validationExperienceCheck = () => {
+        if(data.job.trim()===''){
+            errors.job = 'This field cannot be blank!';
+        }
+        else
+        {
+            errors.job = '';
+        }
+        if(data.employer.trim()===''){
+            errors.employer = 'This field cannot be blank!';
+        }
+        else{
+            errors.employer = '';
+        }
+        if(data.startDate.trim()===''){
+            errors.startDate = 'This field cannot be blank!';
+        }
+        else
+        {
+            errors.startDate = '';
+        }
+        if(data.endDate.trim()===''){
+            errors.endDate = 'This field cannot be blank!';
+        }
+        else
+        {
+            errors.endDate = '';
+        }
+        if(data.city.trim()===''){
+            errors.city = 'This field cannot be blank!';
+        }
+        else {
+            errors.city = '';
+        }
+        setError(errors);
+    }
+
     const goToExperience = () => {
-        validationCheck();
+        validationContactCheck();
         if(errors.name==='' && errors.surname==='' && errors.address==='' && errors.phone==='' && errors.email==='')
         {
             setExperience(true);
@@ -78,26 +115,15 @@ const CV = () => {
     const handleChange = e => {
         const {name,value} = e.target;
         setData({...data,[name]:value});
-        validationCheck();
+        validationContactCheck();
+        validationExperienceCheck();
     }
 
     const goToEducation = () => {
-        if(data.job.trim()===''){
-            errors.job = 'This field cannot be blank!';
-        }
-        if(data.employer.trim()===''){
-            errors.employer = 'This field cannot be blank!';
-        }
-        if(data.startDate.trim()===''){
-            errors.startDate = 'This field cannot be blank!';
-        }
-        if(data.city.trim()===''){
-            errors.city = 'This field cannot be blank!';
-        }
-        setError(errors);
-        if(data.job.trim()!=='' && data.employer.trim()!=='' && data.startDate.trim()!=='' && data.city.trim()!=='')
+        validationExperienceCheck();
+        if(errors.job==='' && errors.employer==='' && errors.startDate==='' && errors.endDate==='' && errors.city==='')
         {
-            setEducation(true)
+            setEducation(true);
             setExperience(false);
         }
     }

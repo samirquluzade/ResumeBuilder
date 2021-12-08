@@ -54,7 +54,8 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
                 <EndDate>
                     <Label htmlFor="endDate">End Date</Label>
                     <Input type="month" name="endDate" className="form-control" onChange={checkDate} value={data.endDate} id="end"/>
-                    {error && <Error>{error.endDate}</Error>}
+                    {error.endDate && <Error>{error.endDate}</Error>}
+                    {errors.endDate && <Error>{errors.endDate}</Error>}
                 </EndDate>
                 <Label style={{cursor:'pointer'}} onClick={checkHandler}>
                     <Input type="checkbox" style={{marginTop:'4%',float:'left'}} id="present" /> &nbsp; I currently work here
