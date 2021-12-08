@@ -39,12 +39,12 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
 
     const addExperience = () => {
         let details = document.createElement("details");
-        // let summary = document.createElement("summary");
+        let summary = document.createElement("summary");
         let inputs = document.getElementById("inputs");
 
         details.appendChild(inputs);
         document.getElementById('details').appendChild(details);
-        // document.getElementById('details').insertAdjacentElement('afterend',inputs);
+        document.getElementById('details').insertAdjacentElement('afterend',inputs);
     }
 
     return(
