@@ -7,6 +7,8 @@ import Education from "./Education";
 
 const CV = () => {
 
+    let t = 0;
+
     const [data,setData] = useState({
        name:'',
        surname:'',
@@ -139,7 +141,7 @@ const CV = () => {
       <Page>
         <LeftSide>
             {contact && <Contact handleChange={handleChange} goToExperience={goToExperience} data={data} error={error}/>}
-            {experience && <Experience handleChange={handleChange} goToEducation={goToEducation} backTo={backTo} data={data} errors={error}/>}
+            {experience && <Experience handleChange={handleChange} goToEducation={goToEducation} backTo={backTo} data={data} errors={error} t={t}/>}
             {education && <Education />}
         </LeftSide>
           <RightSide>

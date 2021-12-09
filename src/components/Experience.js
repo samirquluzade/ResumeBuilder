@@ -37,21 +37,35 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
         }
     }
 
-    const addExperience = () => {
-        let details = document.createElement("details");
-        let summary = document.createElement("summary");
-        let inputs = document.getElementById("inputs");
-
-        details.appendChild(inputs);
-        document.getElementById('details').appendChild(details);
-        document.getElementById('details').insertAdjacentElement('afterend',inputs);
+    const inputHandler = () => {
+        let checkbox = document.getElementById('experience');
+        let text = document.getElementById('inputs');
+        if(checkbox.checked === true){
+            text.style.display = "none";
+        }
+        else
+        {
+            text.style.display = "block";
+        }
     }
+    // const addExperience = () => {
+    //     let details = document.createElement("details");
+    //     // let summary = document.createElement("summary");
+    //     let inputs = document.getElementById("inputs");
+    //
+    //     details.appendChild(inputs);
+    //     document.getElementById('details').appendChild(details);
+    //     // document.getElementById('details').insertAdjacentElement('afterend',inputs);
+    // }
 
     return(
         <>
             <Title>Tell us about your Experience</Title>
             <Message>Start with your recent job</Message>
             <Details id="details">
+                <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>
+                    <Inputd type="checkbox" id="experience" /> &nbsp; I don't have any experience
+                </Labeld>
                 <Inputs id="inputs">
                     <Label htmlFor="job">Job Title</Label>
                     <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={handleChange} value={data.job} minLength={2} maxLength={20} required="required"/>
@@ -81,7 +95,7 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
             </Details>
             <Next>
                 <Link to="#contact" className="btn btn-danger" onClick={backTo}>Back</Link>
-                <Link to="#experience" className="btn btn-info" onClick={addExperience}>Add new Experience</Link>
+                {/*<Link to="#experience" className="btn btn-info" onClick={addExperience}>Add new Experience</Link>*/}
                 <Link to="#education" className="btn btn-primary" onClick={goToEducation}>Next to Education</Link>
             </Next>
         </>
@@ -134,6 +148,16 @@ const Error = styled.p`
 
 const Details = styled.div`
 
+`;
+
+const Labeld = styled.label`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+`;
+
+const Inputd = styled.input`
+    font-weight: 700;
 `;
 
 export default Experience;
