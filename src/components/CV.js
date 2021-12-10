@@ -69,34 +69,34 @@ const CV = () => {
     }
 
     const validationExperienceCheck = () => {
-        if(data.job.trim()===''){
+        if(data.job !== '*' || data.job.trim()===''){
             errors.job = 'This field cannot be blank!';
         }
         else
         {
             errors.job = '';
         }
-        if(data.employer.trim()===''){
+        if(data.employer!=='*' || data.employer.trim()===''){
             errors.employer = 'This field cannot be blank!';
         }
         else{
             errors.employer = '';
         }
-        if(data.startDate.trim()===''){
+        if(data.startDate !=='*' || data.startDate.trim()===''){
             errors.startDate = 'This field cannot be blank!';
         }
         else
         {
             errors.startDate = '';
         }
-        if(data.endDate.trim()===''){
+        if(data.endDate !== '*' || data.endDate.trim()===''){
             errors.endDate = 'This field cannot be blank!';
         }
         else
         {
             errors.endDate = '';
         }
-        if(data.city.trim()===''){
+        if(data.city !== '*' || data.city.trim()===''){
             errors.city = 'This field cannot be blank!';
         }
         else {
@@ -196,31 +196,31 @@ const CV = () => {
                         <Experiences>
                             <ExperienceLeft>
                                 <Job>
-                                {data.job!=='' &&
+                                {data.job!=='' && data.job!=='*' &&
                                     data.job
                                 }
                                 </Job>
                                 <Employer>
-                                {data.employer!=='' &&
+                                {data.employer!=='' && data.employer!=='*' &&
                                     data.employer
                                 }
                                 </Employer>
                                 <Date>
-                                    {data.startDate!=='' &&
+                                    {data.startDate!=='' && data.startDate!=='*' &&
                                         data.startDate + ` / `
-                                    }{  data.endDate!=='' &&
+                                    }{  data.endDate!=='' && data.endDate!=='*' &&
                                         data.endDate
                                     }
                                 </Date>
                                 <Description>
-                                    {data.desc!=='' &&
+                                    {data.desc!=='' && data.desc!=='*' &&
                                         data.desc
                                     }
                                 </Description>
                             </ExperienceLeft>
                             <ExperienceRight>
                                 <City>
-                                    {data.city!=='' &&
+                                    {data.city!=='' && data.city!=='*' &&
                                         data.city
                                     }
                                 </City>

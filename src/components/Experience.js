@@ -42,10 +42,20 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
         let text = document.getElementById('inputs');
         if(checkbox.checked === true){
             text.style.display = "none";
+            data.job = '*';
+            data.employer = '*';
+            data.startDate = '*';
+            data.endDate = '*';
+            data.city = '*';
         }
         else
         {
             text.style.display = "block";
+            data.job = '';
+            data.employer = '';
+            data.startDate = '';
+            data.endDate = '';
+            data.city = '';
         }
     }
     // const addExperience = () => {
