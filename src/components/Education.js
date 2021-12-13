@@ -77,9 +77,9 @@ const Education = ({handleChange,backTo,data,goToAbout,errors}) => {
                 </Inputs>
             </Details>
             <Next>
-                <Link to="#contact" className="btn btn-danger" onClick={backTo}>Back</Link>
+                <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
                 {/*<Link to="#experience" className="btn btn-info" onClick={addExperience}>Add new Experience</Link>*/}
-                <Link to="#education" className="btn btn-primary" onClick={goToAbout}>Next to About</Link>
+                <Link to="/education" className="btn btn-primary" onClick={goToAbout}>Next to Skills</Link>
             </Next>
         </>
     );

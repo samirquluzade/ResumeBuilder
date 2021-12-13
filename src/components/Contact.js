@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const Contact = ({handleChange,goToExperience,data,error}) => {
 
     return(
-      <>
+      <LeftSide>
           <Title>Please enter your contact infos</Title>
           <Inputs>
               <Label htmlFor="name">Name</Label>
@@ -26,10 +26,10 @@ const Contact = ({handleChange,goToExperience,data,error}) => {
               <Input type="text" name="email" className="form-control" placeholder="mail@example.com" onChange={handleChange} value={data.email} minLength={10} maxLength={25} required="required"/>
               {error.email && <Error>{error.email}</Error>}
               <Next onClick={goToExperience}>
-                  <Link to="#experience" className="btn btn-primary">Next to Experience</Link>
+                  <Link to="/experience" className="btn btn-primary">Next to Experience</Link>
               </Next>
           </Inputs>
-      </>
+      </LeftSide>
     );
 };
 
@@ -44,6 +44,13 @@ const Title = styled.h3`
 
 const Inputs = styled.div`
 
+`;
+
+const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 700px;
 `;
 
 const Label = styled.label`
