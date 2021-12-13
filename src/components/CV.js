@@ -1,13 +1,10 @@
 import React,{useState} from 'react';
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 import Contact from "./Contact";
 import Experience from "./Experience";
 import Education from "./Education";
 
 const CV = () => {
-
-    let t = 0;
 
     const [data,setData] = useState({
        name:'',
@@ -24,6 +21,7 @@ const CV = () => {
        desc:'',
        school:'',
        degree:'',
+       speciality:'',
        graduation:'',
        town:'',
        description:''
@@ -110,6 +108,8 @@ const CV = () => {
         setError(errors);
     }
 
+
+
     const goToExperience = () => {
         validationContactCheck();
         if(errors.name==='' && errors.surname==='' && errors.address==='' && errors.phone==='' && errors.email==='')
@@ -143,6 +143,10 @@ const CV = () => {
         if(experience){
             setExperience(false);
             setContact(true);
+        }
+        else if(education){
+            setEducation(false);
+            setExperience(true);
         }
     }
 
@@ -238,6 +242,39 @@ const CV = () => {
                         <Right>
                             EDUCATION
                         </Right>
+                        <Experiences>
+                            <ExperienceLeft>
+                                <Employer>
+                                    {data.degree!=='' && data.degree!=='*' &&
+                                    data.degree
+                                    }
+                                </Employer>
+                                <Job>
+                                    {data.school!=='' && data.school!=='*' &&
+                                    data.school
+                                    } - {data.speciality !== '' && data.speciality !== '*' &&
+                                data.speciality
+                                }
+                                </Job>
+                                <Date>
+                                    {data.graduation!=='' && data.graduation!=='*' &&
+                                    data.graduation
+                                    }
+                                </Date>
+                                <Description>
+                                    {data.description!=='' && data.description!=='*' &&
+                                    data.description
+                                    }
+                                </Description>
+                            </ExperienceLeft>
+                            <ExperienceRight>
+                                <City>
+                                    {data.town!=='' && data.town!=='*' &&
+                                    data.town
+                                    }
+                                </City>
+                            </ExperienceRight>
+                        </Experiences>
                         <Right>
                             SKILLS
                         </Right>
