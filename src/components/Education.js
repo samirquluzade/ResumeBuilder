@@ -46,9 +46,6 @@ const Education = ({handleChange,backTo,data,goToAbout,errors}) => {
                     <Inputd type="checkbox" id="education" /> &nbsp; I don't have any education
                 </Labeld>
                 <Inputs id="education_inputs">
-                    <Label htmlFor="school">School</Label>
-                    <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={handleChange} value={data.school} minLength={2} maxLength={20} required="required"/>
-                    {errors.school && <Error>{errors.school}</Error>}
                     <Label htmlFor="degree">Degree</Label>
                     <Form.Select className="form-control" name="degree" onChange={handleChange}>
                         <option>Select degree</option>
@@ -60,6 +57,9 @@ const Education = ({handleChange,backTo,data,goToAbout,errors}) => {
                         <option value="PH">PH.D.</option>
                     </Form.Select>
                     {errors.degree && <Error>{errors.degree}</Error>}
+                    <Label htmlFor="school">School</Label>
+                    <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={handleChange} value={data.school} minLength={2} maxLength={20} required="required"/>
+                    {errors.school && <Error>{errors.school}</Error>}
                     <Label htmlFor="speciality">Speciality</Label>
                     <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={handleChange} value={data.speciality} minLength={2} maxLength={20} required="required"/>
                     {errors.speciality && <Error>{errors.speciality}</Error>}

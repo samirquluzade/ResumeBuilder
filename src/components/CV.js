@@ -108,6 +108,43 @@ const CV = () => {
         setError(errors);
     }
 
+    const validationEducationCheck = () => {
+        if(data.school.trim()===''){
+            errors.school = 'This field cannot be blank!';
+        }
+        else
+        {
+            errors.school = '';
+        }
+        if(data.degree.trim()===''){
+            errors.degree = 'This field cannot be blank!';
+        }
+        else{
+            errors.degree = '';
+        }
+        if( data.speciality.trim()===''){
+            errors.speciality = 'This field cannot be blank!';
+        }
+        else
+        {
+            errors.speciality = '';
+        }
+        if(data.graduation.trim()===''){
+            errors.graduation = 'This field cannot be blank!';
+        }
+        else
+        {
+            errors.graduation = '';
+        }
+        if( data.town.trim()===''){
+            errors.town = 'This field cannot be blank!';
+        }
+        else {
+            errors.town = '';
+        }
+        setError(errors);
+    }
+
 
 
     const goToExperience = () => {
@@ -124,6 +161,7 @@ const CV = () => {
         setData({...data,[name]:value});
         validationContactCheck();
         validationExperienceCheck();
+        validationEducationCheck();
     }
 
     const goToEducation = () => {
@@ -136,7 +174,7 @@ const CV = () => {
     }
 
     const goToAbout = () => {
-
+        validationEducationCheck();
     }
 
     const backTo = e => {
@@ -146,6 +184,7 @@ const CV = () => {
         }
         else if(education){
             setEducation(false);
+            setContact(false);
             setExperience(true);
         }
     }
@@ -251,8 +290,8 @@ const CV = () => {
                                 </Employer>
                                 <Job>
                                     {data.school!=='' && data.school!=='*' &&
-                                    data.school
-                                    } - {data.speciality !== '' && data.speciality !== '*' &&
+                                    data.school + ' - '
+                                    } {data.speciality !== '' && data.speciality !== '*' &&
                                 data.speciality
                                 }
                                 </Job>

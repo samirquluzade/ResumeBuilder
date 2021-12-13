@@ -33,3 +33,6 @@ ul{
 .dropdown-menu{
   min-width: 60px!important;
 }
+input[type=checkbox]{
+  margin: 0;
+}
