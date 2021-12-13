@@ -67,9 +67,8 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
     //     document.getElementById('details').appendChild(details);
     //     // document.getElementById('details').insertAdjacentElement('afterend',inputs);
     // }
-
     return(
-        <>
+        <LeftSide>
             <Title>Tell us about your Experience</Title>
             <Message>Start with your recent job</Message>
             <Details id="details">
@@ -100,22 +99,29 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
                     <Input type="text" name="city" className="form-control" onChange={handleChange} value={data.city} minLength={2} maxLength={20} required="required"/>
                     {errors.city && <Error>{errors.city}</Error>}
                     <Label htmlFor="desc">Description</Label>
-                    <TextArea name="desc" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your work experience" onChange={handleChange} value={data.desc}/>
+                    <TextArea name="desc" className="form-control" rows="3" cols="50" maxLength="250" placeholder="Write your work experience" onChange={handleChange} value={data.desc}/>
                 </Inputs>
             </Details>
             <Next>
-                <Link to="#contact" className="btn btn-danger" onClick={backTo}>Back</Link>
+                <Link to="/contact" className="btn btn-danger" onClick={backTo}>Back</Link>
                 {/*<Link to="#experience" className="btn btn-info" onClick={addExperience}>Add new Experience</Link>*/}
-                <Link to="#education" className="btn btn-primary" onClick={goToEducation}>Next to Education</Link>
+                <Link to="/education" className="btn btn-primary" onClick={goToEducation}>Next to Education</Link>
             </Next>
-        </>
+        </LeftSide>
     );
 }
+
+const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 700px;
+`;
 
 const Next = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 3%;
+  margin-top: 2%;
 `;
 
 const Title = styled.h3`
@@ -133,7 +139,7 @@ const Inputs = styled.div`
 
 const Label = styled.label`
   font-size: 16px;
-  margin-top: 2%;
+  margin-top: 1%;
   font-weight: 500;
 `;
 
@@ -154,6 +160,7 @@ const EndDate = styled.div``;
 
 const Error = styled.p`
   color:red;
+  font-size: 12px;
 `;
 
 const Details = styled.div`
