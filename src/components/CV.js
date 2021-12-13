@@ -29,6 +29,7 @@ const CV = () => {
     const [contact,setContact] = useState(true);
     const [experience,setExperience] = useState(false);
     const [education,setEducation] = useState(false);
+    const [skill,setSkill] = useState(false);
     const errors = {};
 
     const [error,setError] = useState(errors);
@@ -175,6 +176,11 @@ const CV = () => {
 
     const goToAbout = () => {
         validationEducationCheck();
+        if(errors.degree==='' && errors.school==='' && errors.town==='' && errors.speciality==='' && errors.graduation==='')
+        {
+            setSkill(true);
+            setEducation(false);
+        }
     }
 
     const backTo = e => {
