@@ -21,7 +21,12 @@ const CV = () => {
        startDate:'',
        endDate:'',
        city:'',
-       desc:''
+       desc:'',
+       school:'',
+       degree:'',
+       graduation:'',
+       town:'',
+       description:''
     });
     const [contact,setContact] = useState(true);
     const [experience,setExperience] = useState(false);
@@ -69,34 +74,34 @@ const CV = () => {
     }
 
     const validationExperienceCheck = () => {
-        if(data.job !== '*' || data.job.trim()===''){
+        if(data.job.trim()===''){
             errors.job = 'This field cannot be blank!';
         }
         else
         {
             errors.job = '';
         }
-        if(data.employer!=='*' || data.employer.trim()===''){
+        if(data.employer.trim()===''){
             errors.employer = 'This field cannot be blank!';
         }
         else{
             errors.employer = '';
         }
-        if(data.startDate !=='*' || data.startDate.trim()===''){
+        if( data.startDate.trim()===''){
             errors.startDate = 'This field cannot be blank!';
         }
         else
         {
             errors.startDate = '';
         }
-        if(data.endDate !== '*' || data.endDate.trim()===''){
+        if(data.endDate.trim()===''){
             errors.endDate = 'This field cannot be blank!';
         }
         else
         {
             errors.endDate = '';
         }
-        if(data.city !== '*' || data.city.trim()===''){
+        if( data.city.trim()===''){
             errors.city = 'This field cannot be blank!';
         }
         else {
@@ -130,6 +135,10 @@ const CV = () => {
         }
     }
 
+    const goToAbout = () => {
+
+    }
+
     const backTo = e => {
         if(experience){
             setExperience(false);
@@ -141,8 +150,8 @@ const CV = () => {
       <Page>
         <LeftSide>
             {contact && <Contact handleChange={handleChange} goToExperience={goToExperience} data={data} error={error}/>}
-            {experience && <Experience handleChange={handleChange} goToEducation={goToEducation} backTo={backTo} data={data} errors={error} t={t}/>}
-            {education && <Education />}
+            {experience && <Experience handleChange={handleChange} goToEducation={goToEducation} backTo={backTo} data={data} errors={error}/>}
+            {education && <Education handleChange={handleChange} goToAbout={goToAbout} backTo={backTo} data={data} errors={error}/>}
         </LeftSide>
           <RightSide>
                 <ResumeExample>
