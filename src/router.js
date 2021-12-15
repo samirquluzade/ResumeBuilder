@@ -35,9 +35,9 @@ const Router = () => {
     localStorage.getItem("data")
         ? localStorage.getItem("data")
         : localStorage.setItem("data", JSON.stringify(data));
-    // useEffect(() => {
-    //     data = JSON.parse(localStorage.getItem("data"));
-    // },[]);
+    useEffect(() => {
+        data = JSON.parse(localStorage.getItem("data"));
+    },[]);
 
     let k,all;
     const store = new CustomStore({
@@ -215,7 +215,7 @@ const Router = () => {
 
         setData(list);
         console.log(data);
-        console.log(store.insert);
+        console.log(store);
         localStorage.setItem("data",JSON.stringify(data));
         // validationContactCheck();
         // validationExperienceCheck();
