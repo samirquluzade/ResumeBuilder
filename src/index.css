@@ -36,3 +36,26 @@ ul{
 input[type=checkbox]{
   margin: 0;
 }
+button:focus{
+  outline: 0!important;
+}
+label{
+  font-size: 16px!important;
+  margin-top: 2%!important;
+  font-weight: 500!important;
+}
+.input{
+  position: relative;
+}
+.input:focus{
+  outline: none!important;
+  box-shadow: none!important;
+  border:1px solid #000000;
+}
+.error{
+  color:red;
+}
+.next{
+  float: right;
+  margin-top: 3%;
+}
