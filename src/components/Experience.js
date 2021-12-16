@@ -8,36 +8,44 @@ import {Button} from "react-bootstrap";
 
 const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience}) => {
 
-    const [error,setError] = useState({
+    const [error,setError] = useState([{
        job:null,
        employer:null,
        startDate:null,
        endDate:null,
        city:null,
        desc:null
-    });
-
-    const checkHandler = () => {
+    }]);
+    let [check,setCheck] = useState(false);
+    const checkHandler = (endDate) => {
         let checkbox = document.getElementById('present');
         let text = document.getElementById('end');
         if(checkbox.checked === true){
             text.style.display = "none";
-            data.endDate = "Present";
+            setCheck(true);
         }
         else
         {
             text.style.display = "block";
+            setCheck(false);
         }
     }
 
-    const checkDate = (e) => {
-        if(e.target.value > data.startDate){
-            handleChange(e);
-            setError({...error,endDate: null});
+    const checkDate = (e,i,start) => {
+        const {name,value} = e.target;
+        const errors = [...error];
+        if(value > start){
+            handleChange(e,i);
+            // setError({...error,endDate: null});
+            errors[i][name] = null;
+            setError(errors);
+            console.log(error);
         }
         else
         {
-            setError({...error,endDate: "Start date cannot be greater than end date"});
+            errors[i][name] = "Start date cannot be greater than end date";
+            setError(errors);
+            console.log(error);
         }
     }
 
@@ -75,6 +83,9 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
             <Details id="ex_inputs">
                 <Button className="btn btn-info" style={{float:'right'}} onClick={addExperience} id="newEx">Add new Experience</Button>
                 {data.map((item,i) => {
+                    if(check){
+                        item.endDate = "Present";
+                    }
                     return(
                         <div>
                             <Work onClick={toggleMenu}>Work Experience {i + 1}</Work>
@@ -89,8 +100,11 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
                                 <Input type="month" name="startDate" className="form-control" onChange={e => handleChange(e,i)} required="required" value={item.startDate}/>
                                 {error.startDate && <Error>{error.startDate}</Error>}
                                 <Label htmlFor="endDate">End Date</Label>
-                                <Input type="month" name="endDate" className="form-control"  onChange={e => handleChange(e,i)} required="required" value={item.endDate}/>
+                                <Input type="month" name="endDate" className="form-control"  onChange={e => checkDate(e,i,item.startDate)} required="required" value={item.endDate} id="end"/>
                                 {error.endDate && <Error>{error.endDate}</Error>}
+                                <Labeld style={{cursor:'pointer'}} onClick={() => checkHandler(item.endDate)}>
+                                    <Inputd type="checkbox" id="present" /> &nbsp; I currently work here
+                                </Labeld>
                                 <Label htmlFor="city">City</Label>
                                 <Input type="text" name="city" className="form-control" placeholder="Baku" onChange={e => handleChange(e,i)}  minLength={2} maxLength={20} value={item.city}/>
                                 {error.city && <Error>{error.city}</Error>}

@@ -214,8 +214,6 @@ const Router = () => {
         list[i][name] = value;
 
         setData(list);
-        console.log(data);
-        console.log(store);
         localStorage.setItem("data",JSON.stringify(data));
         // validationContactCheck();
         // validationExperienceCheck();
