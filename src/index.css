@@ -60,5 +60,5 @@ label{
   margin-top: 3%;
 }
 .activ{
-  display: block;
+  display: block!important;
 }
