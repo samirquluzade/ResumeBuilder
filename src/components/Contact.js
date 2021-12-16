@@ -9,29 +9,13 @@ import {Button} from "react-bootstrap";
 const Contact = ({handleChange,goToExperience,error,data,addExperience}) => {
 
 
-    const [show,setShow] = useState(false);
-
-    function toggleMenu(e){
-        console.log(e);
-        e.currentTarget.classList.add('activ');
-    }
-
     return(
       <LeftSide>
           <Title>Please enter your contact infos</Title>
-          {/*<DataGrid dataSource={store}>*/}
-          {/*    <Column dataField="name" dataType="string"/>*/}
-          {/*    <Column dataField="surname" dataType="string" />*/}
-          {/*    <Column dataField="address" dataType="string" />*/}
-          {/*    <Column dataField="phone" dataType="number" />*/}
-          {/*    <Column dataField="phone2" dataType="number" />*/}
-          {/*    <Column dataField="email" dataType="string" />*/}
-          {/*</DataGrid>*/}
           <Link to="#experience" className="btn btn-info" onClick={addExperience} id="newEx">Add new Experience</Link>
           {data.map((item,i) => {
               return(
-                  <>
-                  <button onClick={toggleMenu}>Work Experience {i + 1}</button>
+                  <div>
                   <Inputs id="one">
                       <Label htmlFor="name">Name</Label>
                       <Input type="text" name="name" className="form-control" placeholder="Samir" onChange={e => handleChange(e,i)} minLength={2} maxLength={15} required="required" value={item.name}/>
@@ -51,7 +35,7 @@ const Contact = ({handleChange,goToExperience,error,data,addExperience}) => {
                       <Input type="text" name="email" className="form-control" placeholder="mail@example.com" onChange={e => handleChange(e,i)}  minLength={10} maxLength={25} required="required" value={item.email}/>
                       {error.email && <Error>{error.email}</Error>}
                   </Inputs>
-                  </>
+                  </div>
               )})}
           <Next onClick={goToExperience}>
               <Button className="btn btn-primary">Next to Experience</Button>
@@ -65,6 +49,13 @@ const Next = styled.div`
   button{
     float: right;
   }
+`;
+
+const Work = styled.button`
+  background-color: #E5E4EA;
+  border:none;
+  outline: none;
+  margin:2% 0;
 `;
 
 const ID = styled.p`

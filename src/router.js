@@ -19,12 +19,12 @@ const Router = () => {
         phone:'',
         phone2:'',
         email:'',
-        // job:'',
-        // employer:'',
-        // startDate:'',
-        // endDate:'',
-        // city:'',
-        // desc:'',
+        job:'',
+        employer:'',
+        startDate:'',
+        endDate:'',
+        city:'',
+        desc:'',
         // school:'',
         // degree:'',
         // speciality:'',
@@ -204,7 +204,7 @@ const Router = () => {
         store.insert(data);
         // console.log(data);
         // console.log(store);
-        setData([...data, {name:'',surname: '',address:'',phone:'',phone2:'',email:''}]);
+        setData([...data, {job:'',employer: '',startDate:'',endDate:'',city:'',desc:''}]);
     }
 
     const handleChange = (e,i) => {
@@ -243,9 +243,9 @@ const Router = () => {
     return(
         <Page>
           <Routes>
-              <Route exact path="/" element={[<Contact handleChange={handleChange} store={store} error={error} goToExperience={goToExperience} data={data} addExperience={addExperience}/>,<CV data={data}/>]} />
+              <Route exact path="/" element={[<Contact handleChange={handleChange} store={store} error={error} goToExperience={goToExperience} data={data}/>,<CV data={data}/>]} />
               <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} error={error}/>,<CV data={data}/>]} />
-              <Route exact path="/experience" element={[<Experience handleChange={handleChange} data={data} errors={error}/>,<CV data={data}/>]} />
+              <Route exact path="/experience" element={[<Experience handleChange={handleChange} data={data} errors={error} addExperience={addExperience}/>,<CV data={data}/>]} />
           </Routes>
         </Page>
     );

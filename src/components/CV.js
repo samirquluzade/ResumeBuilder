@@ -56,43 +56,47 @@ const CV = ({data}) => {
                         <Right>
                             WORK EXPERIENCE
                         </Right>
-                        <Experiences>
-                            <ExperienceLeft>
-                                <Job>
-                                {data.job!=='' && data.job!=='*' &&
-                                    data.job
-                                }
-                                </Job>
-                                <Employer>
-                                {data.employer!=='' && data.employer!=='*' &&
-                                    data.employer
-                                }
-                                </Employer>
-                                <Date>
-                                    {data.startDate!=='' && data.startDate!=='*' &&
-                                        data.startDate + ` / `
-                                    }{  data.endDate!=='' && data.endDate!=='*' &&
-                                        data.endDate
-                                    }
-                                </Date>
-                                <Description>
-                                    {data.desc!=='' && data.desc!=='*' &&
-                                        data.desc
-                                    }
-                                </Description>
-                            </ExperienceLeft>
-                            <ExperienceRight>
-                                <City>
-                                    {data.city!=='' && data.city!=='*' &&
-                                        data.city
-                                    }
-                                </City>
-                            </ExperienceRight>
-                        </Experiences>
-                        <Right>
-                            EDUCATION
-                        </Right>
-                        <Experiences>
+                        {data.map((item,i) => {
+                            // console.log(item[i]);
+                            return(
+                                <Experiences>
+                                    <ExperienceLeft>
+                                        <Job>
+                                            {item.job !== '' && item.job !== '*' &&
+                                            item.job
+                                            }
+                                        </Job>
+                                        <Employer>
+                                            {item.employer !== '' && item.employer !== '*' &&
+                                            item.employer
+                                            }
+                                        </Employer>
+                                        <Date>
+                                            {item.startDate !== '' && item.startDate !== '*' &&
+                                            item.startDate + ` / `
+                                            }{item.endDate !== '' && item.endDate !== '*' &&
+                                        item.endDate
+                                        }
+                                        </Date>
+                                        <Description>
+                                            {item.desc !== '' && item.desc !== '*' &&
+                                            item.desc
+                                            }
+                                        </Description>
+                                    </ExperienceLeft>
+                                    <ExperienceRight>
+                                        <City>
+                                            {item.city !== '' && item.city !== '*' &&
+                                            item.city
+                                            }
+                                        </City>
+                                    </ExperienceRight>
+                                </Experiences>
+                                )})}
+                            <Right>
+                                EDUCATION
+                            </Right>
+                            <Experiences>
                             <ExperienceLeft>
                                 <Employer>
                                     {data.degree!=='' && data.degree!=='*' &&

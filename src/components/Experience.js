@@ -4,8 +4,9 @@ import DataGrid, {
 } from "devextreme-react/data-grid";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
-const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
+const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience}) => {
 
     const [error,setError] = useState({
        job:null,
@@ -42,85 +43,101 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors}) => {
 
     const inputHandler = () => {
         let checkbox = document.getElementById('experience');
-        let text = document.getElementById('inputs');
+        let text = document.getElementById('ex_inputs');
         if(checkbox.checked === true){
             text.style.display = "none";
-            data.job = '*';
-            data.employer = '*';
-            data.startDate = '*';
-            data.endDate = '*';
-            data.city = '*';
+            // data.job = '*';
+            // data.employer = '*';
+            // data.startDate = '*';
+            // data.endDate = '*';
+            // data.city = '*';
         }
         else
         {
             text.style.display = "block";
-            data.job = '';
-            data.employer = '';
-            data.startDate = '';
-            data.endDate = '';
-            data.city = '';
+            // data.job = '';
+            // data.employer = '';
+            // data.startDate = '';
+            // data.endDate = '';
+            // data.city = '';
         }
     }
-    // const addExperience = () => {
-    //     let details = document.createElement("details");
-    //     // let summary = document.createElement("summary");
-    //     let inputs = document.getElementById("inputs");
-    //
-    //     details.appendChild(inputs);
-    //     document.getElementById('details').appendChild(details);
-    //     // document.getElementById('details').insertAdjacentElement('afterend',inputs);
-    // }
+    function toggleMenu(e){
+        const val = e.target.parentNode.childNodes[1];
+        val.classList.toggle('activ');
+    }
     return(
         <LeftSide>
-            <Title>Tell us about your Experience</Title>
-            <Message>Start with your recent job</Message>
-            {/*<Details id="details">*/}
-            {/*    <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>*/}
-            {/*        <Inputd type="checkbox" id="experience" /> &nbsp; I don't have any experience*/}
-            {/*    </Labeld>*/}
-            {/*    <Inputs id="inputs">*/}
-            {/*        <Label htmlFor="job">Job Title</Label>*/}
-            {/*        <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={handleChange} value={data.job} minLength={2} maxLength={20} required="required"/>*/}
-            {/*        {errors.job && <Error>{errors.job}</Error>}*/}
-            {/*        <Label htmlFor="employer">Employer</Label>*/}
-            {/*        <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={handleChange} value={data.employer} minLength={2} maxLength={20} required="required"/>*/}
-            {/*        {errors.employer && <Error>{errors.employer}</Error>}*/}
-            {/*        <Label htmlFor="startDate">Start Date</Label>*/}
-            {/*        <Input type="month" name="startDate" className="form-control" onChange={handleChange} value={data.startDate}/>*/}
-            {/*        {errors.startDate && <Error>{errors.startDate}</Error>}*/}
-            {/*        <EndDate>*/}
-            {/*            <Label htmlFor="endDate">End Date</Label>*/}
-            {/*            <Input type="month" name="endDate" className="form-control" onChange={checkDate} value={data.endDate} id="end"/>*/}
-            {/*            {error.endDate && <Error>{error.endDate}</Error>}*/}
-            {/*            {errors.endDate && <Error>{errors.endDate}</Error>}*/}
-            {/*        </EndDate>*/}
-            {/*        <Label style={{cursor:'pointer'}} onClick={checkHandler}>*/}
-            {/*            <Input type="checkbox" style={{marginTop:'4%',float:'left'}} id="present" /> &nbsp; I currently work here*/}
-            {/*        </Label>*/}
-            {/*        <br/>*/}
-            {/*        <Label htmlFor="city">City</Label>*/}
-            {/*        <Input type="text" name="city" className="form-control" onChange={handleChange} value={data.city} minLength={2} maxLength={20} required="required"/>*/}
-            {/*        {errors.city && <Error>{errors.city}</Error>}*/}
-            {/*        <Label htmlFor="desc">Description</Label>*/}
-            {/*        <TextArea name="desc" className="form-control" rows="3" cols="50" maxLength="250" placeholder="Write your work experience" onChange={handleChange} value={data.desc}/>*/}
-            {/*    </Inputs>*/}
-            {/*</Details>*/}
-            <DataGrid rows={data}>
-                <Column dataField="name" dataType="string"/>
-                <Column dataField="employer" dataType="string" />
-                <Column dataField="startDate" dataType="date" />
-                <Column dataField="endDate" dataType="date" />
-                <Column dataField="city" dataType="string" />
-                <Column dataField="desc" dataType="string" />
-            </DataGrid>
+            <Title>Please enter your experience infos</Title>
+            <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>
+                <Inputd type="checkbox" id="experience" /> &nbsp; I don't have any experience
+            </Labeld>
+            <Details id="ex_inputs">
+                <Button className="btn btn-info" style={{float:'right'}} onClick={addExperience} id="newEx">Add new Experience</Button>
+                {data.map((item,i) => {
+                    return(
+                        <div>
+                            <Work onClick={toggleMenu}>Work Experience {i + 1}</Work>
+                            <Inputs id="one">
+                                <Label htmlFor="job">Job</Label>
+                                <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.job}/>
+                                {error.job && <Error>{error.job}</Error>}
+                                <Label htmlFor="employer">Employer</Label>
+                                <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.employer}/>
+                                {error.employer && <Error>{error.employer}</Error>}
+                                <Label htmlFor="startDate">Start Date</Label>
+                                <Input type="month" name="startDate" className="form-control" onChange={e => handleChange(e,i)} required="required" value={item.startDate}/>
+                                {error.startDate && <Error>{error.startDate}</Error>}
+                                <Label htmlFor="endDate">End Date</Label>
+                                <Input type="month" name="endDate" className="form-control"  onChange={e => handleChange(e,i)} required="required" value={item.endDate}/>
+                                {error.endDate && <Error>{error.endDate}</Error>}
+                                <Label htmlFor="city">City</Label>
+                                <Input type="text" name="city" className="form-control" placeholder="Baku" onChange={e => handleChange(e,i)}  minLength={2} maxLength={20} value={item.city}/>
+                                {error.city && <Error>{error.city}</Error>}
+                                <Label htmlFor="desc">Description</Label>
+                                <TextArea name="desc" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={handleChange} value={data.desc}/>
+                            </Inputs>
+                        </div>
+                )})}
+            </Details>
             <Next>
                 <Link to="/contact" className="btn btn-danger">Back</Link>
-                {/*<Link to="#experience" className="btn btn-info" onClick={addExperience}>Add new Experience</Link>*/}
                 <Link to="/education" className="btn btn-primary" onClick={goToEducation}>Next to Education</Link>
             </Next>
         </LeftSide>
     );
 }
+
+const Next = styled.div`
+  margin-top: 4%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Work = styled.button`
+  background-color: #E5E4EA;
+  border:none;
+  outline: none;
+  margin:2% 0;
+`;
+
+const TextArea = styled.textarea`
+    resize: none;
+`;
+
+const ID = styled.p`
+  padding-top: 2%;
+  font-weight: 700;
+  font-size: 18px;
+`;
+
+const Title = styled.h3`
+  text-align: center;
+`;
+
+const Inputs = styled.div`
+  display: none;
+`;
 
 const LeftSide = styled.div`
   display: flex;
@@ -129,28 +146,9 @@ const LeftSide = styled.div`
   min-width: 700px;
 `;
 
-const Next = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2%;
-`;
-
-const Title = styled.h3`
-  text-align: center;
-`;
-
-const Message = styled.h5`
-  text-align: center;
-  color:maroon;
-`;
-
-const Inputs = styled.div`
-
-`;
-
 const Label = styled.label`
   font-size: 16px;
-  margin-top: 1%;
+  margin-top: 2%;
   font-weight: 500;
 `;
 
@@ -163,19 +161,11 @@ const Input = styled.input`
   }
 `;
 
-const TextArea = styled.textarea`
-    resize: none;
+const Details = styled.div`
 `;
-
-const EndDate = styled.div``;
 
 const Error = styled.p`
   color:red;
-  font-size: 12px;
-`;
-
-const Details = styled.div`
-
 `;
 
 const Labeld = styled.label`
