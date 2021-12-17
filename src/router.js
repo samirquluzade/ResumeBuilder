@@ -25,6 +25,14 @@ const Router = () => {
         endDate:'',
         city:'',
         desc:'',
+        errors:{
+            job:'',
+            employer:'',
+            startDate:'',
+            endDate:'',
+            city:'',
+            desc:'',
+        }
         // school:'',
         // degree:'',
         // speciality:'',
@@ -68,7 +76,16 @@ const Router = () => {
     const [skill,setSkill] = useState(false);
     const errors = {};
 
-    const [error,setError] = useState(errors);
+    const [error,setError] = useState([
+        {
+            job:null,
+            employer:null,
+            startDate:null,
+            endDate:null,
+            city:null,
+            desc:null
+        }
+    ]);
 
     const submitContact = () => {
         setContact(true);
@@ -204,7 +221,9 @@ const Router = () => {
         store.insert(data);
         // console.log(data);
         // console.log(store);
-        setData([...data, {job:'',employer: '',startDate:'',endDate:'',city:'',desc:''}]);
+        setData([...data, {job:'',employer: '',startDate:'',endDate:'',city:'',desc:'',errors: {
+                job:null,employer: null,startDate: null,endDate: null,desc: null
+            }}]);
     }
 
     const handleChange = (e,i) => {
