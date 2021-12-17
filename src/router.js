@@ -38,13 +38,19 @@ const Router = () => {
             endDate:'',
             city:'',
             desc:'',
-        }
-        // school:'',
-        // degree:'',
-        // speciality:'',
-        // graduation:'',
-        // town:'',
-        // description:''
+            school:'',
+            degree:'',
+            speciality:'',
+            graduation:'',
+            town:'',
+            description:''
+        },
+        school:'',
+        degree:'',
+        speciality:'',
+        graduation:'',
+        town:'',
+        description:''
     }]);
     localStorage.getItem("data")
         ? localStorage.getItem("data")
@@ -128,82 +134,84 @@ const Router = () => {
         }
     }
 
-    // const validationExperienceCheck = () => {
-    //     if(data.job.trim()===''){
-    //         errors.job = 'This field cannot be blank!';
-    //     }
-    //     else
-    //     {
-    //         errors.job = '';
-    //     }
-    //     if(data.employer.trim()===''){
-    //         errors.employer = 'This field cannot be blank!';
-    //     }
-    //     else{
-    //         errors.employer = '';
-    //     }
-    //     if( data.startDate.trim()===''){
-    //         errors.startDate = 'This field cannot be blank!';
-    //     }
-    //     else
-    //     {
-    //         errors.startDate = '';
-    //     }
-    //     if(data.endDate.trim()===''){
-    //         errors.endDate = 'This field cannot be blank!';
-    //     }
-    //     else
-    //     {
-    //         errors.endDate = '';
-    //     }
-    //     if( data.city.trim()===''){
-    //         errors.city = 'This field cannot be blank!';
-    //     }
-    //     else {
-    //         errors.city = '';
-    //     }
-    //     setError(errors);
-    // }
-    //
+    const validationExperienceCheck = () => {
+        data.map((item) => {
+            if(item.job.trim()===''){
+                item.errors.job = 'This field cannot be blank!';
+            }
+            else
+            {
+                item.errors.job = '';
+            }
+            if(item.employer.trim()===''){
+                item.errors.employer = 'This field cannot be blank!';
+            }
+            else{
+                item.errors.employer = '';
+            }
+            if(item.startDate.trim()===''){
+                item.errors.startDate = 'This field cannot be blank!';
+            }
+            else
+            {
+                item.errors.startDate = '';
+            }
+            if(item.endDate.trim()===''){
+                item.errors.endDate = 'This field cannot be blank!';
+            }
+            else
+            {
+                item.errors.endDate = '';
+            }
+            if(item.city.trim()===''){
+                item.errors.city = 'This field cannot be blank!';
+            }
+            else {
+                item.errors.city = '';
+            }
+        })
+    }
+
     // const validationEducationCheck = () => {
-    //     if(data.school.trim()===''){
-    //         errors.school = 'This field cannot be blank!';
+    //     data.map((item) => {
+    //     if(item.school.trim()===''){
+    //         item.errors.school = 'This field cannot be blank!';
     //     }
     //     else
     //     {
-    //         errors.school = '';
+    //         item.errors.school = '';
     //     }
-    //     if(data.degree.trim()===''){
-    //         errors.degree = 'This field cannot be blank!';
+    //     if(item.degree.trim()===''){
+    //         item.errors.degree = 'This field cannot be blank!';
     //     }
     //     else{
-    //         errors.degree = '';
+    //         item.errors.degree = '';
     //     }
-    //     if( data.speciality.trim()===''){
-    //         errors.speciality = 'This field cannot be blank!';
-    //     }
-    //     else
-    //     {
-    //         errors.speciality = '';
-    //     }
-    //     if(data.graduation.trim()===''){
-    //         errors.graduation = 'This field cannot be blank!';
+    //     if(item.speciality.trim()===''){
+    //         item.errors.speciality = 'This field cannot be blank!';
     //     }
     //     else
     //     {
-    //         errors.graduation = '';
+    //         item.errors.speciality = '';
     //     }
-    //     if( data.town.trim()===''){
-    //         errors.town = 'This field cannot be blank!';
+    //     if(item.graduation.trim()===''){
+    //         item.errors.graduation = 'This field cannot be blank!';
+    //     }
+    //     else
+    //     {
+    //         item.errors.graduation = '';
+    //     }
+    //     if(item.town.trim()===''){
+    //         item.errors.town = 'This field cannot be blank!';
     //     }
     //     else {
-    //         errors.town = '';
+    //         item.errors.town = '';
     //     }
-    //     setError(errors);
+    //     })
     // }
-    //
+
     const goToExperience = () => {
-        // validationContactCheck();
+        validationContactCheck();
         if(data[0].errors.name==='' && data[0].errors.surname==='' && data[0].errors.address==='' && data[0].errors.phone==='' && data[0].errors.email==='')
         {
             navigate("/experience");
@@ -211,11 +219,14 @@ const Router = () => {
     }
 
     const addExperience = () =>{
-        store.insert(data);
-        // console.log(data);
-        // console.log(store);
         setData([...data, {name:data[0].name,surname:data[0].surname,address: data[0].address,phone:data[0].phone,phone2:data[0].phone2,email:data[0].email,job:'',employer: '',startDate:'',endDate:'',city:'',desc:'',errors: {
                 job:'',employer: '',startDate: '',endDate: '',desc: ''
+            }}]);
+    }
+
+    const addEducation = () => {
+        setData([...data,{school: '',degree: '',graduation: '',speciality: '',town: '',description: '',errors:{
+                school: '',degree: '',graduation: '',speciality: '',town: '',description: ''
             }}]);
     }
 
@@ -225,22 +236,24 @@ const Router = () => {
         const list = [...data];
         list[i][name] = value;
         validationContactCheck();
+        validationExperienceCheck();
+        // validationEducationCheck();
 
         setData(list);
         localStorage.setItem("data",JSON.stringify(data));
-        // validationExperienceCheck();
-        // validationEducationCheck();
     }
 
-    // const goToEducation = () => {
-    //     validationExperienceCheck();
-    //     if(errors.job==='' && errors.employer==='' && errors.startDate==='' && errors.endDate==='' && errors.city==='')
-    //     {
-    //         setEducation(true);
-    //         setExperience(false);
-    //     }
-    // }
-    //
+    const goToEducation = () => {
+        validationExperienceCheck();
+        data.map((item) => {
+            console.log(item.errors);
+            if(item.errors.job==='' && item.errors.employer==='' && item.errors.startDate==='' && item.errors.endDate==='' && item.errors.city==='')
+            {
+                navigate('/education');
+            }
+        })
+    }
+
     // const goToAbout = () => {
     //     validationEducationCheck();
     //     if(errors.degree==='' && errors.school==='' && errors.town==='' && errors.speciality==='' && errors.graduation==='')
@@ -254,8 +267,9 @@ const Router = () => {
         <Page>
           <Routes>
               <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data}/>]} />
-              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data}/>,<CV data={data}/>]} />
-              <Route exact path="/experience" element={[<Experience handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data}/>]} />
+              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data}/>]} />
+              <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data}/>]} />
+              <Route exact path="/education" element={[<Education handleChange={handleChange} data={data} addEducation={addEducation}/>,<CV data={data}/>]} />
           </Routes>
         </Page>
     );

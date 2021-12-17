@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 
-const Education = ({handleChange,backTo,data,goToAbout,errors}) => {
+const Education = ({handleChange,backTo,data,goToAbout,addEducation}) => {
+
+    const [allData,setAllData] = useState(data);
+
+    useEffect(() => {
+        setAllData(data);
+    },[data]);
 
     const getAllYear = () => {
         let years = [];
@@ -15,73 +21,85 @@ const Education = ({handleChange,backTo,data,goToAbout,errors}) => {
         return years;
     }
 
+    function toggleMenu(e){
+        const val = e.target.parentNode.childNodes[1];
+        val.classList.toggle('activ');
+    }
+
     const inputHandler = () => {
     let checkbox = document.getElementById('education');
     let text = document.getElementById('education_inputs');
     if(checkbox.checked === true){
         text.style.display = "none";
-        data.school = '*';
-        data.degree = '*';
-        data.graduation = '*';
-        data.town = '*';
-        data.description = '*';
+        // data.school = '*';
+        // data.degree = '*';
+        // data.graduation = '*';
+        // data.town = '*';
+        // data.description = '*';
     }
     else
     {
         text.style.display = "block";
-        data.school = '';
-        data.degree = '';
-        data.graduation = '';
-        data.town = '';
-        data.description = '';
+        // data.school = '';
+        // data.degree = '';
+        // data.graduation = '';
+        // data.town = '';
+        // data.description = '';
     }
 }
 
     return(
-        <>
+        <LeftSide>
             <Title>Tell us about your Education</Title>
             <Message>Start with your recent education</Message>
-            <Details id="details">
                 <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>
                     <Inputd type="checkbox" id="education" /> &nbsp; I don't have any education
                 </Labeld>
-                <Inputs id="education_inputs">
-                    <Label htmlFor="degree">Degree</Label>
-                    <Form.Select className="form-control" name="degree" onChange={handleChange}>
-                        <option>Select degree</option>
-                        <option value="Bachelor">Bachelor</option>
-                        <option value="Master">Master</option>
-                        <option value="Undergraduate">Undergraduate</option>
-                        <option value="College">Some College(no degree)</option>
-                        <option value="MBA">MBA</option>
-                        <option value="PH">PH.D.</option>
-                    </Form.Select>
-                    {errors.degree && <Error>{errors.degree}</Error>}
-                    <Label htmlFor="school">School</Label>
-                    <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={handleChange} value={data.school} minLength={2} maxLength={20} required="required"/>
-                    {errors.school && <Error>{errors.school}</Error>}
-                    <Label htmlFor="speciality">Speciality</Label>
-                    <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={handleChange} value={data.speciality} minLength={2} maxLength={20} required="required"/>
-                    {errors.speciality && <Error>{errors.speciality}</Error>}
-                    <Label htmlFor="graduation">Graduation Date</Label>
-                        <Form.Select className="form-control" name="graduation" onChange={handleChange}>
-                            <option>Select degree</option>
-                            {getAllYear()}
-                        </Form.Select>
-                    {errors.graduation && <Error>{errors.graduation}</Error>}
-                    <Label htmlFor="town">City</Label>
-                    <Input type="text" name="town" className="form-control" onChange={handleChange} value={data.town} minLength={2} maxLength={20} required="required"/>
-                    {errors.town && <Error>{errors.town}</Error>}
-                    <Label htmlFor="description">Description</Label>
-                    <TextArea name="description" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={handleChange} value={data.description}/>
-                </Inputs>
+            <Details id="details">
+                <Button className="btn btn-info" style={{float:'right'}} onClick={addEducation} id="newEx">Add new Education</Button>
+                {allData.map((item,i) => {
+                    return(
+                        <div>
+                            <Edu onClick={toggleMenu}>Education {i + 1}</Edu>
+                            <Inputs id="education_inputs">
+                                <Label htmlFor="degree">Degree</Label>
+                                <Form.Select className="form-control" name="degree" onChange={e => handleChange(e,i)}>
+                                    <option>Select degree</option>
+                                    <option value="Bachelor">Bachelor</option>
+                                    <option value="Master">Master</option>
+                                    <option value="Undergraduate">Undergraduate</option>
+                                    <option value="College">Some College(no degree)</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="PH">PH.D.</option>
+                                </Form.Select>
+                                {item.errors.degree && <Error>{item.errors.degree}</Error>}
+                                <Label htmlFor="school">School</Label>
+                                <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={e => handleChange(e,i)} value={item.school} minLength={2} maxLength={20} required="required"/>
+                                {item.errors.school && <Error>{item.errors.school}</Error>}
+                                <Label htmlFor="speciality">Speciality</Label>
+                                <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={e => handleChange(e,i)} value={item.speciality} minLength={2} maxLength={20} required="required"/>
+                                {item.errors.speciality && <Error>{item.errors.speciality}</Error>}
+                                <Label htmlFor="graduation">Graduation Date</Label>
+                                    <Form.Select className="form-control" name="graduation" onChange={e => handleChange(e,i)}>
+                                        <option>Select degree</option>
+                                        {getAllYear()}
+                                    </Form.Select>
+                                {item.errors.graduation && <Error>{item.errors.graduation}</Error>}
+                                <Label htmlFor="town">City</Label>
+                                <Input type="text" name="town" className="form-control" onChange={e => handleChange(e,i)} value={item.town} minLength={2} maxLength={20} required="required"/>
+                                {item.errors.town && <Error>{item.errors.town}</Error>}
+                                <Label htmlFor="description">Description</Label>
+                                <TextArea name="description" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={e => handleChange(e,i)} value={item.description}/>
+                            </Inputs>
+                        </div>
+                    )})}
             </Details>
             <Next>
                 <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
                 {/*<Link to="#experience" className="btn btn-info" onClick={addExperience}>Add new Experience</Link>*/}
                 <Link to="/education" className="btn btn-primary" onClick={goToAbout}>Next to Skills</Link>
             </Next>
-        </>
+        </LeftSide>
     );
 };
 
@@ -101,13 +119,20 @@ const Message = styled.h5`
 `;
 
 const Inputs = styled.div`
-
+  display: none;
 `;
 
 const Label = styled.label`
   font-size: 16px;
   margin-top: 2%;
   font-weight: 500;
+`;
+
+const Edu = styled.button`
+  background-color: #E5E4EA;
+  border:none;
+  outline: none;
+  margin:1% 0;
 `;
 
 const Input = styled.input`
@@ -129,8 +154,14 @@ const Error = styled.p`
   color:red;
 `;
 
-const Details = styled.div`
+const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 700px;
+`;
 
+const Details = styled.div`
 `;
 
 const Labeld = styled.label`
