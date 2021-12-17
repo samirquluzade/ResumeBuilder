@@ -23,32 +23,32 @@ const CV = ({data}) => {
                     <ResumeRight>
                         <Head>
                             <FullName>
-                                {data.name} <br />
-                                {data.surname}
+                                {data[0].name} <br />
+                                {data[0].surname}
                             </FullName>
                             <Contacts>
-                                {data.address!=='' &&
+                                {data[0].address!=='' &&
                                 <Info>
                                     <i className="fas fa-map-marker-alt">&nbsp;</i>
-                                    <span>{data.address}</span>
+                                    <span>{data[0].address}</span>
                                 </Info>
                                 }
-                                {data.phone!=='' &&
+                                {data[0].phone!=='' &&
                                 <Info>
                                     <i className="fas fa-phone-square">&nbsp;</i>
-                                    <span>{data.phone}</span>
+                                    <span>{data[0].phone}</span>
                                 </Info>
                                 }
-                                {data.phone2!=='' &&
+                                {data[0].phone2!=='' &&
                                 <Info>
                                     <i className="fas fa-phone-square">&nbsp;</i>
-                                    <span>{data.phone2}</span>
+                                    <span>{data[0].phone2}</span>
                                 </Info>
                                 }
-                                {data.email!=='' &&
+                                {data[0].email!=='' &&
                                 <Info>
                                     <i className="fas fa-envelope">&nbsp;</i>
-                                    <span>{data.email}</span>
+                                    <span>{data[0].email}</span>
                                 </Info>
                                 }
                             </Contacts>
