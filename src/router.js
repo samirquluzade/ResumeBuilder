@@ -26,6 +26,12 @@ const Router = () => {
         city:'',
         desc:'',
         errors:{
+            name:'',
+            surname:'',
+            address:'',
+            phone:'',
+            phone2:'',
+            email:'',
             job:'',
             employer:'',
             startDate:'',
@@ -74,18 +80,6 @@ const Router = () => {
     const [experience,setExperience] = useState(false);
     const [education,setEducation] = useState(false);
     const [skill,setSkill] = useState(false);
-    const errors = {};
-
-    const [error,setError] = useState([
-        {
-            job:null,
-            employer:null,
-            startDate:null,
-            endDate:null,
-            city:null,
-            desc:null
-        }
-    ]);
 
     const submitContact = () => {
         setContact(true);
@@ -97,44 +91,43 @@ const Router = () => {
         setEducation(true);
     }
 
-    // const validationContactCheck = () => {
-    //     if(data.name.trim()!==''){
-    //         errors.name = '';
-    //     }
-    //     else
-    //     {
-    //         errors.name = 'This field cannot be blank!';
-    //     }
-    //     if(data.surname.trim()!==''){
-    //         errors.surname = '';
-    //     }
-    //     else
-    //     {
-    //         errors.surname = 'This field cannot be blank!';
-    //     }
-    //     if(data.address.trim()!==''){
-    //         errors.address = '';
-    //     }
-    //     else{
-    //         errors.address = 'This field cannot be blank!';
-    //     }
-    //     if(data.phone.trim()!==''){
-    //         errors.phone = '';
-    //     }
-    //     else
-    //     {
-    //         errors.phone = 'This field cannot be blank!';
-    //     }
-    //     if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(data.email)){
-    //         errors.email = 'Please enter a valid email address!'
-    //     }
-    //     else
-    //     {
-    //         errors.email = '';
-    //     }
-    //     setError(errors);
-    // }
-    //
+    const validationContactCheck = () => {
+        if(data[0].name.trim()!==''){
+            data[0].errors.name = '';
+        }
+        else
+        {
+            data[0].errors.name = 'This field cannot be blank!';
+        }
+        if(data[0].surname.trim()!==''){
+            data[0].errors.surname = '';
+        }
+        else
+        {
+            data[0].errors.surname = 'This field cannot be blank!';
+        }
+        if(data[0].address.trim()!==''){
+            data[0].errors.address = '';
+        }
+        else{
+            data[0].errors.address = 'This field cannot be blank!';
+        }
+        if(data[0].phone.trim()!==''){
+            data[0].errors.phone = '';
+        }
+        else
+        {
+            data[0].errors.phone = 'This field cannot be blank!';
+        }
+        if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(data[0].email)){
+            data[0].errors.email = 'Please enter a valid email address!'
+        }
+        else
+        {
+            data[0].errors.email = '';
+        }
+    }
+
     // const validationExperienceCheck = () => {
     //     if(data.job.trim()===''){
     //         errors.job = 'This field cannot be blank!';
@@ -211,7 +204,7 @@ const Router = () => {
     //
     const goToExperience = () => {
         // validationContactCheck();
-        if(errors.name==='' && errors.surname==='' && errors.address==='' && errors.phone==='' && errors.email==='')
+        if(data[0].errors.name==='' && data[0].errors.surname==='' && data[0].errors.address==='' && data[0].errors.phone==='' && data[0].errors.email==='')
         {
             navigate("/experience");
         }
@@ -221,8 +214,8 @@ const Router = () => {
         store.insert(data);
         // console.log(data);
         // console.log(store);
-        setData([...data, {job:'',employer: '',startDate:'',endDate:'',city:'',desc:'',errors: {
-                job:null,employer: null,startDate: null,endDate: null,desc: null
+        setData([...data, {name:data[0].name,surname:data[0].surname,address: data[0].address,phone:data[0].phone,phone2:data[0].phone2,email:data[0].email,job:'',employer: '',startDate:'',endDate:'',city:'',desc:'',errors: {
+                job:'',employer: '',startDate: '',endDate: '',desc: ''
             }}]);
     }
 
@@ -231,10 +224,10 @@ const Router = () => {
 
         const list = [...data];
         list[i][name] = value;
+        validationContactCheck();
 
         setData(list);
         localStorage.setItem("data",JSON.stringify(data));
-        // validationContactCheck();
         // validationExperienceCheck();
         // validationEducationCheck();
     }
@@ -260,9 +253,9 @@ const Router = () => {
     return(
         <Page>
           <Routes>
-              <Route exact path="/" element={[<Contact handleChange={handleChange} store={store} error={error} goToExperience={goToExperience} data={data}/>,<CV data={data}/>]} />
-              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} error={error}/>,<CV data={data}/>]} />
-              <Route exact path="/experience" element={[<Experience handleChange={handleChange} data={data} errors={error} addExperience={addExperience}/>,<CV data={data}/>]} />
+              <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data}/>]} />
+              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data}/>,<CV data={data}/>]} />
+              <Route exact path="/experience" element={[<Experience handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data}/>]} />
           </Routes>
         </Page>
     );
