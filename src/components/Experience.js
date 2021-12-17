@@ -104,7 +104,7 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
                                 <Input type="text" name="city" className="form-control" placeholder="Baku" onChange={e => handleChange(e,i)}  minLength={2} maxLength={20} value={item.city}/>
                                 {item.errors.city!=='' && <Error>{item.errors.city}</Error>}
                                 <Label htmlFor="desc">Description</Label>
-                                <TextArea name="desc" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={handleChange} value={data.desc}/>
+                                <TextArea name="desc" className="form-control" rows="4" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={handleChange} value={data.desc}/>
                             </Inputs>
                         </div>
                 )})}
@@ -127,7 +127,7 @@ const Work = styled.button`
   background-color: #E5E4EA;
   border:none;
   outline: none;
-  margin:2% 0;
+  margin:1% 0;
 `;
 
 const TextArea = styled.textarea`
@@ -157,7 +157,7 @@ const LeftSide = styled.div`
 
 const Label = styled.label`
   font-size: 16px;
-  margin-top: 2%;
+  //margin-top: 2%;
   font-weight: 500;
 `;
 
