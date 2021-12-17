@@ -13,7 +13,7 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
 
     useEffect(() => {
         setAllData(data);
-    },[data])
+    },[data]);
 
     const checkHandler = (endDate) => {
         let checkbox = document.getElementById('present');
@@ -80,6 +80,7 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
                 {allData.map((item,i) => {
                     if(check){
                         item.endDate = "Present";
+                        setCheck(false);
                     }
                     return(
                         <div>
@@ -104,14 +105,14 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
                                 <Input type="text" name="city" className="form-control" placeholder="Baku" onChange={e => handleChange(e,i)}  minLength={2} maxLength={20} value={item.city}/>
                                 {item.errors.city!=='' && <Error>{item.errors.city}</Error>}
                                 <Label htmlFor="desc">Description</Label>
-                                <TextArea name="desc" className="form-control" rows="4" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={handleChange} value={data.desc}/>
+                                <TextArea name="desc" className="form-control" rows="4" cols="50" maxLength="250" placeholder="Write your work experience" onChange={e => handleChange(e,i)} value={item.desc}/>
                             </Inputs>
                         </div>
                 )})}
             </Details>
             <Next>
                 <Link to="/contact" className="btn btn-danger">Back</Link>
-                <Link to="/education" className="btn btn-primary" onClick={goToEducation}>Next to Education</Link>
+                <Button className="btn btn-primary" onClick={goToEducation}>Next to Education</Button>
             </Next>
         </LeftSide>
     );
