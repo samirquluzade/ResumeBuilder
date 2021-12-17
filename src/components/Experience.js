@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DataGrid, {
     Column,
 } from "devextreme-react/data-grid";
@@ -8,15 +8,13 @@ import {Button} from "react-bootstrap";
 
 const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience}) => {
 
-    const [error,setError] = useState([{
-       job:null,
-       employer:null,
-       startDate:null,
-       endDate:null,
-       city:null,
-       desc:null
-    }]);
     let [check,setCheck] = useState(false);
+    const [allData,setAllData] = useState(data);
+
+    useEffect(() => {
+        setAllData(data);
+    },[data])
+
     const checkHandler = (endDate) => {
         let checkbox = document.getElementById('present');
         let text = document.getElementById('end');
@@ -33,19 +31,16 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
 
     const checkDate = (e,i,start) => {
         const {name,value} = e.target;
-        const errors = [...error];
+        const list = [...data];
         if(value > start){
             handleChange(e,i);
-            // setError({...error,endDate: null});
-            errors[i][name] = null;
-            setError(errors);
-            console.log(error);
+            list[i]['errors'][name] = '';
+            setAllData(list);
         }
         else
         {
-            errors[i][name] = "Start date cannot be greater than end date";
-            setError(errors);
-            console.log(error);
+            list[i]['errors'][name] = "Start date cannot be greater than end date";
+            setAllData(list);
         }
     }
 
@@ -82,7 +77,7 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
             </Labeld>
             <Details id="ex_inputs">
                 <Button className="btn btn-info" style={{float:'right'}} onClick={addExperience} id="newEx">Add new Experience</Button>
-                {data.map((item,i) => {
+                {allData.map((item,i) => {
                     if(check){
                         item.endDate = "Present";
                     }
@@ -92,22 +87,22 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
                             <Inputs id="one">
                                 <Label htmlFor="job">Job</Label>
                                 <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.job}/>
-                                {error.job && <Error>{error.job}</Error>}
+                                {item.errors.job!=='' && <Error>{item.errors.job}</Error>}
                                 <Label htmlFor="employer">Employer</Label>
                                 <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.employer}/>
-                                {error.employer && <Error>{error.employer}</Error>}
+                                {item.errors.employer!=='' && <Error>{item.errors.employer}</Error>}
                                 <Label htmlFor="startDate">Start Date</Label>
                                 <Input type="month" name="startDate" className="form-control" onChange={e => handleChange(e,i)} required="required" value={item.startDate}/>
-                                {error.startDate && <Error>{error.startDate}</Error>}
+                                {item.errors.startDate!=='' && <Error>{item.errors.startDate}</Error>}
                                 <Label htmlFor="endDate">End Date</Label>
-                                <Input type="month" name="endDate" className="form-control"  onChange={e => checkDate(e,i,item.startDate)} required="required" value={item.endDate} id="end"/>
-                                {error.endDate && <Error>{error.endDate}</Error>}
+                                <Input type="month" name="endDate" className="form-control"  onChange={(e) => checkDate(e,i,item.startDate)} required="required" value={item.endDate} id="end"/>
+                                {item.errors.endDate!=='' && <Error>{item.errors.endDate}</Error>}
                                 <Labeld style={{cursor:'pointer'}} onClick={() => checkHandler(item.endDate)}>
                                     <Inputd type="checkbox" id="present" /> &nbsp; I currently work here
                                 </Labeld>
                                 <Label htmlFor="city">City</Label>
                                 <Input type="text" name="city" className="form-control" placeholder="Baku" onChange={e => handleChange(e,i)}  minLength={2} maxLength={20} value={item.city}/>
-                                {error.city && <Error>{error.city}</Error>}
+                                {item.errors.city!=='' && <Error>{item.errors.city}</Error>}
                                 <Label htmlFor="desc">Description</Label>
                                 <TextArea name="desc" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={handleChange} value={data.desc}/>
                             </Inputs>
