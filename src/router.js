@@ -245,18 +245,24 @@ const Router = () => {
 
     const goToEducation = () => {
         validationExperienceCheck();
-        data.map((item) => {
-            console.log(item.errors);
-            if(item.errors.job==='' && item.errors.employer==='' && item.errors.startDate==='' && item.errors.endDate==='' && item.errors.city==='')
-            {
-                navigate('/education');
-            }
-        })
+        let i = 0;
+        let k = 0;
+        while(i < data.length - 1){
+            data.map((item) => {
+                if(item.errors.job === '' && item.errors.employer==='' && item.errors.startDate === '' && item.errors.endDate === '' && item.errors.city === '' && item.errors.desc === ''){
+                    k++;
+                }
+            });
+            i++;
+        }
+        if(k === data.length){
+            navigate('/education');
+        }
     }
 
     // const goToAbout = () => {
     //     validationEducationCheck();
-    //     if(errors.degree==='' && errors.school==='' && errors.town==='' && errors.speciality==='' && errors.graduation==='')
+    //     if(degree==='' && errors.school==='' && errors.town==='' && errors.speciality==='' && errors.graduation==='')
     //     {
     //         setSkill(true);
     //         setEducation(false);
