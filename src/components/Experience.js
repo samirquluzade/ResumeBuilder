@@ -49,20 +49,24 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
         let text = document.getElementById('ex_inputs');
         if(checkbox.checked === true){
             text.style.display = "none";
-            // data.job = '*';
-            // data.employer = '*';
-            // data.startDate = '*';
-            // data.endDate = '*';
-            // data.city = '*';
+            allData.map((item) => {
+                item.job = '*';
+                item.employer = '*';
+                item.startDate = '*';
+                item.endDate = '*';
+                item.city = '*';
+            });
         }
         else
         {
             text.style.display = "block";
-            // data.job = '';
-            // data.employer = '';
-            // data.startDate = '';
-            // data.endDate = '';
-            // data.city = '';
+            allData.map((item) => {
+                item.job = '';
+                item.employer = '';
+                item.startDate = '';
+                item.endDate = '';
+                item.city = '';
+            });
         }
     }
     function toggleMenu(e){

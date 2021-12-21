@@ -4,7 +4,7 @@ import Contact from "./Contact";
 import Experience from "./Experience";
 import Education from "./Education";
 
-const CV = ({data}) => {
+const CV = ({data,education}) => {
 
     return(
           <>
@@ -57,7 +57,6 @@ const CV = ({data}) => {
                             WORK EXPERIENCE
                         </Right>
                         {data.map((item,i) => {
-                            // console.log(item[i]);
                             return(
                                 <Experiences>
                                     <ExperienceLeft>
@@ -96,39 +95,43 @@ const CV = ({data}) => {
                             <Right>
                                 EDUCATION
                             </Right>
-                            <Experiences>
-                            <ExperienceLeft>
+                    {education.map((item,i) => {
+                        return(
+                                <Experiences>
+                                <ExperienceLeft>
                                 <Employer>
-                                    {data.degree!=='' && data.degree!=='*' &&
-                                    data.degree
-                                    }
+                            {item.degree!=='' && item.degree!=='*' &&
+                                item.degree
+                            }
                                 </Employer>
                                 <Job>
-                                    {data.school!=='' && data.school!=='*' &&
-                                    data.school + ' - '
-                                    } {data.speciality !== '' && data.speciality !== '*' &&
-                                data.speciality
-                                }
+                            {item.school!=='' && item.school!=='*' &&
+                                item.school + ' - '
+                            } {item.speciality !== '' && item.speciality !== '*' &&
+                                item.speciality
+                            }
                                 </Job>
                                 <Date>
-                                    {data.graduation!=='' && data.graduation!=='*' &&
-                                    data.graduation
-                                    }
+                            {item.graduation!=='' && item.graduation!=='*' &&
+                                item.graduation
+                            }
                                 </Date>
                                 <Description>
-                                    {data.description!=='' && data.description!=='*' &&
-                                    data.description
-                                    }
+                            {item.description!=='' && item.description!=='*' &&
+                                item.description
+                            }
                                 </Description>
-                            </ExperienceLeft>
-                            <ExperienceRight>
+                                </ExperienceLeft>
+                                <ExperienceRight>
                                 <City>
-                                    {data.town!=='' && data.town!=='*' &&
-                                    data.town
-                                    }
+                            {item.town!=='' && item.town!=='*' &&
+                                item.town
+                            }
                                 </City>
-                            </ExperienceRight>
-                        </Experiences>
+                                </ExperienceRight>
+                                </Experiences>
+                                )
+                    })}
                         <Right>
                             SKILLS
                         </Right>
