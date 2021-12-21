@@ -139,12 +139,6 @@ const TextArea = styled.textarea`
     resize: none;
 `;
 
-const ID = styled.p`
-  padding-top: 2%;
-  font-weight: 700;
-  font-size: 18px;
-`;
-
 const Title = styled.h3`
   text-align: center;
 `;

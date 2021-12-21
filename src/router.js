@@ -57,8 +57,12 @@ const Router = () => {
     localStorage.getItem("data")
         ? localStorage.getItem("data")
         : localStorage.setItem("data", JSON.stringify(data));
+    localStorage.getItem("education")
+        ? localStorage.getItem("education")
+        : localStorage.setItem("education", JSON.stringify(education));
     useEffect(() => {
         data = JSON.parse(localStorage.getItem("data"));
+        education = JSON.parse(localStorage.getItem("education"));
     },[]);
 
     let k,all;
