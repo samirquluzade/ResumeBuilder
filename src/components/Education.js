@@ -5,30 +5,11 @@ import {Button, Form} from "react-bootstrap";
 
 const Education = ({backTo,data,goToAbout,addEducation,handleChangeEducation}) => {
 
-    // const [allData,setAllData] = useState(data);
+    const [allData,setAllData] = useState(data);
 
-    // const [datas,setDatas] = useState([{
-    //     school:'',
-    //     degree:'',
-    //     speciality:'',
-    //     graduation:'',
-    //     town:'',
-    //     errors:{
-    //         school:'',
-    //         degree:'',
-    //         speciality:'',
-    //         graduation:'',
-    //         town:'',
-    //     }
-    // }]);
-
-    // const handleChange = (e,i) => {
-    //     const {name,value} = e.target;
-    //
-    //     const list = [...datas];
-    //     list[i][name] = value;
-    //     setDatas(list);
-    // }
+    useEffect(() => {
+        setAllData(data);
+    },[data]);
 
     const getAllYear = () => {
         let years = [];
@@ -47,23 +28,27 @@ const Education = ({backTo,data,goToAbout,addEducation,handleChangeEducation}) =
 
     const inputHandler = () => {
     let checkbox = document.getElementById('education');
-    let text = document.getElementById('education_inputs');
+    let text = document.getElementById('details');
     if(checkbox.checked === true){
         text.style.display = "none";
-        data.school = '*';
-        data.degree = '*';
-        data.graduation = '*';
-        data.town = '*';
-        data.description = '*';
+        allData.map((item,i) => {
+            item.school = '*';
+            item.degree = '*';
+            item.graduation = '*';
+            item.town = '*';
+            item.description = '*';
+        });
     }
     else
     {
         text.style.display = "block";
-        // data.school = '';
-        // data.degree = '';
-        // data.graduation = '';
-        // data.town = '';
-        // data.description = '';
+        allData.map((item,i) => {
+            item.school = '';
+            item.degree = '';
+            item.graduation = '';
+            item.town = '';
+            item.description = '';
+        });
     }
 }
 
@@ -76,7 +61,7 @@ const Education = ({backTo,data,goToAbout,addEducation,handleChangeEducation}) =
                 </Labeld>
             <Details id="details">
                 <Button className="btn btn-info" style={{float:'right'}} onClick={addEducation} id="newEx">Add new Education</Button>
-                {data.map((item,i) => {
+                {allData.map((item,i) => {
                     return(
                         <div>
                             <Edu onClick={toggleMenu}>Education {i + 1}</Edu>
@@ -165,8 +150,6 @@ const Input = styled.input`
 const TextArea = styled.textarea`
     resize: none;
 `;
-
-const EndDate = styled.div``;
 
 const Error = styled.p`
   color:red;
