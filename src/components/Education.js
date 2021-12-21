@@ -3,13 +3,32 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 
-const Education = ({handleChange,backTo,data,goToAbout,addEducation}) => {
+const Education = ({backTo,data,goToAbout,addEducation,handleChangeEducation}) => {
 
-    const [allData,setAllData] = useState(data);
+    // const [allData,setAllData] = useState(data);
 
-    useEffect(() => {
-        setAllData(data);
-    },[data]);
+    // const [datas,setDatas] = useState([{
+    //     school:'',
+    //     degree:'',
+    //     speciality:'',
+    //     graduation:'',
+    //     town:'',
+    //     errors:{
+    //         school:'',
+    //         degree:'',
+    //         speciality:'',
+    //         graduation:'',
+    //         town:'',
+    //     }
+    // }]);
+
+    // const handleChange = (e,i) => {
+    //     const {name,value} = e.target;
+    //
+    //     const list = [...datas];
+    //     list[i][name] = value;
+    //     setDatas(list);
+    // }
 
     const getAllYear = () => {
         let years = [];
@@ -31,11 +50,11 @@ const Education = ({handleChange,backTo,data,goToAbout,addEducation}) => {
     let text = document.getElementById('education_inputs');
     if(checkbox.checked === true){
         text.style.display = "none";
-        // data.school = '*';
-        // data.degree = '*';
-        // data.graduation = '*';
-        // data.town = '*';
-        // data.description = '*';
+        data.school = '*';
+        data.degree = '*';
+        data.graduation = '*';
+        data.town = '*';
+        data.description = '*';
     }
     else
     {
@@ -57,13 +76,13 @@ const Education = ({handleChange,backTo,data,goToAbout,addEducation}) => {
                 </Labeld>
             <Details id="details">
                 <Button className="btn btn-info" style={{float:'right'}} onClick={addEducation} id="newEx">Add new Education</Button>
-                {allData.map((item,i) => {
+                {data.map((item,i) => {
                     return(
                         <div>
                             <Edu onClick={toggleMenu}>Education {i + 1}</Edu>
                             <Inputs id="education_inputs">
                                 <Label htmlFor="degree">Degree</Label>
-                                <Form.Select className="form-control" name="degree" onChange={e => handleChange(e,i)}>
+                                <Form.Select className="form-control" name="degree" onChange={e => handleChangeEducation(e,i)}>
                                     <option>Select degree</option>
                                     <option value="Bachelor">Bachelor</option>
                                     <option value="Master">Master</option>
@@ -74,29 +93,28 @@ const Education = ({handleChange,backTo,data,goToAbout,addEducation}) => {
                                 </Form.Select>
                                 {item.errors.degree && <Error>{item.errors.degree}</Error>}
                                 <Label htmlFor="school">School</Label>
-                                <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={e => handleChange(e,i)} value={item.school} minLength={2} maxLength={20} required="required"/>
+                                <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={e => handleChangeEducation(e,i)} value={item.school} minLength={2} maxLength={20} required="required"/>
                                 {item.errors.school && <Error>{item.errors.school}</Error>}
                                 <Label htmlFor="speciality">Speciality</Label>
-                                <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={e => handleChange(e,i)} value={item.speciality} minLength={2} maxLength={20} required="required"/>
+                                <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={e => handleChangeEducation(e,i)} value={item.speciality} minLength={2} maxLength={20} required="required"/>
                                 {item.errors.speciality && <Error>{item.errors.speciality}</Error>}
                                 <Label htmlFor="graduation">Graduation Date</Label>
-                                    <Form.Select className="form-control" name="graduation" onChange={e => handleChange(e,i)}>
-                                        <option>Select degree</option>
+                                    <Form.Select className="form-control" name="graduation" onChange={e => handleChangeEducation(e,i)}>
+                                        <option>Select date</option>
                                         {getAllYear()}
                                     </Form.Select>
                                 {item.errors.graduation && <Error>{item.errors.graduation}</Error>}
                                 <Label htmlFor="town">City</Label>
-                                <Input type="text" name="town" className="form-control" onChange={e => handleChange(e,i)} value={item.town} minLength={2} maxLength={20} required="required"/>
+                                <Input type="text" name="town" className="form-control" onChange={e => handleChangeEducation(e,i)} value={item.town} minLength={2} maxLength={20} required="required"/>
                                 {item.errors.town && <Error>{item.errors.town}</Error>}
                                 <Label htmlFor="description">Description</Label>
-                                <TextArea name="description" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={e => handleChange(e,i)} value={item.description}/>
+                                <TextArea name="description" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={e => handleChangeEducation(e,i)} value={item.description}/>
                             </Inputs>
                         </div>
                     )})}
             </Details>
             <Next>
                 <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
-                {/*<Link to="#experience" className="btn btn-info" onClick={addExperience}>Add new Experience</Link>*/}
                 <Link to="/education" className="btn btn-primary" onClick={goToAbout}>Next to Skills</Link>
             </Next>
         </LeftSide>
