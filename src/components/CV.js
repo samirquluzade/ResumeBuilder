@@ -162,12 +162,12 @@ const About = styled.div`
 
 const Right = styled.div`
     color:#434244;
-    margin: 15% 10% 2% 5%;
+    margin: 3% 10% 2% 5%;
     font-weight: 700;
     &:after{
       content: "";
       display: block;
-      width: 400px;
+      width: 425px;
       height: 1px;
       background-color: gray;
     }
@@ -179,13 +179,13 @@ const ResumeRight = styled.div`
 `;
 
 const FullName = styled.div`
-  margin: 10% 25% 5% 5%;
+  margin: 5% 25% 1% 5%;
   font-size: 26px;
   font-weight: 700;
 `;
 
 const Contacts = styled.div`
-  margin: 10% 1% 5% 5%;
+  margin: 5% 1% 5% 5%;
   i{
     font-size: 16px;
   }
@@ -214,21 +214,21 @@ const Info = styled.div`
 const Experiences = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 10% 4% 5%;
+  margin: 0 10% 2% 5%;
   font-weight: 500;
 `;
 
 const Job = styled.div`
-  
+    font-size: 12px;
 `;
 
 const Employer = styled.div`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 const Date = styled.div`
-  
+  font-size: 10px;
 `;
 
 const ExperienceLeft = styled.div``;
@@ -236,7 +236,7 @@ const ExperienceLeft = styled.div``;
 const ExperienceRight = styled.div``;
 
 const City = styled.div`
-  
+    font-size: 12px;
 `;
 
 const Description = styled.div`
