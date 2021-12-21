@@ -7,6 +7,7 @@ import Experience from "./components/Experience";
 import Education from "./components/Education";
 import CV from './components/CV';
 import styled from "styled-components";
+import Skills from "./components/Skills";
 
 const Router = () => {
 
@@ -54,15 +55,27 @@ const Router = () => {
             town:''
         }
     }]);
+    let [skills,setSkills] = useState([{
+        skill:'',
+        level:'',
+        errors:{
+            skill:'',
+            level:''
+        }
+    }]);
     localStorage.getItem("data")
         ? localStorage.getItem("data")
         : localStorage.setItem("data", JSON.stringify(data));
     localStorage.getItem("education")
         ? localStorage.getItem("education")
         : localStorage.setItem("education", JSON.stringify(education));
+    localStorage.getItem("skill")
+        ? localStorage.getItem("skill")
+        : localStorage.setItem("skill", JSON.stringify(skills));
     useEffect(() => {
         data = JSON.parse(localStorage.getItem("data"));
         education = JSON.parse(localStorage.getItem("education"));
+        skills = JSON.parse(localStorage.getItem("skills"));
     },[]);
 
     let k,all;
@@ -126,34 +139,34 @@ const Router = () => {
 
     const validationExperienceCheck = () => {
         data.map((item) => {
-            if(item.job===''){
+            if(item.job.trim()===''){
                 item.errors.job = 'This field cannot be blank!';
             }
             else
             {
                 item.errors.job = '';
             }
-            if(item.employer===''){
+            if(item.employer.trim()===''){
                 item.errors.employer = 'This field cannot be blank!';
             }
             else{
                 item.errors.employer = '';
             }
-            if(item.startDate===''){
+            if(item.startDate.trim()===''){
                 item.errors.startDate = 'This field cannot be blank!';
             }
             else
             {
                 item.errors.startDate = '';
             }
-            if(item.endDate===''){
+            if(item.endDate.trim()===''){
                 item.errors.endDate = 'This field cannot be blank!';
             }
             else
             {
                 item.errors.endDate = '';
             }
-            if(item.city===''){
+            if(item.city.trim()===''){
                 item.errors.city = 'This field cannot be blank!';
             }
             else {
@@ -200,6 +213,16 @@ const Router = () => {
         })
     }
 
+    const validationSkillsCheck = () => {
+        skills.map((item) => {
+            if (item.skill.trim() === '') {
+                item.errors.skill = 'This field cannot be blank!';
+            } else {
+                item.errors.skill = '';
+            }
+        });
+    }
+
     const goToExperience = () => {
         validationContactCheck();
         if(data[0].errors.name==='' && data[0].errors.surname==='' && data[0].errors.address==='' && data[0].errors.phone==='' && data[0].errors.email==='')
@@ -217,6 +240,12 @@ const Router = () => {
     const addEducation = () => {
         setEducation([...education,{school: '',degree: '',graduation: '',speciality: '',town: '',description: '',errors:{
                 school: '',degree: '',graduation: '',speciality: '',town: '',description: ''
+            }}]);
+    }
+
+    const addSkill = () => {
+        setSkills([...skills,{skill:'',level:'',errors:{
+                skill:'',level:''
             }}]);
     }
 
@@ -241,6 +270,16 @@ const Router = () => {
         localStorage.setItem('education',JSON.stringify(education));
     }
 
+    const handleChangeSkill = (e,i) => {
+        const {name,value} = e.target;
+
+        const list = [...skills];
+        list[i][name] = value;
+        validationSkillsCheck();
+        setSkills(list);
+        localStorage.setItem('skills',JSON.stringify(skills));
+    }
+
     const goToEducation = () => {
         validationExperienceCheck();
         let k = 0;
@@ -249,28 +288,32 @@ const Router = () => {
                     k++;
                 }
             }
-        console.log(k);
         if(k === data.length){
             navigate('/education');
         }
     }
 
-    // const goToAbout = () => {
-    //     validationEducationCheck();
-    //     if(degree==='' && errors.school==='' && errors.town==='' && errors.speciality==='' && errors.graduation==='')
-    //     {
-    //         setSkill(true);
-    //         setEducation(false);
-    //     }
-    // }
+    const goToSkill = () => {
+        validationSkillsCheck();
+        let t = 0;
+        for(let i = 0;i<education.length;i++){
+            if(education[i].errors.school === '' && education[i].errors.degree==='' && education[i].errors.graduation === '' && education[i].errors.speciality === '' && education[i].errors.town === ''){
+                t++;
+            }
+        }
+        if(t === education.length){
+            navigate('/skills');
+        }
+    }
 
     return(
         <Page>
           <Routes>
-              <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data} education={education}/>]} />
-              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data} education={education}/>]} />
-              <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data} education={education}/>]} />
-              <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} data={education} addEducation={addEducation}/>,<CV data={data} education={education}/>]} />
+              <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data} education={education} skills={skills}/>]} />
+              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data} education={education} skills={skills}/>]} />
+              <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data} education={education} skills={skills}/>]} />
+              <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation}/>,<CV data={data} education={education} skills={skills}/>]} />
+              <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} data={skills} addSkill={addSkill} />,<CV data={data} skills={skills} />]} />
           </Routes>
         </Page>
     );

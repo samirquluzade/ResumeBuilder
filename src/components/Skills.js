@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 
-const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) => {
+const Skills = ({backTo,data,goToAbout,addEducation,handleChangeEducation}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -11,54 +11,44 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
         setAllData(data);
     },[data]);
 
-    const getAllYear = () => {
-        let years = [];
-        let currentYear= new Date().getFullYear();
-        for(let i = currentYear + 3;i>=currentYear - 70;i--){
-            const year = i;
-            years.push(<option value={year}>{year}</option>);
-        }
-        return years;
-    }
-
     function toggleMenu(e){
         const val = e.target.parentNode.childNodes[1];
         val.classList.toggle('activ');
     }
 
     const inputHandler = () => {
-    let checkbox = document.getElementById('education');
-    let text = document.getElementById('details');
-    if(checkbox.checked === true){
-        text.style.display = "none";
-        allData.map((item,i) => {
-            item.school = '*';
-            item.degree = '*';
-            item.graduation = '*';
-            item.town = '*';
-            item.description = '*';
-        });
+        let checkbox = document.getElementById('education');
+        let text = document.getElementById('details');
+        if(checkbox.checked === true){
+            text.style.display = "none";
+            allData.map((item,i) => {
+                item.school = '*';
+                item.degree = '*';
+                item.graduation = '*';
+                item.town = '*';
+                item.description = '*';
+            });
+        }
+        else
+        {
+            text.style.display = "block";
+            allData.map((item,i) => {
+                item.school = '';
+                item.degree = '';
+                item.graduation = '';
+                item.town = '';
+                item.description = '';
+            });
+        }
     }
-    else
-    {
-        text.style.display = "block";
-        allData.map((item,i) => {
-            item.school = '';
-            item.degree = '';
-            item.graduation = '';
-            item.town = '';
-            item.description = '';
-        });
-    }
-}
 
     return(
         <LeftSide>
             <Title>Tell us about your Education</Title>
             <Message>Start with your recent education</Message>
-                <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>
-                    <Inputd type="checkbox" id="education" /> &nbsp; I don't have any education
-                </Labeld>
+            <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>
+                <Inputd type="checkbox" id="education" /> &nbsp; I don't have any education
+            </Labeld>
             <Details id="details">
                 <Button className="btn btn-info" style={{float:'right'}} onClick={addEducation} id="newEx">Add new Education</Button>
                 {allData.map((item,i) => {
@@ -84,10 +74,10 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
                                 <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={e => handleChangeEducation(e,i)} value={item.speciality} minLength={2} maxLength={20} required="required"/>
                                 {item.errors.speciality && <Error>{item.errors.speciality}</Error>}
                                 <Label htmlFor="graduation">Graduation Date</Label>
-                                    <Form.Select className="form-control" name="graduation" onChange={e => handleChangeEducation(e,i)}>
-                                        <option>Select date</option>
-                                        {getAllYear()}
-                                    </Form.Select>
+                                <Form.Select className="form-control" name="graduation" onChange={e => handleChangeEducation(e,i)}>
+                                    <option>Select date</option>
+                                    {getAllYear()}
+                                </Form.Select>
                                 {item.errors.graduation && <Error>{item.errors.graduation}</Error>}
                                 <Label htmlFor="town">City</Label>
                                 <Input type="text" name="town" className="form-control" onChange={e => handleChangeEducation(e,i)} value={item.town} minLength={2} maxLength={20} required="required"/>
@@ -100,7 +90,7 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
             </Details>
             <Next>
                 <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
-                <Link to="/education" className="btn btn-primary" onClick={goToSkill}>Next to Skills</Link>
+                <Link to="/education" className="btn btn-primary" onClick={goToAbout}>Next to Skills</Link>
             </Next>
         </LeftSide>
     );
@@ -175,4 +165,4 @@ const Inputd = styled.input`
     font-weight: 700;
 `;
 
-export default Education;
+export default Skills;
