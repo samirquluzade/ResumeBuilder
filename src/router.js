@@ -158,43 +158,43 @@ const Router = () => {
         })
     }
 
-    // const validationEducationCheck = () => {
-    //     data.map((item) => {
-    //     if(item.school.trim()===''){
-    //         item.errors.school = 'This field cannot be blank!';
-    //     }
-    //     else
-    //     {
-    //         item.errors.school = '';
-    //     }
-    //     if(item.degree.trim()===''){
-    //         item.errors.degree = 'This field cannot be blank!';
-    //     }
-    //     else{
-    //         item.errors.degree = '';
-    //     }
-    //     if(item.speciality.trim()===''){
-    //         item.errors.speciality = 'This field cannot be blank!';
-    //     }
-    //     else
-    //     {
-    //         item.errors.speciality = '';
-    //     }
-    //     if(item.graduation.trim()===''){
-    //         item.errors.graduation = 'This field cannot be blank!';
-    //     }
-    //     else
-    //     {
-    //         item.errors.graduation = '';
-    //     }
-    //     if(item.town.trim()===''){
-    //         item.errors.town = 'This field cannot be blank!';
-    //     }
-    //     else {
-    //         item.errors.town = '';
-    //     }
-    //     })
-    // }
+    const validationEducationCheck = () => {
+        education.map((item) => {
+        if(item.school.trim()===''){
+            item.errors.school = 'This field cannot be blank!';
+        }
+        else
+        {
+            item.errors.school = '';
+        }
+        if(item.degree.trim()===''){
+            item.errors.degree = 'This field cannot be blank!';
+        }
+        else{
+            item.errors.degree = '';
+        }
+        if(item.speciality.trim()===''){
+            item.errors.speciality = 'This field cannot be blank!';
+        }
+        else
+        {
+            item.errors.speciality = '';
+        }
+        if(item.graduation.trim()===''){
+            item.errors.graduation = 'This field cannot be blank!';
+        }
+        else
+        {
+            item.errors.graduation = '';
+        }
+        if(item.town.trim()===''){
+            item.errors.town = 'This field cannot be blank!';
+        }
+        else {
+            item.errors.town = '';
+        }
+        })
+    }
 
     const goToExperience = () => {
         validationContactCheck();
@@ -223,7 +223,6 @@ const Router = () => {
         list[i][name] = value;
         validationContactCheck();
         validationExperienceCheck();
-        // validationEducationCheck();
         setData(list);
         localStorage.setItem("data",JSON.stringify(data));
     }
@@ -233,7 +232,7 @@ const Router = () => {
 
         const list = [...education];
         list[i][name] = value;
-
+        validationEducationCheck();
         setEducation(list);
         localStorage.setItem('education',JSON.stringify(education));
     }
