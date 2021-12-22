@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 
-const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill}) => {
+const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLevel}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -20,7 +20,7 @@ const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill}) => {
         <LeftSide>
             <Title>Tell us about your Education</Title>
             <Details id="details">
-                <Button className="btn btn-info" style={{float:'right'}} onClick={addSkill} id="newEx">Add new Education</Button>
+                <Button className="btn btn-info" style={{float:'right'}} onClick={addSkill} id="newEx">Add new Skill</Button>
                 {allData.map((item,i) => {
                     return(
                         <div>
@@ -29,17 +29,17 @@ const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill}) => {
                                 <Label htmlFor="skill">Skill</Label>
                                 <Input type="text" name="skill" className="form-control" placeholder="Type your skill here" onChange={e => handleChangeSkill(e,i)} value={item.skill} minLength={2} maxLength={20} required="required"/>
                                 {item.errors.skill && <Error>{item.errors.skill}</Error>}
-                                <Label htmlFor="skill">Level</Label>
+                                <Label htmlFor="level">Level</Label>
                                 <Levels>
-                                    <li name="level" value="20" onclick={e => handleChangeSkill(e,i)}>1/5</li>
+                                    <li value="20" onClick={e => handleChangeSkillLevel(e,i)}>1/5</li>
                                     <Line />
-                                    <li name="level" value="40">2/5</li>
+                                    <li value="40" onClick={e => handleChangeSkillLevel(e,i)}>2/5</li>
                                     <Line />
-                                    <li name="level" value="60">3/5</li>
+                                    <li value="60" onClick={e => handleChangeSkillLevel(e,i)}>3/5</li>
                                     <Line />
-                                    <li name="level" value="80">4/5</li>
+                                    <li value="80" onClick={e => handleChangeSkillLevel(e,i)}>4/5</li>
                                     <Line />
-                                    <li name="level" value="100">5/5</li>
+                                    <li value="100" onClick={e => handleChangeSkillLevel(e,i)}>5/5</li>
                                 </Levels>
                             </Inputs>
                         </div>
