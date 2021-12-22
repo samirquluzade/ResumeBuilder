@@ -280,6 +280,15 @@ const Router = () => {
         localStorage.setItem('skills',JSON.stringify(skills));
     }
 
+    const handleChangeSkillLevel = (e,i) => {
+        const {value} = e.target;
+
+        const list = [...skills];
+        list[i]['level'] = value;
+        setSkills(list);
+        localStorage.setItem('skills',JSON.stringify(skills));
+    }
+
     const goToEducation = () => {
         validationExperienceCheck();
         let k = 0;
@@ -313,7 +322,7 @@ const Router = () => {
               <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data} education={education} skills={skills}/>]} />
               <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data} education={education} skills={skills}/>]} />
               <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation}/>,<CV data={data} education={education} skills={skills}/>]} />
-              <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} data={skills} addSkill={addSkill} />,<CV data={data} education={education} skills={skills} />]} />
+              <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} />,<CV data={data} education={education} skills={skills} />]} />
           </Routes>
         </Page>
     );

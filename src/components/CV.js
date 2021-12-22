@@ -4,7 +4,7 @@ import Contact from "./Contact";
 import Experience from "./Experience";
 import Education from "./Education";
 
-const CV = ({data,education}) => {
+const CV = ({data,education,skills}) => {
 
     return(
           <>
@@ -135,6 +135,28 @@ const CV = ({data,education}) => {
                         <Right>
                             SKILLS
                         </Right>
+                        {skills.map((item,i) => {
+                            return(
+                                <Experiences>
+                                    <ExperienceLeft>
+                                        <Employer>
+                                            {item.skill!=='' &&
+                                            item.skill
+                                            }
+                                        </Employer>
+                                    </ExperienceLeft>
+                                    <ExperienceRight>
+                                        <City>
+                                            {item.skill !== '' && (
+                                            <LevelPercent>
+                                                 <SkillPercent style={{width: item.level + '%'}}/>
+                                            </LevelPercent>
+                                            )}
+                                        </City>
+                                    </ExperienceRight>
+                                </Experiences>
+                            )
+                        })}
                     </ResumeRight>
                 </ResumeExample>
           </>
@@ -214,6 +236,7 @@ const Info = styled.div`
 const Experiences = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0 10% 2% 5%;
   font-weight: 500;
 `;
@@ -243,4 +266,19 @@ const Description = styled.div`
     font-size: 10px;
     color:#847C7C;
 `;
+
+const LevelPercent = styled.div`
+  width: 135px;
+  height: 5px;
+  border:none;
+  position: relative;
+  background: #847C7C;
+`;
+
+const SkillPercent = styled.div`
+  position: absolute;
+  background: #000000;
+  height: 5px;
+`;
+
 export default CV;
