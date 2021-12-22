@@ -62,3 +62,7 @@ label{
 .activ{
   display: block!important;
 }
+.level{
+  background-color: forestgreen;
+  color:#fff;
+}

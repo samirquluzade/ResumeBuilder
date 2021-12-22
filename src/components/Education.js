@@ -86,10 +86,10 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
                                 </Form.Select>
                                 {item.errors.degree && <Error>{item.errors.degree}</Error>}
                                 <Label htmlFor="school">School</Label>
-                                <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={e => handleChangeEducation(e,i)} value={item.school} minLength={2} maxLength={20} required="required"/>
+                                <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={e => handleChangeEducation(e,i)} value={item.school} minLength={2} maxLength={35} required="required"/>
                                 {item.errors.school && <Error>{item.errors.school}</Error>}
                                 <Label htmlFor="speciality">Speciality</Label>
-                                <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={e => handleChangeEducation(e,i)} value={item.speciality} minLength={2} maxLength={20} required="required"/>
+                                <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={e => handleChangeEducation(e,i)} value={item.speciality} minLength={2} maxLength={35} required="required"/>
                                 {item.errors.speciality && <Error>{item.errors.speciality}</Error>}
                                 <Label htmlFor="graduation">Graduation Date</Label>
                                     <Form.Select className="form-control" name="graduation" onChange={e => handleChangeEducation(e,i)}>

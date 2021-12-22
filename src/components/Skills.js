@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {Button, Form} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 
 const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLevel}) => {
 
@@ -14,6 +14,13 @@ const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill,handleChangeSk
     function toggleMenu(e){
         const val = e.target.parentNode.childNodes[1];
         val.classList.toggle('activ');
+    }
+
+    function activeClass(e){
+        for(let i = 0; i < 9;i++){
+            e.target.parentNode.children[i].classList.remove('level');
+        }
+        e.target.classList.add('level');
     }
 
     return(
@@ -31,22 +38,22 @@ const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill,handleChangeSk
                                 {item.errors.skill && <Error>{item.errors.skill}</Error>}
                                 <Label htmlFor="level">Level</Label>
                                 <Levels>
-                                    <li value="20" onClick={e => handleChangeSkillLevel(e,i)}>1/5</li>
+                                    <li value="20" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>1/5</li>
                                     <Line />
-                                    <li value="40" onClick={e => handleChangeSkillLevel(e,i)}>2/5</li>
+                                    <li value="40" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>2/5</li>
                                     <Line />
-                                    <li value="60" onClick={e => handleChangeSkillLevel(e,i)}>3/5</li>
+                                    <li value="60" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>3/5</li>
                                     <Line />
-                                    <li value="80" onClick={e => handleChangeSkillLevel(e,i)}>4/5</li>
+                                    <li value="80" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>4/5</li>
                                     <Line />
-                                    <li value="100" onClick={e => handleChangeSkillLevel(e,i)}>5/5</li>
+                                    <li value="100" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>5/5</li>
                                 </Levels>
                             </Inputs>
                         </div>
                     )})}
             </Details>
             <Next>
-                <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
+                <Link to="/education" className="btn btn-danger" onClick={backTo}>Back</Link>
                 <Button className="btn btn-primary" onClick={goToAbout}>Next to About</Button>
             </Next>
         </LeftSide>
@@ -141,7 +148,7 @@ const Levels = styled.div`
     width: 1px;
     height: 30px;
     background: gray;
-    margin: auto 0;
+    margin: auto 1%;
   }
 `;
 
