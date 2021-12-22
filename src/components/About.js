@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
-const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLevel}) => {
+const About = ({backTo,data,goToFinish,handleChangeAbout,handleChangeLevel,addLanguage}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -22,39 +22,42 @@ const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill,handleChangeSk
         }
         e.target.classList.add('level');
     }
-
     return(
         <LeftSide>
-            <Title>Tell us about your Skills</Title>
+            <Title>Tell us about yourself</Title>
             <Details id="details">
-                <Button className="btn btn-info" style={{float:'right'}} onClick={addSkill} id="newEx">Add new Skill</Button>
+                <Button className="btn btn-info" style={{float:'right'}} onClick={addLanguage} id="newEx">Add new Language</Button>
+                <Inputs id="education_input">
+                    <Label htmlFor="about">About</Label>
+                    <TextArea name="about" className="form-control" rows="6" cols="50" maxLength="350" placeholder="Write about yourself" onChange={e => handleChangeAbout(e,0)} value={data[0].about}/>
+                    {data[0].error.about!=='' && <Error>{data[0].error.about}</Error>}
+                </Inputs>
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Edu onClick={toggleMenu}>Skill {i + 1}</Edu>
-                            <Inputs id="education_inputs">
-                                <Label htmlFor="skill">Skill</Label>
-                                <Input type="text" name="skill" className="form-control" placeholder="Type your skill here" onChange={e => handleChangeSkill(e,i)} value={item.skill} minLength={2} maxLength={20} required="required"/>
-                                {item.errors.skill && <Error>{item.errors.skill}</Error>}
-                                <Label htmlFor="level">Level</Label>
+                            <Edu onClick={toggleMenu}>Language {i + 1}</Edu>
+                            <PInputs>
+                                <Label htmlFor="langName">Language</Label>
+                                <Input type="text" name="langName" className="form-control" placeholder="Type your language here" onChange={e => handleChangeAbout(e,i)} value={item.langName} minLength={2} maxLength={20}/>
+                                <Label htmlFor="langLevel">Level</Label>
                                 <Levels>
-                                    <li value="20" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>1/5</li>
+                                    <li value="20" onClick={e => {handleChangeLevel(e,i);activeClass(e)}}>1/5</li>
                                     <Line />
-                                    <li value="40" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>2/5</li>
+                                    <li value="40" onClick={e => {handleChangeLevel(e,i);activeClass(e)}}>2/5</li>
                                     <Line />
-                                    <li value="60" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>3/5</li>
+                                    <li value="60" onClick={e => {handleChangeLevel(e,i);activeClass(e)}}>3/5</li>
                                     <Line />
-                                    <li value="80" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>4/5</li>
+                                    <li value="80" onClick={e => {handleChangeLevel(e,i);activeClass(e)}}>4/5</li>
                                     <Line />
-                                    <li value="100" onClick={e => {handleChangeSkillLevel(e,i);activeClass(e)}}>5/5</li>
+                                    <li value="100" onClick={e => {handleChangeLevel(e,i);activeClass(e)}}>5/5</li>
                                 </Levels>
-                            </Inputs>
+                            </PInputs>
                         </div>
                     )})}
             </Details>
             <Next>
-                <Link to="/education" className="btn btn-danger" onClick={backTo}>Back</Link>
-                <Button className="btn btn-primary" onClick={goToAbout}>Next to About</Button>
+                <Link to="/skills" className="btn btn-danger" onClick={backTo}>Back</Link>
+                <Button className="btn btn-primary" onClick={goToFinish}>Next to Finish</Button>
             </Next>
         </LeftSide>
     );
@@ -76,6 +79,10 @@ const Message = styled.h5`
 `;
 
 const Inputs = styled.div`
+    padding-top: 2%;
+`;
+
+const PInputs = styled.div`
   display: none;
 `;
 
@@ -154,4 +161,4 @@ const Levels = styled.div`
 
 
 
-export default Skills;
+export default About;
