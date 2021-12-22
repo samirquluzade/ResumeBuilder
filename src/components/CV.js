@@ -4,7 +4,7 @@ import Contact from "./Contact";
 import Experience from "./Experience";
 import Education from "./Education";
 
-const CV = ({data,education,skills}) => {
+const CV = ({data,education,skills,about}) => {
 
     return(
           <>
@@ -13,12 +13,31 @@ const CV = ({data,education,skills}) => {
                         <About>
                             ABOUT ME
                         </About>
+                        <LeftSide>
+                            {about[0].about}
+                        </LeftSide>
                         <About>
                             WEBSITES & SOCIAL LINKS
                         </About>
                         <About>
                             LANGUAGES
                         </About>
+                        {about.map((item) => {
+                            return(
+                                <>
+                                    <LeftSide>
+                                        {item.langName!=='' && item.langName}
+                                    </LeftSide>
+                                    {item.langName !== '' &&
+                                        <LeftSide>
+                                            <LevelPercent>
+                                                <SkillPercent style={{width: item.langLevel + '%'}}/>
+                                            </LevelPercent>
+                                         </LeftSide>
+                                    }
+                                </>
+                            )
+                        })}
                     </ResumeLeft>
                     <ResumeRight>
                         <Head>
@@ -176,8 +195,8 @@ const ResumeLeft = styled.div`
 `;
 
 const About = styled.div`
-  color:white;
-  margin:40% 0 40% 10%;
+  color:white;  
+  margin:40% 0 5% 10%;
   font-size: 12px;
   font-weight: 600;
 `;
@@ -279,6 +298,12 @@ const SkillPercent = styled.div`
   position: absolute;
   background: #000000;
   height: 5px;
+`;
+
+const LeftSide = styled.div`
+  color:white;
+  font-size: 10px;
+  margin:1% 10%;
 `;
 
 export default CV;
