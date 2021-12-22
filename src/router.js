@@ -72,6 +72,12 @@ const Router = () => {
             about:'',
         }
     }]);
+    let [link,setLink] = useState([{
+        link:'',
+        error:{
+            link:''
+        }
+    }])
     localStorage.getItem("data")
         ? localStorage.getItem("data")
         : localStorage.setItem("data", JSON.stringify(data));
@@ -81,10 +87,18 @@ const Router = () => {
     localStorage.getItem("skills")
         ? localStorage.getItem("skills")
         : localStorage.setItem("skills", JSON.stringify(skills));
+    localStorage.getItem("about")
+        ? localStorage.getItem("about")
+        : localStorage.setItem("about", JSON.stringify(abouts));
+    localStorage.getItem("link")
+        ? localStorage.getItem("link")
+        : localStorage.setItem("link", JSON.stringify(link));
     useEffect(() => {
         data = JSON.parse(localStorage.getItem("data"));
         education = JSON.parse(localStorage.getItem("education"));
         skills = JSON.parse(localStorage.getItem("skills"));
+        abouts = JSON.parse(localStorage.getItem("about"));
+        link = JSON.parse(localStorage.getItem("link"));
     },[]);
 
     let k,all;
@@ -274,6 +288,10 @@ const Router = () => {
             }}]);
     }
 
+    const addLink = () => {
+        setLink([...link,{link:'',errors:{link:''}}]);
+    }
+
     const handleChange = (e,i) => {
         const {name,value} = e.target;
 
@@ -333,6 +351,15 @@ const Router = () => {
         localStorage.setItem('about',JSON.stringify(abouts));
     }
 
+    const handleChangeLink = (e,i) => {
+        const {name,value} = e.target;
+
+        const list = [...link];
+        list[i][name] = value;
+        setLink(list);
+        localStorage.setItem('link',JSON.stringify(link));
+    }
+
     const goToEducation = () => {
         validationExperienceCheck();
         let k = 0;
@@ -379,12 +406,12 @@ const Router = () => {
     return(
         <Page>
           <Routes>
-              <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data} education={education} skills={skills} about={abouts}/>]} />
-              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data} education={education} skills={skills} about={abouts}/>]} />
-              <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data} education={education} skills={skills} about={abouts}/>]} />
-              <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation}/>,<CV data={data} education={education} skills={skills} about={abouts}/>]} />
-              <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} goToAbout={goToAbout} />,<CV data={data} education={education} skills={skills} about={abouts}/>]} />
-              <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} goToFinish={goToFinish} addLanguage={addLanguage} data={abouts} />, <CV data={data} education={education} skills={skills} about={abouts} />]} />
+              <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} goToAbout={goToAbout} />,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} handleChangeLink={handleChangeLink} goToFinish={goToFinish} addLanguage={addLanguage} addLink={addLink} data={abouts} />, <CV data={data} education={education} skills={skills} about={abouts} link={link} />]} />
           </Routes>
         </Page>
     );
