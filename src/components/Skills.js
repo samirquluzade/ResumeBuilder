@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 
-const Skills = ({backTo,data,goToAbout,addEducation,handleChangeEducation}) => {
+const Skills = ({backTo,data,goToAbout,addSkill,handleChangeSkill}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -16,81 +16,38 @@ const Skills = ({backTo,data,goToAbout,addEducation,handleChangeEducation}) => {
         val.classList.toggle('activ');
     }
 
-    const inputHandler = () => {
-        let checkbox = document.getElementById('education');
-        let text = document.getElementById('details');
-        if(checkbox.checked === true){
-            text.style.display = "none";
-            allData.map((item,i) => {
-                item.school = '*';
-                item.degree = '*';
-                item.graduation = '*';
-                item.town = '*';
-                item.description = '*';
-            });
-        }
-        else
-        {
-            text.style.display = "block";
-            allData.map((item,i) => {
-                item.school = '';
-                item.degree = '';
-                item.graduation = '';
-                item.town = '';
-                item.description = '';
-            });
-        }
-    }
-
     return(
         <LeftSide>
             <Title>Tell us about your Education</Title>
-            <Message>Start with your recent education</Message>
-            <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>
-                <Inputd type="checkbox" id="education" /> &nbsp; I don't have any education
-            </Labeld>
             <Details id="details">
-                <Button className="btn btn-info" style={{float:'right'}} onClick={addEducation} id="newEx">Add new Education</Button>
+                <Button className="btn btn-info" style={{float:'right'}} onClick={addSkill} id="newEx">Add new Education</Button>
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Edu onClick={toggleMenu}>Education {i + 1}</Edu>
+                            <Edu onClick={toggleMenu}>Skill {i + 1}</Edu>
                             <Inputs id="education_inputs">
-                                <Label htmlFor="degree">Degree</Label>
-                                <Form.Select className="form-control" name="degree" onChange={e => handleChangeEducation(e,i)}>
-                                    <option>Select degree</option>
-                                    <option value="Bachelor">Bachelor</option>
-                                    <option value="Master">Master</option>
-                                    <option value="Undergraduate">Undergraduate</option>
-                                    <option value="College">Some College(no degree)</option>
-                                    <option value="MBA">MBA</option>
-                                    <option value="PH">PH.D.</option>
-                                </Form.Select>
-                                {item.errors.degree && <Error>{item.errors.degree}</Error>}
-                                <Label htmlFor="school">School</Label>
-                                <Input type="text" name="school" className="form-control" placeholder="Harvard" onChange={e => handleChangeEducation(e,i)} value={item.school} minLength={2} maxLength={20} required="required"/>
-                                {item.errors.school && <Error>{item.errors.school}</Error>}
-                                <Label htmlFor="speciality">Speciality</Label>
-                                <Input type="text" name="speciality" className="form-control" placeholder="Computer Engineering" onChange={e => handleChangeEducation(e,i)} value={item.speciality} minLength={2} maxLength={20} required="required"/>
-                                {item.errors.speciality && <Error>{item.errors.speciality}</Error>}
-                                <Label htmlFor="graduation">Graduation Date</Label>
-                                <Form.Select className="form-control" name="graduation" onChange={e => handleChangeEducation(e,i)}>
-                                    <option>Select date</option>
-                                    {getAllYear()}
-                                </Form.Select>
-                                {item.errors.graduation && <Error>{item.errors.graduation}</Error>}
-                                <Label htmlFor="town">City</Label>
-                                <Input type="text" name="town" className="form-control" onChange={e => handleChangeEducation(e,i)} value={item.town} minLength={2} maxLength={20} required="required"/>
-                                {item.errors.town && <Error>{item.errors.town}</Error>}
-                                <Label htmlFor="description">Description</Label>
-                                <TextArea name="description" className="form-control" rows="5" cols="50" maxLength="250" placeholder="Write your educational experience" onChange={e => handleChangeEducation(e,i)} value={item.description}/>
+                                <Label htmlFor="skill">Skill</Label>
+                                <Input type="text" name="skill" className="form-control" placeholder="Type your skill here" onChange={e => handleChangeSkill(e,i)} value={item.skill} minLength={2} maxLength={20} required="required"/>
+                                {item.errors.skill && <Error>{item.errors.skill}</Error>}
+                                <Label htmlFor="skill">Level</Label>
+                                <Levels>
+                                    <li name="level" value="20" onclick={e => handleChangeSkill(e,i)}>1/5</li>
+                                    <Line />
+                                    <li name="level" value="40">2/5</li>
+                                    <Line />
+                                    <li name="level" value="60">3/5</li>
+                                    <Line />
+                                    <li name="level" value="80">4/5</li>
+                                    <Line />
+                                    <li name="level" value="100">5/5</li>
+                                </Levels>
                             </Inputs>
                         </div>
                     )})}
             </Details>
             <Next>
                 <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
-                <Link to="/education" className="btn btn-primary" onClick={goToAbout}>Next to Skills</Link>
+                <Button className="btn btn-primary" onClick={goToAbout}>Next to About</Button>
             </Next>
         </LeftSide>
     );
@@ -164,5 +121,30 @@ const Labeld = styled.label`
 const Inputd = styled.input`
     font-weight: 700;
 `;
+
+const Line = styled.div``;
+
+const Levels = styled.div`
+  background: white;
+  width: 100%;
+  padding: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  li{
+    padding: 10px;
+    cursor: pointer;
+    list-style-type: none;
+  }
+  ${Line}{
+    flex-direction: row;
+    width: 1px;
+    height: 30px;
+    background: gray;
+    margin: auto 0;
+  }
+`;
+
+
 
 export default Skills;
