@@ -33,10 +33,17 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
         text.style.display = "none";
         allData.map((item,i) => {
             item.school = '*';
+            item.errors.school = '';
             item.degree = '*';
+            item.errors.degree = '';
             item.graduation = '*';
+            item.errors.graduation = '';
             item.town = '*';
+            item.errors.town = '';
             item.description = '*';
+            item.errors.description = '';
+            item.speciality = '*';
+            item.errors.speciality = '';
         });
     }
     else
@@ -48,6 +55,7 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
             item.graduation = '';
             item.town = '';
             item.description = '';
+            item.speciality = '*';
         });
     }
 }
@@ -68,7 +76,7 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
                             <Inputs id="education_inputs">
                                 <Label htmlFor="degree">Degree</Label>
                                 <Form.Select className="form-control" name="degree" onChange={e => handleChangeEducation(e,i)}>
-                                    <option>Select degree</option>
+                                    {item.degree === '' ? <option>Select degree</option> : <option>{item.degree}</option>}
                                     <option value="Bachelor">Bachelor</option>
                                     <option value="Master">Master</option>
                                     <option value="Undergraduate">Undergraduate</option>
@@ -85,7 +93,7 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
                                 {item.errors.speciality && <Error>{item.errors.speciality}</Error>}
                                 <Label htmlFor="graduation">Graduation Date</Label>
                                     <Form.Select className="form-control" name="graduation" onChange={e => handleChangeEducation(e,i)}>
-                                        <option>Select date</option>
+                                        {item.graduation === '' ? <option>Select Date</option> : <option>{item.graduation}</option>}
                                         {getAllYear()}
                                     </Form.Select>
                                 {item.errors.graduation && <Error>{item.errors.graduation}</Error>}
@@ -100,7 +108,7 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
             </Details>
             <Next>
                 <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
-                <Link to="/education" className="btn btn-primary" onClick={goToSkill}>Next to Skills</Link>
+                <Button className="btn btn-primary" onClick={goToSkill}>Next to Skills</Button>
             </Next>
         </LeftSide>
     );

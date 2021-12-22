@@ -95,43 +95,43 @@ const CV = ({data,education}) => {
                             <Right>
                                 EDUCATION
                             </Right>
-                    {education.map((item,i) => {
-                        return(
-                                <Experiences>
-                                <ExperienceLeft>
-                                <Employer>
-                            {item.degree!=='' && item.degree!=='*' &&
-                                item.degree
-                            }
-                                </Employer>
-                                <Job>
-                            {item.school!=='' && item.school!=='*' &&
-                                item.school + ' - '
-                            } {item.speciality !== '' && item.speciality !== '*' &&
-                                item.speciality
-                            }
-                                </Job>
-                                <Date>
-                            {item.graduation!=='' && item.graduation!=='*' &&
-                                item.graduation
-                            }
-                                </Date>
-                                <Description>
-                            {item.description!=='' && item.description!=='*' &&
-                                item.description
-                            }
-                                </Description>
-                                </ExperienceLeft>
-                                <ExperienceRight>
-                                <City>
-                            {item.town!=='' && item.town!=='*' &&
-                                item.town
-                            }
-                                </City>
-                                </ExperienceRight>
-                                </Experiences>
-                                )
-                    })}
+                        {education.map((item,i) => {
+                            return(
+                                    <Experiences>
+                                        <ExperienceLeft>
+                                        <Employer>
+                                    {item.degree!=='' && item.degree!=='*' &&
+                                        item.degree
+                                    }
+                                        </Employer>
+                                        <Job>
+                                    {item.school!=='' && item.school!=='*' &&
+                                        item.school + ' - '
+                                    } {item.speciality !== '' && item.speciality !== '*' &&
+                                        item.speciality
+                                    }
+                                        </Job>
+                                        <Date>
+                                    {item.graduation!=='' && item.graduation!=='*' &&
+                                        item.graduation
+                                    }
+                                        </Date>
+                                        <Description>
+                                    {item.description!=='' && item.description!=='*' &&
+                                        item.description
+                                    }
+                                        </Description>
+                                        </ExperienceLeft>
+                                        <ExperienceRight>
+                                        <City>
+                                    {item.town!=='' && item.town!=='*' &&
+                                        item.town
+                                    }
+                                        </City>
+                                        </ExperienceRight>
+                                    </Experiences>
+                                    )
+                        })}
                         <Right>
                             SKILLS
                         </Right>
