@@ -4,7 +4,7 @@ import Contact from "./Contact";
 import Experience from "./Experience";
 import Education from "./Education";
 
-const CV = ({data,education,skills,about}) => {
+const CV = ({data,education,skills,about,link}) => {
 
     return(
           <>
@@ -19,6 +19,13 @@ const CV = ({data,education,skills,about}) => {
                         <About>
                             WEBSITES & SOCIAL LINKS
                         </About>
+                            {link.map((item,i) => {
+                                return(
+                                    <LeftSide>
+                                        {item.links!=='' && item.links}
+                                    </LeftSide>
+                                )
+                            })}
                         <About>
                             LANGUAGES
                         </About>
