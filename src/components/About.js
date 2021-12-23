@@ -3,13 +3,15 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
-const About = ({backTo,data,goToFinish,handleChangeAbout,handleChangeLevel,addLanguage,addLink}) => {
+const About = ({backTo,data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleChangeLink,addLanguage,addLink}) => {
 
     const [allData,setAllData] = useState(data);
+    const [linkData,setLinkData] = useState(link);
 
     useEffect(() => {
         setAllData(data);
-    },[data]);
+        setLinkData(link);
+    },[data,link]);
 
     function toggleMenu(e){
         const val = e.target.parentNode.childNodes[1];
@@ -32,8 +34,8 @@ const About = ({backTo,data,goToFinish,handleChangeAbout,handleChangeLevel,addLa
             <Title>Tell us about yourself</Title>
             <Details id="details">
                 <Button className="btn btn-info" style={{float:'right'}} onClick={addLanguage} id="newEx">Add new Language</Button>
-                <Simple>
-                    <Button className="btn btn-warning" style={{float:'right'}} onClick={addLink} id="newEx">Add new Social Link</Button>
+                <Simple onClick={addLink}>
+                    <Button className="btn btn-warning" style={{float:'right'}} id="newEx">Add new Social Link</Button>
                 </Simple>
                 <Inputs id="education_input">
                     <Label htmlFor="about">About</Label>
@@ -62,13 +64,13 @@ const About = ({backTo,data,goToFinish,handleChangeAbout,handleChangeLevel,addLa
                             </PInputs>
                         </div>
                     )})}
-                {allData.map((item,i) => {
+                {linkData.map((item,i) => {
                     return(
                         <div>
                             <Edu onClick={toggleMenuLink}>Social Link {i + 1}</Edu>
                             <SInputs>
-                                <Label htmlFor="link">Link</Label>
-                                <Input type="text" name="link" className="form-control" placeholder="Type your social links(Linkedin,Github,Behance or other)" onChange={e => handleChangeAbout(e,i)} value={item.link} minLength={2} maxLength={40}/>
+                                <Label htmlFor="links">Link</Label>
+                                <Input type="text" name="links" className="form-control" placeholder="Type your social links(Linkedin,Github,Behance or other)" onChange={e => handleChangeLink(e,i)} value={item.links} minLength={2} maxLength={80}/>
                             </SInputs>
                         </div>
                     )})}

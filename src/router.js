@@ -73,9 +73,9 @@ const Router = () => {
         }
     }]);
     let [link,setLink] = useState([{
-        link:'',
+        links:'',
         error:{
-            link:''
+            links:''
         }
     }])
     localStorage.getItem("data")
@@ -289,7 +289,7 @@ const Router = () => {
     }
 
     const addLink = () => {
-        setLink([...link,{link:'',errors:{link:''}}]);
+        setLink([...link,{links:'',errors:{links:''}}]);
     }
 
     const handleChange = (e,i) => {
@@ -411,7 +411,7 @@ const Router = () => {
               <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} goToAbout={goToAbout} />,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
-              <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} handleChangeLink={handleChangeLink} goToFinish={goToFinish} addLanguage={addLanguage} addLink={addLink} data={abouts} />, <CV data={data} education={education} skills={skills} about={abouts} link={link} />]} />
+              <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} handleChangeLink={handleChangeLink} goToFinish={goToFinish} addLanguage={addLanguage} addLink={addLink} data={abouts} link={link} />, <CV data={data} education={education} skills={skills} about={abouts} link={link} />]} />
           </Routes>
         </Page>
     );
