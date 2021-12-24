@@ -79,49 +79,20 @@ const Router = () => {
         }
     }])
     localStorage.getItem("data")
-        ? localStorage.getItem("data")
+        ? data = JSON.parse(localStorage.getItem("data"))
         : localStorage.setItem("data", JSON.stringify(data));
     localStorage.getItem("education")
-        ? localStorage.getItem("education")
+        ? education = JSON.parse(localStorage.getItem("education"))
         : localStorage.setItem("education", JSON.stringify(education));
     localStorage.getItem("skills")
-        ? localStorage.getItem("skills")
+        ? skills = JSON.parse(localStorage.getItem("skills"))
         : localStorage.setItem("skills", JSON.stringify(skills));
     localStorage.getItem("about")
-        ? localStorage.getItem("about")
+        ? abouts = JSON.parse(localStorage.getItem("about"))
         : localStorage.setItem("about", JSON.stringify(abouts));
     localStorage.getItem("link")
-        ? localStorage.getItem("link")
+        ? link = JSON.parse(localStorage.getItem("link"))
         : localStorage.setItem("link", JSON.stringify(link));
-    useEffect(() => {
-        data = JSON.parse(localStorage.getItem("data"));
-        education = JSON.parse(localStorage.getItem("education"));
-        skills = JSON.parse(localStorage.getItem("skills"));
-        abouts = JSON.parse(localStorage.getItem("about"));
-        link = JSON.parse(localStorage.getItem("link"));
-    },[]);
-
-    let k,all;
-    const store = new CustomStore({
-        load:() => {
-            k = localStorage.getItem('data');
-            all = JSON.parse(k);
-            return all;
-        },
-        insert:values => {
-            const d = localStorage.getItem("data");
-            const newItem = {
-                name:values.name,
-                surname:values.surname,
-                address:values.address,
-                phone:values.phone,
-                phone2:values.phone2,
-                email:values.email,
-            }
-            let newItems = [newItem];
-            localStorage.setItem("data",JSON.stringify(newItems));
-        }
-    })
 
     const validationContactCheck = () => {
         if(data[0].name.trim()!==''){
@@ -402,7 +373,7 @@ const Router = () => {
     const goToFinish = () => {
 
     }
-
+    console.log(data);
     return(
         <Page>
           <Routes>

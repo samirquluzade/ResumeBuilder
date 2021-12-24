@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 
-const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) => {
+const Education = ({data,goToSkill,addEducation,handleChangeEducation}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -107,7 +107,7 @@ const Education = ({backTo,data,goToSkill,addEducation,handleChangeEducation}) =
                     )})}
             </Details>
             <Next>
-                <Link to="/experience" className="btn btn-danger" onClick={backTo}>Back</Link>
+                <Link to="/experience" className="btn btn-danger">Back</Link>
                 <Button className="btn btn-primary" onClick={goToSkill}>Next to Skills</Button>
             </Next>
         </LeftSide>
