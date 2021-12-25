@@ -6,26 +6,29 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
-const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience}) => {
+const Experience = ({handleChange,data,goToEducation,addExperience,settingData}) => {
 
-    let [check,setCheck] = useState(false);
     const [allData,setAllData] = useState(data);
 
     useEffect(() => {
         setAllData(data);
     },[data]);
 
-    const checkHandler = (endDate) => {
-        let checkbox = document.getElementById('present');
-        let text = document.getElementById('end');
-        if(checkbox.checked === true){
-            text.style.display = "none";
-            setCheck(true);
+    const checkHandler = (i) => {
+        let checkbox = document.querySelectorAll("#present");
+        let text = document.querySelectorAll("#end");
+        if(checkbox[i].checked === true){
+            const list = [...data];
+            list[i]['endDate'] = "Present";
+            settingData(list);
+            text[i].style.display = "none";
         }
         else
         {
-            text.style.display = "block";
-            setCheck(false);
+            const list = [...data];
+            list[i]['endDate'] = '';
+            settingData(list);
+            text[i].style.display = "block";
         }
     }
 
@@ -82,10 +85,6 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
             <Details id="ex_inputs">
                 <Button className="btn btn-info" style={{float:'right'}} onClick={addExperience} id="newEx">Add new Experience</Button>
                 {allData.map((item,i) => {
-                    if(check){
-                        item.endDate = "Present";
-                        setCheck(false);
-                    }
                     return(
                         <div>
                             <Work onClick={toggleMenu}>Work Experience {i + 1}</Work>
@@ -102,7 +101,7 @@ const Experience = ({handleChange,backTo,data,goToEducation,errors,addExperience
                                 <Label htmlFor="endDate">End Date</Label>
                                 <Input type="month" name="endDate" className="form-control"  onChange={(e) => checkDate(e,i,item.startDate)} required="required" value={item.endDate} id="end"/>
                                 {item.errors.endDate!=='' && <Error>{item.errors.endDate}</Error>}
-                                <Labeld style={{cursor:'pointer'}} onClick={() => checkHandler(item.endDate)}>
+                                <Labeld style={{cursor:'pointer'}} onClick={() => checkHandler(i)}>
                                     <Inputd type="checkbox" id="present" /> &nbsp; I currently work here
                                 </Labeld>
                                 <Label htmlFor="city">City</Label>
