@@ -190,10 +190,10 @@ const CV = ({data,education,skills,about,link}) => {
 };
 
 const ResumeExample = styled.div`
-    margin: 2% 5%;
+    margin: 0.5% 5%;
     display: flex;
     flex-direction: row;
-    height: 738px;
+    height: 745px;
 `;
 
 const ResumeLeft = styled.div`

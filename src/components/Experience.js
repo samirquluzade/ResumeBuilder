@@ -73,12 +73,13 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData})
         }
     }
     function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[1];
+        const val = e.target.parentNode.childNodes[3];
         val.classList.toggle('activ');
     }
     return(
         <LeftSide>
             <Title>Please enter your experience infos</Title>
+            <Message>Start with your recent work experience</Message>
             <Labeld style={{cursor:'pointer'}} onClick={inputHandler}>
                 <Inputd type="checkbox" id="experience" /> &nbsp; I don't have any experience
             </Labeld>
@@ -87,7 +88,8 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData})
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Work onClick={toggleMenu}>Work Experience {i + 1}</Work>
+                            <Work onClick={toggleMenu}>Work Experience {i + 1}</Work>&nbsp;
+                            <i class="fas fa-trash"></i>
                             <Inputs id="one">
                                 <Label htmlFor="job">Job</Label>
                                 <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.job}/>
@@ -169,6 +171,8 @@ const Input = styled.input`
 `;
 
 const Details = styled.div`
+    overflow-y: scroll;
+    max-height: 500px;
 `;
 
 const Error = styled.p`
@@ -183,6 +187,11 @@ const Labeld = styled.label`
 
 const Inputd = styled.input`
     font-weight: 700;
+`;
+
+const Message = styled.h5`
+  text-align: center;
+  color:maroon;
 `;
 
 export default Experience;
