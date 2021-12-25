@@ -5,11 +5,13 @@ body{
   background-color: #F3F2EF!important;
   /*overflow-y: scroll;*/
   /*overflow-x:hidden ;*/
+  overflow: auto;
 }
 :root,html{
   background-color: #F3F2EF;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  overflow: hidden;
 }
 p{
   margin: 0;
