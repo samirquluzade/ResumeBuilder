@@ -32,7 +32,7 @@ const Skills = ({data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLeve
                     return(
                         <div>
                             <Edu onClick={toggleMenu}>Skill {i + 1}</Edu>
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>&nbsp;
                             <Inputs id="education_inputs">
                                 <Label htmlFor="skill">Skill</Label>
                                 <Input type="text" name="skill" className="form-control" placeholder="Type your skill here" onChange={e => handleChangeSkill(e,i)} value={item.skill} minLength={2} maxLength={20} required="required"/>
@@ -102,10 +102,6 @@ const Input = styled.input`
   }
 `;
 
-const TextArea = styled.textarea`
-    resize: none;
-`;
-
 const Error = styled.p`
   color:red;
 `;
@@ -118,16 +114,8 @@ const LeftSide = styled.div`
 `;
 
 const Details = styled.div`
-`;
-
-const Labeld = styled.label`
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-`;
-
-const Inputd = styled.input`
-    font-weight: 700;
+  overflow-y: scroll;
+  max-height: 500px;
 `;
 
 const Line = styled.div``;

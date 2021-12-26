@@ -14,12 +14,12 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
     },[data,link]);
 
     function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[1];
+        const val = e.target.parentNode.childNodes[3];
         val.classList.toggle('activ');
     }
 
     function toggleMenuLink(e){
-        const val = e.target.parentNode.childNodes[1];
+        const val = e.target.parentNode.childNodes[3];
         val.classList.toggle('activ');
     }
 
@@ -46,7 +46,7 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
                     return(
                         <div>
                             <Edu onClick={toggleMenu}>Language {i + 1}</Edu>
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>&nbsp;
                             <PInputs>
                                 <Label htmlFor="langName">Language</Label>
                                 <Input type="text" name="langName" className="form-control" placeholder="Type your language here" onChange={e => handleChangeAbout(e,i)} value={item.langName} minLength={2} maxLength={20}/>
@@ -69,7 +69,7 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
                     return(
                         <div>
                             <Edu onClick={toggleMenuLink}>Social Link {i + 1}</Edu>
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandlerLink(item)}></i>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandlerLink(item)}></i>&nbsp;
                             <SInputs>
                                 <Label htmlFor="links">Link</Label>
                                 <Input type="text" name="links" className="form-control" placeholder="Type your social links(Linkedin,Github,Behance or other)" onChange={e => handleChangeLink(e,i)} value={item.links} minLength={2} maxLength={80}/>
@@ -150,6 +150,8 @@ const LeftSide = styled.div`
 `;
 
 const Details = styled.div`
+  overflow-y: scroll;
+  max-height: 500px;
 `;
 
 const Line = styled.div``;
