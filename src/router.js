@@ -372,6 +372,36 @@ const Router = () => {
         }
     }
 
+    const deleteHandler = (item) => {
+        const newData = data.filter(items => items!==item);
+        setData(newData);
+        localStorage.setItem('data',JSON.stringify(newData));
+    }
+
+    const deleteHandlerEdu = (item) => {
+        const newData = education.filter(items => items!==item);
+        setEducation(newData);
+        localStorage.setItem('education',JSON.stringify(newData));
+    }
+
+    const deleteHandlerSkill = (item) => {
+        const newData = skills.filter(items => items!==item);
+        setSkills(newData);
+        localStorage.setItem('skills',JSON.stringify(newData));
+    }
+
+    const deleteHandlerAbout = (item) => {
+        const newData = abouts.filter(items => items!==item);
+        setAbouts(newData);
+        localStorage.setItem('about',JSON.stringify(newData));
+    }
+
+    const deleteHandlerLink = (item) => {
+        const newData = link.filter(items => items!==item);
+        setLink(newData);
+        localStorage.setItem('link',JSON.stringify(newData));
+    }
+
     const goToFinish = () => {
 
     }
@@ -380,10 +410,10 @@ const Router = () => {
           <Routes>
               <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
-              <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience} settingData={settingData}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
-              <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
-              <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} goToAbout={goToAbout} />,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
-              <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} handleChangeLink={handleChangeLink} goToFinish={goToFinish} addLanguage={addLanguage} addLink={addLink} data={abouts} link={link} />, <CV data={data} education={education} skills={skills} about={abouts} link={link} />]} />
+              <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience} settingData={settingData} deleteHandler={deleteHandler}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation} deleteHandler={deleteHandlerEdu}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} goToAbout={goToAbout} deleteHandler={deleteHandlerSkill}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} handleChangeLink={handleChangeLink} goToFinish={goToFinish} addLanguage={addLanguage} addLink={addLink} data={abouts} link={link} deleteHandler={deleteHandlerAbout} deleteHandlerLink={deleteHandlerLink}/>, <CV data={data} education={education} skills={skills} about={abouts} link={link} />]} />
           </Routes>
         </Page>
     );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
-const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleChangeLink,addLanguage,addLink}) => {
+const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleChangeLink,addLanguage,addLink,deleteHandler,deleteHandlerLink}) => {
 
     const [allData,setAllData] = useState(data);
     const [linkData,setLinkData] = useState(link);
@@ -46,6 +46,7 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
                     return(
                         <div>
                             <Edu onClick={toggleMenu}>Language {i + 1}</Edu>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
                             <PInputs>
                                 <Label htmlFor="langName">Language</Label>
                                 <Input type="text" name="langName" className="form-control" placeholder="Type your language here" onChange={e => handleChangeAbout(e,i)} value={item.langName} minLength={2} maxLength={20}/>
@@ -68,6 +69,7 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
                     return(
                         <div>
                             <Edu onClick={toggleMenuLink}>Social Link {i + 1}</Edu>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandlerLink(item)}></i>
                             <SInputs>
                                 <Label htmlFor="links">Link</Label>
                                 <Input type="text" name="links" className="form-control" placeholder="Type your social links(Linkedin,Github,Behance or other)" onChange={e => handleChangeLink(e,i)} value={item.links} minLength={2} maxLength={80}/>

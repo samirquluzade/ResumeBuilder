@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 
-const Education = ({data,goToSkill,addEducation,handleChangeEducation}) => {
+const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHandler}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -22,7 +22,7 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation}) => {
     }
 
     function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[1];
+        const val = e.target.parentNode.childNodes[3];
         val.classList.toggle('activ');
     }
 
@@ -73,6 +73,7 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation}) => {
                     return(
                         <div>
                             <Edu onClick={toggleMenu}>Education {i + 1}</Edu>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
                             <Inputs id="education_inputs">
                                 <Label htmlFor="degree">Degree</Label>
                                 <Form.Select className="form-control" name="degree" onChange={e => handleChangeEducation(e,i)}>

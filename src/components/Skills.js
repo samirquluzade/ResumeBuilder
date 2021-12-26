@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
-const Skills = ({data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLevel}) => {
+const Skills = ({data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLevel,deleteHandler}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -12,7 +12,7 @@ const Skills = ({data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLeve
     },[data]);
 
     function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[1];
+        const val = e.target.parentNode.childNodes[3];
         val.classList.toggle('activ');
     }
 
@@ -32,6 +32,7 @@ const Skills = ({data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLeve
                     return(
                         <div>
                             <Edu onClick={toggleMenu}>Skill {i + 1}</Edu>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
                             <Inputs id="education_inputs">
                                 <Label htmlFor="skill">Skill</Label>
                                 <Input type="text" name="skill" className="form-control" placeholder="Type your skill here" onChange={e => handleChangeSkill(e,i)} value={item.skill} minLength={2} maxLength={20} required="required"/>

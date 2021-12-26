@@ -6,7 +6,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
-const Experience = ({handleChange,data,goToEducation,addExperience,settingData}) => {
+const Experience = ({handleChange,data,goToEducation,addExperience,settingData,deleteHandler}) => {
 
     const [allData,setAllData] = useState(data);
 
@@ -76,6 +76,7 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData})
         const val = e.target.parentNode.childNodes[3];
         val.classList.toggle('activ');
     }
+
     return(
         <LeftSide>
             <Title>Please enter your experience infos</Title>
@@ -89,7 +90,7 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData})
                     return(
                         <div>
                             <Work onClick={toggleMenu}>Work Experience {i + 1}</Work>&nbsp;
-                            <i class="fas fa-trash"></i>
+                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
                             <Inputs id="one">
                                 <Label htmlFor="job">Job</Label>
                                 <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.job}/>
