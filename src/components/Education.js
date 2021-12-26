@@ -21,11 +21,6 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHand
         return years;
     }
 
-    function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[3];
-        val.classList.toggle('activ');
-    }
-
     const inputHandler = () => {
     let checkbox = document.getElementById('education');
     let text = document.getElementById('details');
@@ -60,6 +55,11 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHand
     }
 }
 
+    function toggleMenu(e){
+        const val = e.target.parentNode.childNodes[3];
+        val.classList.toggle('activ');
+    }
+
     return(
         <LeftSide>
             <Title>Tell us about your Education</Title>
@@ -72,7 +72,7 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHand
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Edu onClick={toggleMenu}>Education {i + 1}</Edu>
+                            <Edu onClick={toggleMenu}>Education {i + 1}</Edu>&nbsp;
                             <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
                             <Inputs id="education_inputs">
                                 <Label htmlFor="degree">Degree</Label>
@@ -172,6 +172,8 @@ const LeftSide = styled.div`
 `;
 
 const Details = styled.div`
+  overflow-y: scroll;
+  max-height: 500px;
 `;
 
 const Labeld = styled.label`

@@ -9,6 +9,7 @@ import CV from './components/CV';
 import styled from "styled-components";
 import Skills from "./components/Skills";
 import About from "./components/About";
+import Finish from './components/Finish';
 
 const Router = () => {
 
@@ -372,6 +373,20 @@ const Router = () => {
         }
     }
 
+    const goToFinish = () => {
+        validationAboutCheck();
+
+        let q = 0;
+        for(let i = 0;i<abouts.length;i++){
+            if(abouts[0].error.about === ''){
+                q++;
+            }
+        }
+        if(q === abouts.length){
+            navigate('/finish');
+        }
+    }
+
     const deleteHandler = (item) => {
         const newData = data.filter(items => items!==item);
         setData(newData);
@@ -402,9 +417,6 @@ const Router = () => {
         localStorage.setItem('link',JSON.stringify(newData));
     }
 
-    const goToFinish = () => {
-
-    }
     return(
         <Page>
           <Routes>
@@ -414,6 +426,7 @@ const Router = () => {
               <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation} deleteHandler={deleteHandlerEdu}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} goToAbout={goToAbout} deleteHandler={deleteHandlerSkill}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} handleChangeLink={handleChangeLink} goToFinish={goToFinish} addLanguage={addLanguage} addLink={addLink} data={abouts} link={link} deleteHandler={deleteHandlerAbout} deleteHandlerLink={deleteHandlerLink}/>, <CV data={data} education={education} skills={skills} about={abouts} link={link} />]} />
+              <Route exact path="/finish" element={[<CV data={data} education={education} skills={skills} about={abouts} link={link} />,<Finish />]} />
           </Routes>
         </Page>
     );
@@ -421,7 +434,8 @@ const Router = () => {
 const Page = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0 2%;
+  justify-content: center;
+  margin-left: 3%;
 `;
 
 export default Router;
