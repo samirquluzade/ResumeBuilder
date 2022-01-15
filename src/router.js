@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {Route,useNavigate,Routes} from "react-router-dom";
-import CustomStore from'devextreme/data/custom_store';
 
 import Contact from "./components/Contact";
 import Experience from "./components/Experience";
@@ -9,7 +8,6 @@ import CV from './components/CV';
 import styled from "styled-components";
 import Skills from "./components/Skills";
 import About from "./components/About";
-import Finish from './components/Finish';
 
 const Router = () => {
 
@@ -270,6 +268,7 @@ const Router = () => {
         const {name,value} = e.target;
 
         const list = [...data];
+        console.log(list);
         list[i][name] = value;
         validationContactCheck();
         validationExperienceCheck();
@@ -417,6 +416,8 @@ const Router = () => {
         localStorage.setItem('link',JSON.stringify(newData));
     }
 
+    const genPdf = () => {};
+
     return(
         <Page>
           <Routes>
@@ -426,7 +427,7 @@ const Router = () => {
               <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation} deleteHandler={deleteHandlerEdu}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/skills" element={[<Skills handleChangeSkill={handleChangeSkill} handleChangeSkillLevel={handleChangeSkillLevel} data={skills} addSkill={addSkill} goToAbout={goToAbout} deleteHandler={deleteHandlerSkill}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/about" element={[<About handleChangeAbout={handleChangeAbout} handleChangeLevel={handleChangeLevel} handleChangeLink={handleChangeLink} goToFinish={goToFinish} addLanguage={addLanguage} addLink={addLink} data={abouts} link={link} deleteHandler={deleteHandlerAbout} deleteHandlerLink={deleteHandlerLink}/>, <CV data={data} education={education} skills={skills} about={abouts} link={link} />]} />
-              <Route exact path="/finish" element={[<CV data={data} education={education} skills={skills} about={abouts} link={link} />,<Finish />]} />
+              <Route exact path="/finish" element={<CV data={data} education={education} skills={skills} about={abouts} link={link} genPdf={genPdf}/>} />
           </Routes>
         </Page>
     );
@@ -435,7 +436,6 @@ const Page = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-left: 3%;
 `;
 
 export default Router;

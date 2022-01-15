@@ -1,10 +1,37 @@
-import React,{useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
-import Contact from "./Contact";
-import Experience from "./Experience";
-import Education from "./Education";
+import {Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import htmlToPdfmake from 'html-to-pdfmake';
+import pdfMake from 'pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import jsPDF from "jspdf";
 
-const CV = ({data,education,skills,about,link}) => {
+const CV = ({data,education,skills,about,link,genPdf}) => {
+
+    const generatePdf = (e) => {
+        const doc = new jsPDF();
+
+        const text = e.target.parentNode.parentNode.childNodes[0];
+
+        let html = htmlToPdfmake(text.innerHTML);
+
+        const def = {content:html};
+        pdfMake.vfs = pdfFonts.pdfMake.vfs;
+        pdfMake.createPdf(def).open();
+
+
+        // let pdf = new jsPDF('p','pt','a4',true);
+        // pdf.html(html,{
+        //     html2canvas:{
+        //         scale:0.8,
+        //         height:500
+        //     },
+        //     callback:function(){
+        //         pdf.save('CV.pdf');
+        //     }
+        // })
+    }
 
     return(
           <>
@@ -185,12 +212,17 @@ const CV = ({data,education,skills,about,link}) => {
                         })}
                     </ResumeRight>
                 </ResumeExample>
+              {genPdf && (<Buttons>
+                  <Button className="btn btn-success" onClick={generatePdf}>Download CV</Button>
+                  <Link to="/about" className="btn btn-danger">Back to edit</Link>
+              </Buttons>
+              )}
           </>
     );
 };
 
 const ResumeExample = styled.div`
-    margin: 0.5% 5%;
+    //margin: 0.5% 5%;
     display: flex;
     flex-direction: row;
     height: 745px;
@@ -311,6 +343,14 @@ const LeftSide = styled.div`
   color:white;
   font-size: 10px;
   margin:1% 10%;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  a{
+    margin: 5% 0;
+  }
 `;
 
 export default CV;

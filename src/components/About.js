@@ -13,13 +13,27 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
         setLinkData(link);
     },[data,link]);
 
-    function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[3];
+    function toggleMenu(e,i){
+        let val;
+        if(i === 0){
+            val = e.target.parentNode.childNodes[2];
+        }
+        else
+        {
+            val = e.target.parentNode.childNodes[3];
+        }
         val.classList.toggle('activ');
     }
 
-    function toggleMenuLink(e){
-        const val = e.target.parentNode.childNodes[3];
+    function toggleMenuLink(e,i){
+        let val;
+        if(i === 0){
+            val = e.target.parentNode.childNodes[2];
+        }
+        else
+        {
+            val = e.target.parentNode.childNodes[3];
+        }
         val.classList.toggle('activ');
     }
 
@@ -45,8 +59,8 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Edu onClick={toggleMenu}>Language {i + 1}</Edu>
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>&nbsp;
+                            <Edu onClick={(e) => toggleMenu(e,i)}>Language {i + 1}</Edu>
+                            {i > 0 && <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>}&nbsp;
                             <PInputs>
                                 <Label htmlFor="langName">Language</Label>
                                 <Input type="text" name="langName" className="form-control" placeholder="Type your language here" onChange={e => handleChangeAbout(e,i)} value={item.langName} minLength={2} maxLength={20}/>
@@ -68,7 +82,7 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
                 {linkData.map((item,i) => {
                     return(
                         <div>
-                            <Edu onClick={toggleMenuLink}>Social Link {i + 1}</Edu>
+                            <Edu onClick={(e) => toggleMenuLink(e,i)}>Social Link {i + 1}</Edu>
                             <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandlerLink(item)}></i>&nbsp;
                             <SInputs>
                                 <Label htmlFor="links">Link</Label>
@@ -147,6 +161,7 @@ const LeftSide = styled.div`
   flex-direction: column;
   justify-content: center;
   min-width: 700px;
+  margin-right: 2%;
 `;
 
 const Details = styled.div`

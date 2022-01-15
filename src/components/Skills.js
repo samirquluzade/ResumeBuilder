@@ -11,8 +11,15 @@ const Skills = ({data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLeve
         setAllData(data);
     },[data]);
 
-    function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[3];
+    function toggleMenu(e,i){
+        let val;
+        if(i === 0){
+            val = e.target.parentNode.childNodes[2];
+        }
+        else
+        {
+            val = e.target.parentNode.childNodes[3];
+        }
         val.classList.toggle('activ');
     }
 
@@ -31,11 +38,11 @@ const Skills = ({data,goToAbout,addSkill,handleChangeSkill,handleChangeSkillLeve
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Edu onClick={toggleMenu}>Skill {i + 1}</Edu>
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>&nbsp;
+                            <Edu onClick={(e) => toggleMenu(e,i)}>Skill {i + 1}</Edu>
+                            {i > 0 && <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>}&nbsp;
                             <Inputs id="education_inputs">
                                 <Label htmlFor="skill">Skill</Label>
-                                <Input type="text" name="skill" className="form-control" placeholder="Type your skill here" onChange={e => handleChangeSkill(e,i)} value={item.skill} minLength={2} maxLength={20} required="required"/>
+                                <Input type="text" name="skill" className="form-control" placeholder="Type your skill here" onChange={e => handleChangeSkill(e,i)} value={item.skill} minLength={2} maxLength={50} required="required"/>
                                 {item.errors.skill && <Error>{item.errors.skill}</Error>}
                                 <Label htmlFor="level">Level</Label>
                                 <Levels>
@@ -111,6 +118,7 @@ const LeftSide = styled.div`
   flex-direction: column;
   justify-content: center;
   min-width: 700px;
+  margin-right: 2%;
 `;
 
 const Details = styled.div`
