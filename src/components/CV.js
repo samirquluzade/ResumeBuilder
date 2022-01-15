@@ -2,35 +2,29 @@ import React from 'react';
 import styled from "styled-components";
 import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import htmlToPdfmake from 'html-to-pdfmake';
-import pdfMake from 'pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import jsPDF from "jspdf";
 
 const CV = ({data,education,skills,about,link,genPdf}) => {
 
     const generatePdf = (e) => {
-        const doc = new jsPDF();
 
-        const text = e.target.parentNode.parentNode.childNodes[0];
+        e.target.parentNode.parentNode.childNodes[0].style.height = '1050px';
+        e.target.parentNode.parentNode.childNodes[0].style.paddingTop = 0;
+        const html = e.target.parentNode.parentNode.childNodes[0];
 
-        let html = htmlToPdfmake(text.innerHTML);
+        let pdf = new jsPDF('p','pt','a4',true);
+        pdf.html(html,{
+            html2canvas:{
+                scale:0.8,
+                height:500
+            },
+            callback:function(){
+                pdf.save('CV.pdf');
+                e.target.parentNode.parentNode.childNodes[0].style.height = '745px';
+                e.target.parentNode.parentNode.childNodes[0].style.paddingTop = '1%';
+            }
+        });
 
-        const def = {content:html};
-        pdfMake.vfs = pdfFonts.pdfMake.vfs;
-        pdfMake.createPdf(def).open();
-
-
-        // let pdf = new jsPDF('p','pt','a4',true);
-        // pdf.html(html,{
-        //     html2canvas:{
-        //         scale:0.8,
-        //         height:500
-        //     },
-        //     callback:function(){
-        //         pdf.save('CV.pdf');
-        //     }
-        // })
     }
 
     return(
@@ -82,25 +76,25 @@ const CV = ({data,education,skills,about,link,genPdf}) => {
                             <Contacts>
                                 {data[0].address!=='' &&
                                 <Info>
-                                    <i className="fas fa-map-marker-alt">&nbsp;</i>
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAbxJREFUSEvNlv0xBEEQxX8XASJABIgAGRABIkAEiIAMEAEiQASIgBCIgHpVs2r19Uz37l3V6T93Zvq9fv21ExZkkwXhMgZ4DdgANgvpV+AN+BgSxBDgQ+AMELBnInAF3GYIZIAFdNeLMPIrAvuRAhGw5HwEliM0c/4J7AIi4VoLWGAvDWkjLsr5FiASU9YCvgEOKt6fgadytgNsV+4p36qNNLDy+u7cV/XKkZVQKbkHVp03616+axGflwru+/kqsrvSlTMRWjLgp6Xa/3yuAUtGK98RIPlbdgJcmgtKi9KRAlZUlrkrmfHnpUi+VrLA3wPqwV5Nva1JrVawhTI2YhVkN15/Sf67HGvmHhsNlStF3apqDRw75S4AdUmquCSNnFhTu6i6bR+raq8rU25QHwtQzrX+PFO79SfXVLuUR24r6aw1MvfKVgpat3msRdERTEndXfIGSZbIAyDyrkVrUQPBG4MReDReU78+YySvStwxjiLu7nlLoxa1uxSy7eQ5be3n7n51/84CrLct8DRo1E41KT3ZU/L2HWZzbEnoL0RjVaYdHO3pqSDGAstR/4c+aq+5Ag8Gm4fUM4Hq8Q94wVEfAvaQEgAAAABJRU5ErkJggg=="/>
                                     <span>{data[0].address}</span>
                                 </Info>
                                 }
                                 {data[0].phone!=='' &&
                                 <Info>
-                                    <i className="fas fa-phone-square">&nbsp;</i>
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAe9JREFUSEvlluExBEEQhd9FgAjIABEgAkSADIgAEZABIkAEiAAZEAEZUN/VtGpzvTN7u6Puh6nacmd35+vX/ab7JlrQmiyIqxp4WdKBpFdJjy2DLIGBPkjaSMAjSdet4F3gHGq8ZvAInEPfJa06pU3gEfhO0m4CUdttSXuSrlrCczD1fM6gn+n7YUt4DkYdhmLtBE4+lnSR7hPQylCzlRTvSyLttvLaP6UyDGJHNf5KO51LOnO7co63OsowNzwCv0hal3SfTGWbWkC4HC9Y7eeG8kIEpknQrfL75vZRtbUoIzBH5zY94OvsXT36LHd1LlQtJVfjbltvqZnwd3NMurvAmOo0OFZeNV4gKF9rnE+28MBJqbeXevVHAgNAnS3vAZQT5I2kqL93lqQ0nbxqf7QAXDoDEhCqudYCi4fw2jy2o8V++QakneD8AOE5+jtZsQ4XvVv9IUCtaBwYLdxAEgFwEhgsdDM+o77Y22uKgfnBwXdUkvo+K4f/9P8+YIN75ZQA19Z+DuEHpp3VnnfwRzXVXhXKqR3t1BZg/oer85W73Gb79Pj1Vew3JdWMR6u73aOlkgkuNkeZ/V77BR0K5j3UAI8CyJXPQMeA/ea4mAt1vgw8w4TDYDOTbEiqa24mADJCV+MK11+Aa4FN7/8/8DdcP28f3yqwBQAAAABJRU5ErkJggg=="/>&nbsp;
                                     <span>{data[0].phone}</span>
                                 </Info>
                                 }
                                 {data[0].phone2!=='' &&
                                 <Info>
-                                    <i className="fas fa-phone-square">&nbsp;</i>
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAXhJREFUSEvtlu01Q0EQhp9UQAeoAB1QgahAVIAK0AEVoIJIBdFB6EAJVMB5HeusyezeuTd7Tn4w5+TPZnef+Xh35o5Yk43WxOUfnGd+AtwB98Bp65KUUi3YSQZrDvfAj8CRE+EFcNMqcgs+AOaVy5VyRb+y9QUL2ARuwXvAIhDODvAa2Ffc4tX4I3DhyvX2wM/AbgX+AkgLbwEHe0Vsn1J+uAlUF3oRj4Gp42ozaAmsdaVxw8D3AZWhiZU61xVwaQjXgNabWAm8/R1dHrWyoGdUEtUmcAbMIpmpjUUvaqX60IELqo6nPhBqMl3z2HtaWjvOGoiFplJUO1wX2Et5Ep8GhtKq0ZkitfVX1qSNJesC60C0jZZE547UCDjBn5wnFlX4LXCeb46CE1ze19ppyZF3QFr4sT7gdEh1k/e2wdSiXxLaELAA8l7wiAMPgL7fftlQcH6Jert+mlhb5n6pXv8NUnVUQGmfXkGqpwTpWouI+zr2tf/vgT8B2Ks8H3YQddoAAAAASUVORK5CYII="/>&nbsp;
                                     <span>{data[0].phone2}</span>
                                 </Info>
                                 }
                                 {data[0].email!=='' &&
                                 <Info>
-                                    <i className="fas fa-envelope">&nbsp;</i>
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAQRJREFUSEvtlu0RwUAQhp9UQCeoBB3QARWgAyqgAzpBRcyarNnJ3OU+4vgh+y+Z2332fbOXu4ofRfUjLj34a843rT4BU2BYoIM9sNa6FjwDzgWAtuQcuMgLC94Cm8LgHSAcL3gCiO2jjo3cgQVwresEwepEFxfeEOCRCpb140T1qvJm3IoGS9ISsMkx6q1KbfpYNy/PQau1WYHJYg2fepdKV6PRYAGG1IdU2vlMArep18bsmrYtmQX2qXd9S98uzAa71McMneZ1BluLZeBi4yPgWFjn4coBNXN6xS9HUqYz13an1XJ8yX+1ZDgvAgKUM1huIoMC9AOw0rr99baAw+6S/2f1E/vnSh8jOyXlAAAAAElFTkSuQmCC"/>&nbsp;
                                     <span>{data[0].email}</span>
                                 </Info>
                                 }
@@ -222,10 +216,10 @@ const CV = ({data,education,skills,about,link,genPdf}) => {
 };
 
 const ResumeExample = styled.div`
-    //margin: 0.5% 5%;
     display: flex;
     flex-direction: row;
     height: 745px;
+    padding-top: 1%;
 `;
 
 const ResumeLeft = styled.div`
@@ -289,6 +283,9 @@ const Head = styled.div`
 
 const Info = styled.div`
   margin-top: 3%;
+  img{
+    height: 16px;
+  }
 `;
 
 const Experiences = styled.div`

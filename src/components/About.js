@@ -83,7 +83,7 @@ const About = ({data,link,goToFinish,handleChangeAbout,handleChangeLevel,handleC
                     return(
                         <div>
                             <Edu onClick={(e) => toggleMenuLink(e,i)}>Social Link {i + 1}</Edu>
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandlerLink(item)}></i>&nbsp;
+                            {i > 0 && <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandlerLink(item)}></i> } &nbsp;
                             <SInputs>
                                 <Label htmlFor="links">Link</Label>
                                 <Input type="text" name="links" className="form-control" placeholder="Type your social links(Linkedin,Github,Behance or other)" onChange={e => handleChangeLink(e,i)} value={item.links} minLength={2} maxLength={80}/>
