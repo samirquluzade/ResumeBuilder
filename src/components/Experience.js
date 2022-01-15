@@ -72,8 +72,15 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData,d
             });
         }
     }
-    function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[3];
+    function toggleMenu(e,i){
+        let val;
+        if(i === 0){
+            val = e.target.parentNode.childNodes[2];
+        }
+        else
+        {
+            val = e.target.parentNode.childNodes[3];
+        }
         val.classList.toggle('activ');
     }
 
@@ -89,14 +96,14 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData,d
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Work onClick={toggleMenu}>Work Experience {i + 1}</Work>&nbsp;
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
+                            <Work onClick={(e) => toggleMenu(e,i)}>Work Experience {i + 1}</Work>&nbsp;
+                            {i > 0 && <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>}
                             <Inputs id="one">
                                 <Label htmlFor="job">Job</Label>
-                                <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.job}/>
+                                <Input type="text" name="job" className="form-control" placeholder="Software Engineer" onChange={e => handleChange(e,i)} minLength={2} maxLength={50} required="required" value={item.job}/>
                                 {item.errors.job!=='' && <Error>{item.errors.job}</Error>}
                                 <Label htmlFor="employer">Employer</Label>
-                                <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={e => handleChange(e,i)} minLength={2} maxLength={30} required="required" value={item.employer}/>
+                                <Input type="text" name="employer" className="form-control" placeholder="Google" onChange={e => handleChange(e,i)} minLength={2} maxLength={50} required="required" value={item.employer}/>
                                 {item.errors.employer!=='' && <Error>{item.errors.employer}</Error>}
                                 <Label htmlFor="startDate">Start Date</Label>
                                 <Input type="month" name="startDate" className="form-control" onChange={e => handleChange(e,i)} required="required" value={item.startDate}/>
@@ -154,6 +161,7 @@ const LeftSide = styled.div`
   flex-direction: column;
   justify-content: center;
   min-width: 700px;
+  margin-right: 2%;
 `;
 
 const Label = styled.label`

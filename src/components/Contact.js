@@ -69,6 +69,7 @@ const LeftSide = styled.div`
   flex-direction: column;
   justify-content: center;
   min-width: 700px;
+  margin-right: 2%;
 `;
 
 const Label = styled.label`

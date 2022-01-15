@@ -55,8 +55,15 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHand
     }
 }
 
-    function toggleMenu(e){
-        const val = e.target.parentNode.childNodes[3];
+    function toggleMenu(e,i){
+        let val;
+        if(i === 0){
+            val = e.target.parentNode.childNodes[2];
+        }
+        else
+        {
+            val = e.target.parentNode.childNodes[3];
+        }
         val.classList.toggle('activ');
     }
 
@@ -72,8 +79,8 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHand
                 {allData.map((item,i) => {
                     return(
                         <div>
-                            <Edu onClick={toggleMenu}>Education {i + 1}</Edu>&nbsp;
-                            <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>
+                            <Edu onClick={(e) => toggleMenu(e,i)}>Education {i + 1}</Edu>&nbsp;
+                            {i > 0 && <i class="fas fa-trash" style={{cursor:'pointer'}} onClick={() => deleteHandler(item)}></i>}
                             <Inputs id="education_inputs">
                                 <Label htmlFor="degree">Degree</Label>
                                 <Form.Select className="form-control" name="degree" onChange={e => handleChangeEducation(e,i)}>
@@ -169,6 +176,7 @@ const LeftSide = styled.div`
   flex-direction: column;
   justify-content: center;
   min-width: 700px;
+  margin-right: 2%;
 `;
 
 const Details = styled.div`
