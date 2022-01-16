@@ -345,6 +345,7 @@ const LeftSide = styled.div`
 const Buttons = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 1%;
   a{
     margin: 5% 0;
   }
