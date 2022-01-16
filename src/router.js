@@ -8,6 +8,8 @@ import CV from './components/CV';
 import styled from "styled-components";
 import Skills from "./components/Skills";
 import About from "./components/About";
+import CV2 from "./components/CV2";
+import CV3 from "./components/CV3";
 
 const Router = () => {
 
@@ -421,7 +423,7 @@ const Router = () => {
     return(
         <Page>
           <Routes>
-              <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
+              <Route exact path="/" element={[<Contact handleChange={handleChange} goToExperience={goToExperience} data={data}/>,<CV3 />]}/>
               <Route exact path="/contact" element={[<Contact handleChange={handleChange} data={data} goToExperience={goToExperience}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/experience" element={[<Experience goToEducation={goToEducation} handleChange={handleChange} data={data} addExperience={addExperience} settingData={settingData} deleteHandler={deleteHandler}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
               <Route exact path="/education" element={[<Education handleChangeEducation={handleChangeEducation} goToSkill={goToSkill} data={education} addEducation={addEducation} deleteHandler={deleteHandlerEdu}/>,<CV data={data} education={education} skills={skills} about={abouts} link={link}/>]} />
