@@ -11,8 +11,69 @@ const CV3 = () => {
                     </LeftImg>
                     <LeftContact>
                         <Contact>Contact</Contact>
+                        <Info>
+                            <i class="far fa-envelope-open"></i>&nbsp;&nbsp;
+                            <span>smrquluzade@gmail.com</span>
+                        </Info>
+                        <Info>
+                            <i class="fas fa-phone-alt"></i>&nbsp;&nbsp;
+                            <span>09292019219</span>
+                        </Info>
+                        <Info>
+                            <i class="fas fa-globe"></i>&nbsp;&nbsp;
+                            <span>www.example.com</span>
+                        </Info>
+                        <Location>
+                            <p>Baku,Azerbaijan</p>
+                            <i class='bx bx-map bx-flip-horizontal' ></i>
+                        </Location>
                     </LeftContact>
+                    <LeftEducation>
+                        <Rectangle />
+                        <Contact>Education</Contact>
+                        <Infos>
+                            <School>
+                                <i class='bx bxs-graduation'></i>&nbsp;&nbsp;
+                                <span>BEU</span>
+                            </School>
+                            <p>BACHELOR</p>
+                            <p>2021</p>
+                        </Infos>
+                        <Infos>
+                            <School>
+                                <i class='bx bxs-graduation'></i>&nbsp;&nbsp;
+                                <span>BEU</span>
+                            </School>
+                            <p>BACHELOR</p>
+                            <p>2021</p>
+                        </Infos>
+                        <Infos>
+                            <School>
+                                <i class='bx bxs-graduation'></i>&nbsp;&nbsp;
+                                <span>BEU</span>
+                            </School>
+                            <p>BACHELOR</p>
+                            <p>2021</p>
+                        </Infos>
+                    </LeftEducation>
                 </LeftSec>
+                <RightSec>
+                    <Upper>
+                        <FullName>Samir Guluzadeh</FullName>
+                        <Spec>Front End Developer</Spec>
+                    </Upper>
+                    <Middle>
+                        <Objective>
+                            <Spec>Objective</Spec>
+                            <Desc>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium architecto aspernatur aut culpa doloremque eaque eius eos esse est eveniet, impedit inventore ipsam iste itaque, laboriosam laborum nostrum nulla odit quaerat qui reiciendis sint soluta tempora tenetur. Asperiores, repudiandae!
+                            </Desc>
+                        </Objective>
+                        <Experience>
+
+                        </Experience>
+                    </Middle>
+                </RightSec>
             </Secs>
         </ResumeExample>
     )
@@ -22,32 +83,149 @@ const ResumeExample = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  height: 745px;
+  height: 750px;
   padding-top: 1%;
 `;
 const Secs = styled.div`
   display: flex;
   flex-direction: row;
+  background-color: white;
 `;
+const Objective = styled.div`
+  
+`;
+const Experience = styled.div``;
 const LeftSec = styled.div`
-  width: 34%;
+  width: 32%;
   background-color: #9d32ad;
-  height: 745px;
+  height: auto;
   display: flex;
   flex-direction: column;
 `;
+const RightSec = styled.div`
+  width: 68%;
+  background-color: #ffffff;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0 2%;
+`;
+const FullName = styled.div`
+    padding-top: 3%;
+    color:#6b6969;
+    text-transform: uppercase;
+    font-size: 44px;
+    letter-spacing: 1px;
+`;
+const Upper = styled.div`
+  &::after{
+    content: "";
+    margin-top: 2%;
+    height: 1px;
+    width: 100%;
+    display: block;
+    background-color: #6b6969;
+  }
+`;
+const Desc = styled.div`
+  color:#6b6969;
+`;
+const Spec = styled.div`
+  text-transform: uppercase;
+  font-size: 22px;
+  color:#9d32ad;
+`;
+const Middle = styled.div`
+    padding-top: 4%;
+`;
 const LeftImg = styled.div`
   img{
-    height: 258px;
+    height: 246px;
   }
   width: 100%;
 `;
 const LeftContact = styled.div`
-  
+    display: flex;
+    flex-direction: column;
 `;
-const Contact = styled.h4`
-    letter-spacing: 10px;
+const LeftEducation = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Contact = styled.h3`
+    text-align: center;
+    letter-spacing: 5px;
     color:#ffffff;
     text-transform: uppercase;
+    font-weight: 400;
+    &::after{
+        content: "";
+        width: 70%;
+        background-color: #ffffff;
+        height: 1px;
+        display: block;
+        margin: 1% auto;
+    }
+`;
+const Info = styled.div`
+  margin-left: 7%;
+  i{
+    color:white;
+  }
+  span{
+    font-size: 12px;
+    color:white;
+  }
+  padding-bottom: 4%;
+`;
+const Location = styled.div`
+  border-left: 123px solid transparent;
+  border-right: 123px solid transparent;
+  border-top: 60px solid #9d32ad;
+  width: 0;
+  height: 0;
+  background-color: white;
+  color: white;
+  text-align: center;
+  i{
+    font-size: 32px;
+    margin-left: -15px;
+  }
+  p{
+    font-size: 13px;
+    margin-top: -60px;
+    margin-left: -45px;
+  }
+`;
+const Rectangle = styled.div`
+  border-left: 124px solid transparent;
+  border-right: 124px solid transparent;
+  border-top: 50px solid #ffffff;
+  width: 0;
+  height: 0;
+`;
+const Infos = styled.div`
+  margin-left: 7%;
+  display: flex;
+  flex-direction: column;
+  i{
+    color:white;
+    font-size: 18px;
+  }
+  span{
+    font-size: 12px;
+    text-transform: uppercase;
+    color:white;
+  }
+  p{
+    color:white;
+    margin-left: 11%;
+    font-size: 10px;
+  }
+  padding-bottom: 2%;
+`;
+const School = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 export default CV3;
