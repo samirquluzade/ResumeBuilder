@@ -70,8 +70,65 @@ const CV3 = () => {
                             </Desc>
                         </Objective>
                         <Experience>
-
+                            <Spec>Experience</Spec>
+                            <Job>
+                                <LeftJob>
+                                    <Title>Front End Developer</Title>
+                                    <Date>02/2021 - 09/2021</Date>
+                                    <Name>Google</Name>
+                                </LeftJob>
+                                <RightJob>
+                                    Baku
+                                </RightJob>
+                            </Job>
+                            <Job>
+                                <LeftJob>
+                                    <Title>Front End Developer</Title>
+                                    <Date>02/2021 - 09/2021</Date>
+                                    <Name>Google</Name>
+                                </LeftJob>
+                                <RightJob>
+                                    Baku
+                                </RightJob>
+                            </Job>
+                            <Job>
+                                <LeftJob>
+                                    <Title>Front End Developer</Title>
+                                    <Date>02/2021 - 09/2021</Date>
+                                    <Name>Google</Name>
+                                </LeftJob>
+                                <RightJob>
+                                    Baku
+                                </RightJob>
+                            </Job>
                         </Experience>
+                        <Skills>
+                            <Spec>Skills</Spec>
+                            <Skill>
+                                <SkillPercent>
+                                    <LevelPercent />
+                                </SkillPercent>
+                                <SkillName>Adobe Photoshop</SkillName>
+                            </Skill>
+                            <Skill>
+                                <SkillPercent>
+                                    <LevelPercent />
+                                </SkillPercent>
+                                <SkillName>Adobe Photoshop</SkillName>
+                            </Skill>
+                            <Skill>
+                                <SkillPercent>
+                                    <LevelPercent />
+                                </SkillPercent>
+                                <SkillName>Adobe Photoshop</SkillName>
+                            </Skill>
+                            <Skill>
+                                <SkillPercent>
+                                    <LevelPercent />
+                                </SkillPercent>
+                                <SkillName>Adobe Photoshop</SkillName>
+                            </Skill>
+                        </Skills>
                     </Middle>
                 </RightSec>
             </Secs>
@@ -91,10 +148,63 @@ const Secs = styled.div`
   flex-direction: row;
   background-color: white;
 `;
-const Objective = styled.div`
+const Objective = styled.div``;
+const Skill = styled.div`
+  padding-top: 1%;
+  display: flex;
+  align-items: center;
+`;
+const SkillPercent = styled.div`
+  width: 50%;
+  height: 13px;
+  border:1px solid #9d32ad;
+  position: relative;
+  background: transparent;
+`;
+
+const LevelPercent = styled.div`
+  position: absolute;
+  background: #9d32ad;
+  height: 12px;
+  width: 50%;
+  text-align: center;
+  font-size: 10px;
+  margin-top: -1px;
+`;
+const Skills = styled.div`
   
 `;
-const Experience = styled.div``;
+const SkillName = styled.div`
+  color:#6b6969;
+  padding-left: 2%;
+  font-size: 13px;
+`;
+const Name = styled.div`
+  font-size: 14px;
+  color:#6b6969;
+`;
+const Date = styled.div`
+  font-size: 14px;
+  color:#6b6969;
+`;
+const Job = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2%;
+`;
+const LeftJob = styled.div``;
+const RightJob = styled.div`
+  color:#6b6969;
+  display: flex;
+  align-items: center;
+`;
+const Experience = styled.div`
+  padding-top: 3%;
+`;
+const Title = styled.div`
+  font-size: 16px;
+  color:#6b6969;
+`;
 const LeftSec = styled.div`
   width: 32%;
   background-color: #9d32ad;
@@ -136,7 +246,7 @@ const Spec = styled.div`
   color:#9d32ad;
 `;
 const Middle = styled.div`
-    padding-top: 4%;
+    padding-top: 3%;
 `;
 const LeftImg = styled.div`
   img{
