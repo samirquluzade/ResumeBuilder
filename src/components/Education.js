@@ -45,6 +45,7 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHand
     else
     {
         text.style.display = "block";
+        // eslint-disable-next-line array-callback-return
         allData.map((item,i) => {
             item.school = '';
             item.degree = '';

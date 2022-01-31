@@ -256,10 +256,15 @@ const Router = () => {
     }
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         localStorage.getItem("data") ? data = JSON.parse(localStorage.getItem("data")) : localStorage.setItem("data", JSON.stringify(data));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         localStorage.getItem("education") ? education = JSON.parse(localStorage.getItem("education")) : localStorage.setItem("education", JSON.stringify(education));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         localStorage.getItem("skills") ? skills = JSON.parse(localStorage.getItem("skills")) : localStorage.setItem("skills", JSON.stringify(skills));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         localStorage.getItem("about") ? abouts = JSON.parse(localStorage.getItem("about")) : localStorage.setItem("about", JSON.stringify(abouts));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         localStorage.getItem("link") ? link = JSON.parse(localStorage.getItem("link")) : localStorage.setItem("link", JSON.stringify(link));
     },[data,education,skills,abouts,link]);
 
