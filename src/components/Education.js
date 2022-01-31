@@ -26,6 +26,7 @@ const Education = ({data,goToSkill,addEducation,handleChangeEducation,deleteHand
     let text = document.getElementById('details');
     if(checkbox.checked === true){
         text.style.display = "none";
+        // eslint-disable-next-line array-callback-return
         allData.map((item,i) => {
             item.school = '*';
             item.errors.school = '';

@@ -1,7 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import DataGrid, {
-    Column,
-} from "devextreme-react/data-grid";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
@@ -52,6 +49,7 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData,d
         let text = document.getElementById('ex_inputs');
         if(checkbox.checked === true){
             text.style.display = "none";
+            // eslint-disable-next-line array-callback-return
             allData.map((item) => {
                 item.job = '*';
                 item.employer = '*';
@@ -63,6 +61,7 @@ const Experience = ({handleChange,data,goToEducation,addExperience,settingData,d
         else
         {
             text.style.display = "block";
+            // eslint-disable-next-line array-callback-return
             allData.map((item) => {
                 item.job = '';
                 item.employer = '';

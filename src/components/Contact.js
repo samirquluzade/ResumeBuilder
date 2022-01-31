@@ -1,9 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import DataGrid, {
-    Column,
-} from "devextreme-react/data-grid";
-import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
 const Contact = ({handleChange,goToExperience,data}) => {
@@ -42,19 +38,6 @@ const Next = styled.div`
   button{
     float: right;
   }
-`;
-
-const Work = styled.button`
-  background-color: #E5E4EA;
-  border:none;
-  outline: none;
-  margin:2% 0;
-`;
-
-const ID = styled.p`
-  padding-top: 2%;
-  font-weight: 700;
-  font-size: 18px;
 `;
 
 const Title = styled.h3`
