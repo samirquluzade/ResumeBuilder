@@ -23,30 +23,30 @@ const MainSection = (props) => {
                         <div className="col-lg-4 col-md-6 col-sm-6">
                             <ResumeCard></ResumeCard>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
-                            <ResumeCard></ResumeCard>
-                        </div>
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-lg-4 col-md-6 col-sm-6">*/}
+                        {/*    <ResumeCard></ResumeCard>*/}
+                        {/*</div>*/}
                     </div>
                 </ResumeCards>
             </MostResumes>
