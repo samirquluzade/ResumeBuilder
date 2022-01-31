@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Modal,Button} from "react-bootstrap";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 

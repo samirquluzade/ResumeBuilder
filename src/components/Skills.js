@@ -78,11 +78,6 @@ const Title = styled.h3`
   text-align: center;
 `;
 
-const Message = styled.h5`
-  text-align: center;
-  color:maroon;
-`;
-
 const Inputs = styled.div`
   display: none;
 `;

@@ -8,8 +8,6 @@ import CV from './components/CV';
 import styled from "styled-components";
 import Skills from "./components/Skills";
 import About from "./components/About";
-import CV2 from "./components/CV2";
-import CV3 from "./components/CV3";
 
 const Router = () => {
 
@@ -118,6 +116,7 @@ const Router = () => {
     }
 
     const validationExperienceCheck = () => {
+        // eslint-disable-next-line array-callback-return
         data.map((item) => {
             if(item.job.trim()===''){
                 item.errors.job = 'This field cannot be blank!';
@@ -156,6 +155,7 @@ const Router = () => {
     }
 
     const validationEducationCheck = () => {
+        // eslint-disable-next-line array-callback-return
         education.map((item) => {
         if(item.school.trim()===''){
             item.errors.school = 'This field cannot be blank!';
@@ -194,6 +194,7 @@ const Router = () => {
     }
 
     const validationSkillsCheck = () => {
+        // eslint-disable-next-line array-callback-return
         skills.map((item) => {
             if (item.skill.trim() === '') {
                 item.errors.skill = 'This field cannot be blank!';
@@ -260,7 +261,7 @@ const Router = () => {
         localStorage.getItem("skills") ? skills = JSON.parse(localStorage.getItem("skills")) : localStorage.setItem("skills", JSON.stringify(skills));
         localStorage.getItem("about") ? abouts = JSON.parse(localStorage.getItem("about")) : localStorage.setItem("about", JSON.stringify(abouts));
         localStorage.getItem("link") ? link = JSON.parse(localStorage.getItem("link")) : localStorage.setItem("link", JSON.stringify(link));
-    },[]);
+    },[data,education,skills,abouts,link]);
 
     const settingData = (list) => {
         setData(list);
