@@ -11,7 +11,7 @@ body{
   background-color: #F3F2EF;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 p{
   margin: 0;
